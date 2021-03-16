@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import { connectToDatabase } from '../util/mongodb'
 
-export default function Home({ users }) {
+export default function Home({ stories }) {
 
-  console.log(users);
+  
 
   return (
     <div>
@@ -16,10 +16,13 @@ export default function Home({ users }) {
 
 
         <div>
-            {users && users.map(user => (
+            {stories && stories.map(story => (
               <div>
-                <p>hello{user.username}</p>
-                <p>bye{user.email}</p>
+                <p>hello title: {story.title}</p>
+                <p>hello author: {story.author}</p>
+                <p>hello text: {story.text}</p>
+                <p>hello genre: {story.genre}</p>
+                <a href={`/stories/${story._id}`}>READ</a>
               </div>
               
             ))}
@@ -54,17 +57,22 @@ export default function Home({ users }) {
 export async function getServerSideProps(context) {
   const { db } = await connectToDatabase()
 
-
-  const data = await db.collection('users').find({}).limit(20).toArray();
-  await db.listCollections().toArray(function(err, collInfos) {
-    // collInfos is an array of collection info objects that look like:
-    // { name: 'test', options: {} }
-    // console.log(err, collInfos)
-  });
-  const users = JSON.parse(JSON.stringify(data));
+  const data = await db.collection('stories').find({}).sort({_id: 1}).limit(20).toArray();
   
-  console.log(data)
+  const stories = JSON.parse(JSON.stringify(data));
+
+  const filtered = stories.map(story => {
+    return { //props
+      _id: story._id,
+      title: story.title,
+      text: story.text,
+      genre: story.genre,
+      author: story.author,
+      user_id: story.user_id
+    }
+  })
+  
   return {
-    props: { users: users },
+    props: { stories: stories },
   }
 }
