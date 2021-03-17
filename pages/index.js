@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { connectToDatabase } from '../util/mongodb'
 
 export default function Home({ stories, speech }) {
-
+  console.log(stories)
   console.log(speech)
 
   // useEffect(() => {
@@ -36,17 +36,18 @@ export default function Home({ stories, speech }) {
 
 // Connecting to Amazon Polly TTS client
 const client = new PollyClient({ 
-  region: process.env.AWS_REGION, 
+  region: process.env.AWS_REGION_MYAPP, 
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID, 
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID_MYAPP, 
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_MYAPP,
   },
 });
 
 // Params for synthesizing speech
 const params = {
   OutputFormat: "mp3",
-  Text: "Hæ, ég heiti Dóra. Ég les upp fyrir þig texta.",
+  // Text: "Hæ, ég heiti Dóra. Ég les upp fyrir þig texta.",
+  Text: '',
   TextType: "text",
   VoiceId: "Dora"
 }
@@ -76,8 +77,11 @@ export async function getServerSideProps(context) {
 
   // If no data ... ?
 
-
   // AWS Polly TTS
+  params.Text = filtered.map(story => {
+    return story.text
+  });
+  
   const url = await getSynthesizeSpeechUrl({
     client, params
   });
