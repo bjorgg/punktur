@@ -4,9 +4,9 @@ export default function Navbar() {
     
     return (
         <nav>
-            <Link href="/newStory"><a>Ný saga</a></Link>
-            <Link href="/about"><a>Um punkt</a></Link>
-            <Link href="/login"><a>Skrá inn</a></Link>
+            <Link href="/ny-saga"><a>Ný saga</a></Link>
+            <Link href="/um-punkt"><a>Um punkt</a></Link>
+            <Link href="/skra-inn"><a>Skrá inn</a></Link>
         </nav>
     );
 }
