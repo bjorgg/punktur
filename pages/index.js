@@ -33,17 +33,6 @@ export async function getServerSideProps(context) {
   
   const stories = JSON.parse(JSON.stringify(data));
 
-  const filtered = stories.map(story => {
-    return { //props
-      _id: story._id,
-      title: story.title,
-      text: story.text,
-      genre: story.genre,
-      author: story.author,
-      user_id: story.user_id
-    }
-  })
-  
   return {
     props: { stories: stories },
   }
