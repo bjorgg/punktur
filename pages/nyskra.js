@@ -13,7 +13,7 @@ export default function SignUp() {
             });
             const savedUser = await result.json();
             alert('Account created');
-            window.location.href = "/login";
+            window.location.href = "/skra-inn";
             console.log("CREATED!", savedUser);
         }
     };
