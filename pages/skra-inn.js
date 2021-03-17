@@ -21,7 +21,7 @@ export default function LogIn() {
             });
             const loggedInUser = await result.json();
             if (loggedInUser) {
-                window.location.href = "/settings";
+                window.location.href = "/min-sida";
             } else {
                 setEmailError('Not found')
             }
