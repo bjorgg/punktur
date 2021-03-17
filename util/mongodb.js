@@ -34,7 +34,6 @@ export async function connectToDatabase() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
-    console.log(MONGODB_DB, MONGODB_URI)
     cached.promise = MongoClient.connect(MONGODB_URI, opts).then((client) => {
       return {
         client,
