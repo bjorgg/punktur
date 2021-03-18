@@ -3,7 +3,7 @@ import isEmail from "validator/lib/isEmail";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import bcrypt from "bcryptjs";
 import middleware from "../../middleware/middleware";
-import { insertUser, findUserByEmail, findUserByName } from "../../db/user";
+import { insertUser, findUserByEmail, /*findUserByName*/ } from "../../db/user";
 
 
 const handler = nextConnect();
