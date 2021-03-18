@@ -21,6 +21,7 @@ handler.post(async (req, res) => {
         return;
     }
     if (await findUserByEmail(req.db, email)) {
+        console.log('halloooo')
         res.status(403).send("The email has already been used.");
         return;
     }
@@ -34,6 +35,7 @@ handler.post(async (req, res) => {
         password: hashedPassword,
         username,
     });
+    console.log(user);
     req.logIn(user, (err) => {
         if (err) {
             throw err;
