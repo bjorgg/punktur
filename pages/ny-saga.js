@@ -1,4 +1,4 @@
-import { useState } from 'React'
+import { useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 
 export default function NewStory() {
