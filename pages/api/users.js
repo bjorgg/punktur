@@ -24,10 +24,10 @@ handler.post(async (req, res) => {
         res.status(403).send("The email has already been used.");
         return;
     }
-    if (await findUserByName(req.db, username)) {
-        res.status(403).send("The username has already been used.");
-        return;
-    }
+    // if (await findUserByName(req.db, username)) {
+    //     res.status(403).send("The username has already been used.");
+    //     return;
+    // }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await insertUser(req.db, {
         email,
