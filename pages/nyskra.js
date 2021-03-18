@@ -6,8 +6,9 @@ const SignupPage = () => {
     const router = useRouter();
     const [user, { mutate }] = useCurrentUser();
     const [errorMsg, setErrorMsg] = useState("");
+    
     useEffect(() => {
-        // redirect to home if user is authenticated
+        // redirect to profile page if user is authenticated
         if (user) router.replace("/min-sida");
     }, [user]);
 
@@ -34,19 +35,27 @@ const SignupPage = () => {
     return (
         <>
             <div>
-                <h2>Sign up</h2>
+                <h2>Nýskráning</h2>
                 <form onSubmit={handleSubmit}>
                     {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
-                    <label htmlFor="username">
-                        <input id="username" name="username" type="text" placeholder="Your name" />
-                    </label>
-                    <label htmlFor="email">
-                        <input id="email" name="email" type="email" placeholder="Email address" />
-                    </label>
-                    <label htmlFor="password">
-                        <input id="password" name="password" type="password" placeholder="Create a password" />
-                    </label>
-                    <button type="submit">Sign up</button>
+                    <div>
+                        <label htmlFor="username">Nafn/höfundarnafn</label>
+                            <input id="username" name="username" type="text"/>
+                    </div>
+                    <div>
+                        <label htmlFor="email">Netfang</label>
+                        <input id="email" name="email" type="email"/>
+                    </div>
+                    <div>
+                        <label htmlFor="password">Lykilorð</label>
+                        <input id="password" name="password" type="password"/>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="acceptTerms" required></input>
+                        <label>Ég hef lesið og samþykki Notandaskilmála</label>
+                    </div>
+
+                    <button type="submit">Innskrá</button>
                 </form>
             </div>
         </>
