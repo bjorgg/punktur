@@ -14,6 +14,12 @@ export async function findUserByEmail(db, email) {
   }).then((user) => user || null);
 }
 
+export async function findUserByName(db, username) {
+  return db.collection('users').findOne({
+    username,
+  }).then((user) => user || null);
+}
+
 export async function insertUser(db, {
   email, password, username,
 }) {
