@@ -6,11 +6,13 @@ import middleware from "../../middleware/middleware";
 import { insertUser, findUserByEmail, findUserByName } from "../../db/user";
 
 
-
 const handler = nextConnect();
 
 handler.use(middleware);
 
+
+// handler validating email, password, username
+// if user is authenticated we return an object to the state
 handler.post(async (req, res) => {
     const { username, password } = req.body;
     const email = normalizeEmail(req.body.email);
@@ -36,7 +38,6 @@ handler.post(async (req, res) => {
         password: hashedPassword,
         username,
     });
-    console.log(user);
     req.logIn(user, (err) => {
         if (err) {
             throw err;

@@ -7,11 +7,14 @@ const LoginPage = () => {
     const router = useRouter();
     const [errorMsg, setErrorMsg] = useState("");
     const [user, { mutate }] = useCurrentUser();
+    
+    // call when user changes or signs in
     useEffect(() => {
-        // redirect to home if user is authenticated
+        // redirect to profile if user is authenticated
         if (user) router.push("/min-sida");
     }, [user]);
 
+    // making a POST request to api/auth that authenticates user
     async function onSubmit(e) {
         e.preventDefault();
         const body = {
