@@ -1,4 +1,5 @@
 import { useState } from 'React'
+import { Editor } from '@tinymce/tinymce-react';
 
 export default function NewStory() {
     // const [title, setTitle] = useState('')
@@ -10,13 +11,15 @@ export default function NewStory() {
 
     // How to prevent the same story to be saved more than once
     const handleCreateStory = async () => {
+        const title = document.querySelector('#storyTitle').value;
+        const story = tinymce.get('storyContent').getContent();
 
         const result = await fetch("http://localhost:3000/api/createStory", {
             method: "post",
             body: JSON.stringify({ 
-                title: "Önnur post prufa ",
-                text: "Ný saga úr post request",
-                genre: "Vinsælt", // Hvað ef það eru fleiri en einn flokkur?
+                title: title,
+                text: story,
+                genres: ["Vinsælt", "Tragedía"], // Hvað ef það eru fleiri en einn flokkur? Array!
                 author: "Árnamaðkur",
                 user_id: "2873926ea8458s29424u93u409" 
             }),
@@ -32,6 +35,21 @@ export default function NewStory() {
 
     return (
         <div>
+            <input id='storyTitle' type='text' />
+            <Editor
+                id='storyContent'
+                apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                init={{
+                    selector: 'textarea',
+                    skin_url: '/skins/ui/CUSTOM',
+                    placeholder: 'Einu sinni var...',
+                    skin: 'content',
+                    // content_css: 'content',  
+                    height: 500,
+                    menubar: false,
+                    toolbar: 'p h2 undo redo bold italic underline indent outdent',
+                }}
+            />
             <button onClick={handleCreateStory}>Birta sögu</button>
         </div>
     )

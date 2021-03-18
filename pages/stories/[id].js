@@ -1,5 +1,5 @@
 import  { connectToDatabase } from '../../util/mongodb'
-import { ObjectID } from 'mongodb';
+import { getStoryById } from '../../db/stories';
 
 export default function Stories({ story }) {
     return (
@@ -25,21 +25,8 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({params}) {
     const {db} = await connectToDatabase();
-    console.log(params.id)
-
-    const data = await db.collection('stories')
-    .findOne({
-        _id: new ObjectID(params.id)
-    }, {
-        projection: {
-            title: 1,
-            text: 1,
-            author: 1,
-            genre: 1,
-        }
-    })
-    console.log()
+    const story = await getStoryById(db, params.id);
     return {
-        props: {story: JSON.parse(JSON.stringify(data))},
+        props: {story},
     }
 }
