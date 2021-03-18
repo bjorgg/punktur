@@ -44,7 +44,7 @@ const LoginPage = () => {
                 </label>
                 <button type="submit">Sign in</button>
                 <div>
-                    <Link href="/signup">
+                    <Link href="/nyskra">
                         <a>Nýskráning</a>
                     </Link>
                 </div>
