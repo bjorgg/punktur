@@ -78,9 +78,10 @@ export async function getServerSideProps(context) {
   // If no data ... ?
 
   // AWS Polly TTS
-  params.Text = filtered.map(story => {
+  params.Text = stories.map(story => {
     return story.text
   });
+  console.log(params.Text[2])
   
   const url = await getSynthesizeSpeechUrl({
     client, params
