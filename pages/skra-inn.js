@@ -9,7 +9,7 @@ const LoginPage = () => {
     const [user, { mutate }] = useCurrentUser();
     useEffect(() => {
         // redirect to home if user is authenticated
-        if (user) router.push("/");
+        if (user) router.push("/min-sida");
     }, [user]);
 
     async function onSubmit(e) {
