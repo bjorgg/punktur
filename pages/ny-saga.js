@@ -42,12 +42,13 @@ export default function NewStory() {
                 init={{
                     selector: 'textarea',
                     skin_url: '/skins/ui/CUSTOM',
+                    plugins: 'wordcount table', 
                     placeholder: 'Einu sinni var...',
                     skin: 'content',
                     // content_css: 'content',  
                     height: 500,
                     menubar: false,
-                    toolbar: 'p h2 undo redo bold italic underline indent outdent',
+                    toolbar: 'undo redo bold italic underline indent outdent styleselect',
                 }}
             />
             <button onClick={handleCreateStory}>Birta sögu</button>

@@ -14,7 +14,7 @@ export default function Profile() {
                         <h3>{user && `Velkomin/n ${user.username}!`}</h3>
                     </div>
                     <div>
-                        <p>Hér kemur frófílmynd</p>
+                        { <p>Hér kemur frófílmynd</p> } {/*hahaha það er ekki bara ég sem skrifa óvart frófíll tíhí, kv kolla*/}
                         <p>{user.username}</p>
                         <p>Hér kemur um notanda text?</p>
                     </div>

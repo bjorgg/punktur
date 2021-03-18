@@ -26,7 +26,8 @@ export default function Home({ stories, speech }) {
                     <div key={story._id}>
                         <p>title: {story.title}</p>
                         <p>author: {story.author}</p>
-                        <p>text: {story.text}</p>
+                        {/* <p>text: {story.text}</p> */}
+                        <p dangerouslySetInnerHTML={{__html: story.text}}></p>
                         <p>genre: {story.genre}</p>
                         <a href={`/stories/${story._id}`}>READ</a>
                     </div>
