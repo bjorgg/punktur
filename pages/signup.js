@@ -1,70 +1,56 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useCurrentUser } from "../hooks/user";
 
-export default function SignUp() {
-    const handleCreate = async () => {
-        if (!hasAcceptedTerms) {
-            console.log("ACCEPT TERMS!");
-        } else if (password !== passwordAgain) {
-            console.log("PASSWORDS DONT MATCH!");
+const SignupPage = () => {
+    const router = useRouter();
+    const [user, { mutate }] = useCurrentUser();
+    const [errorMsg, setErrorMsg] = useState("");
+    useEffect(() => {
+        // redirect to home if user is authenticated
+        if (user) router.replace("/");
+    }, [user]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const body = {
+            email: e.currentTarget.email.value,
+            username: e.currentTarget.username.value,
+            password: e.currentTarget.password.value,
+        };
+        const res = await fetch("/api/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        });
+        if (res.status === 201) {
+            const userObj = await res.json();
+            mutate(userObj);
         } else {
-            const result = await fetch("http://localhost:3000/api/createUser", {
-                method: "post",
-                body: JSON.stringify({ username, email, password }),
-            });
-            const savedUser = await result.json();
-            alert('Account created');
-            window.location.href = "/login";
-            console.log("CREATED!", savedUser);
+            setErrorMsg(await res.text());
         }
     };
 
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordAgain, setPasswordAgain] = useState("");
-    const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
-
     return (
-        <div>
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleCreate();
-                }}
-            >
-                <div>
-                    <label>Nafn</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}></input>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                </div>
-                <div>
-                    <label>Password again</label>
-                    <input type="password" value={passwordAgain} onChange={(e) => setPasswordAgain(e.target.value)}></input>
-                </div>
-                <div>
-                    <label>Terms of use</label>
-                    <input type="checkbox" value={hasAcceptedTerms} onChange={(e) => setHasAcceptedTerms(e.target.value)}></input>
-                </div>
-                <button type="submit">Skrá</button>
-            </form>
-        </div>
+        <>
+            <div>
+                <h2>Sign up</h2>
+                <form onSubmit={handleSubmit}>
+                    {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
+                    <label htmlFor="username">
+                        <input id="username" name="username" type="text" placeholder="Your name" />
+                    </label>
+                    <label htmlFor="email">
+                        <input id="email" name="email" type="email" placeholder="Email address" />
+                    </label>
+                    <label htmlFor="password">
+                        <input id="password" name="password" type="password" placeholder="Create a password" />
+                    </label>
+                    <button type="submit">Sign up</button>
+                </form>
+            </div>
+        </>
     );
-}
+};
 
-/* export default async function handler(req, res){
-    const {db} = await connectToDatabase();
-
-    const data = req.query;
-
-    const response = await db.collection('users').insertOne(data)
-
-    res.json(response);
-} */
+export default SignupPage;
