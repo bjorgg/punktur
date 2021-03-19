@@ -23,3 +23,11 @@ export async function getStoryById(db, id) {
     );
     return convertMongoData(story);
 }
+
+export async function updateStoryById(db, id, update) {
+    return db.collection('stories').findOneAndUpdate(
+      { _id: ObjectID(id) },
+      { $set: update },
+      { returnOriginal: false },
+    )
+  }

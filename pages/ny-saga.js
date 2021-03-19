@@ -3,7 +3,6 @@ import { Editor } from '@tinymce/tinymce-react';
 
 export default function NewStory() {
     // const [title, setTitle] = useState('')
-    // const [subTitle, setSubTitle] = useState('')
     // const [text, setText] = useState('')
     // const [genre, setGenre] = useState('')
 
@@ -21,7 +20,7 @@ export default function NewStory() {
                 text: story,
                 genres: ["Vinsælt", "Tragedía"],
                 author: "Árnamaðkur", // Tengja við user hér og líka user_id fyrir neðan
-                user_id: "2873926ea8458s29424u93u409" 
+                user_id: "605351b83ac44511943c4757" 
             }),
         });
         const savedStory = await result.json();
