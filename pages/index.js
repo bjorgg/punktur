@@ -26,25 +26,7 @@ export default function Home({ stories, speech }) {
             {user && `Velkomin/n ${user.username}`}
             {stories &&
                 stories.map((story) => (
-                    <div>
-                        <div key={story._id}>
-                            <p>title: {story.title}</p>
-                            <p>author: {story.author}</p>
-                            {/* <p>text: {story.text}</p> */}
-                            <p dangerouslySetInnerHTML={{__html: story.text}}></p>
-                            <div>
-                                genre:
-                                {story.genres.map((genre) => 
-                                    <div key={genre}>
-                                        {genre}
-                                    </div>
-                                )}
-                            </div>
-                            <a href={`/stories/${story._id}`}>READ</a>
-                        </div>
-
                         <StoryCard story={story} key={story._id}/>
-                    </div>
                 ))}
         </div>
     );
