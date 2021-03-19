@@ -7,11 +7,14 @@ const LoginPage = () => {
     const router = useRouter();
     const [errorMsg, setErrorMsg] = useState("");
     const [user, { mutate }] = useCurrentUser();
+    
+    // call when user changes or signs in
     useEffect(() => {
-        // redirect to home if user is authenticated
+        // redirect to profile if user is authenticated
         if (user) router.push("/min-sida");
     }, [user]);
 
+    // making a POST request to api/auth that authenticates user
     async function onSubmit(e) {
         e.preventDefault();
         const body = {
@@ -27,25 +30,25 @@ const LoginPage = () => {
             const userObj = await res.json();
             mutate(userObj);
         } else {
-            setErrorMsg("Incorrect username or password. Try again!");
+            setErrorMsg("Rangt netfang eða lykilorð, reyndu aftur!");
         }
     }
 
     return (
         <>
-            <h2>Sign in</h2>
+            <h2>Innskráning</h2>
             <form onSubmit={onSubmit}>
                 {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
-                <label htmlFor="email">
-                    <input id="email" type="email" name="email" placeholder="Email address" />
+                <label htmlFor="email">Netfang
+                    <input id="email" type="email" name="email" placeholder="Netfang" />
                 </label>
-                <label htmlFor="password">
-                    <input id="password" type="password" name="password" placeholder="Password" />
+                <label htmlFor="password">Lykilorð
+                    <input id="password" type="password" name="password" placeholder="Lykilorð" />
                 </label>
-                <button type="submit">Sign in</button>
+                <button type="submit">Ská inn</button>
                 <div>
                     <Link href="/nyskra">
-                        <a>Nýskráning</a>
+                        <a>Stofna reikning</a>
                     </Link>
                 </div>
             </form>
