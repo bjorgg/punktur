@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
 import StoryCard from "../components/StoryCard.js";
+import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
 
@@ -21,6 +22,7 @@ export default function Home({ stories, speech }) {
 
     return (
         <div>
+            <Hero />
             {user && `Velkomin/n ${user.username}`}
             {stories &&
                 stories.map((story) => (

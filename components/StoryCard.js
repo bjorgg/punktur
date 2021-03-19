@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from '../styles/StoryCard.module.css'
+import styles from '../styles/StoryCard.module.css';
 
 
 const StoryCard = ({story}) => {
