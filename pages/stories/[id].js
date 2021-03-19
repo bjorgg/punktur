@@ -9,8 +9,16 @@ export default function Stories({ story }) {
               <div>
                 <p>hello title: {story.title}</p>
                 <p>hello author: {story.author}</p>
-                <p>hello text: {story.text}</p>
-                <p>hello genre: {story.genre}</p>
+                {/* <p>hello text: {story.text}</p> */}
+                <p dangerouslySetInnerHTML={{__html: story.text}}></p>
+                <div>
+                    genres:
+                    {story.genres.map((genre) => 
+                        <div key={genre}>
+                            {genre}
+                        </div>
+                    )}
+                </div>
               </div>
             }
         </div>
@@ -27,6 +35,8 @@ export async function getStaticPaths(){
 export async function getStaticProps({params}) {
     const {db} = await connectToDatabase();
     const story = await getStoryById(db, params.id);
+    console.log(story);
+
     return {
         props: {story},
     }

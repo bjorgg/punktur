@@ -17,7 +17,7 @@ export async function getStoryById(db, id) {
                 title: 1,
                 text: 1,
                 author: 1,
-                genre: 1,
+                genres: 1,
             },
         }
     );
