@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Editor } from '@tinymce/tinymce-react';
+import TextEditor from '../components/TextEditor'
+import GenresArray from '../components/Genres'
 
 export default function NewStory() {
     // const [title, setTitle] = useState('')
@@ -13,13 +14,18 @@ export default function NewStory() {
     const handleCreateStory = async () => {
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
+        // const genre = document.querySelector('#storyGenres').value;
+        const checkboxes = Array.from(document.querySelectorAll('input[name="genre"]'));
+        const genres = checkboxes
+            .filter((checkbox) => checkbox.checked)
+            .map((checkbox) => checkbox.value);
 
         const result = await fetch("http://localhost:3000/api/createStory", {
             method: "post",
             body: JSON.stringify({ 
                 title: title,
                 text: story,
-                genres: ["Vinsælt", "Tragedía"], // Hvað ef það eru fleiri en einn flokkur? Array!
+                genres, 
                 author: "Árnamaðkur",
                 user_id: "2873926ea8458s29424u93u409" 
             }),
@@ -36,21 +42,8 @@ export default function NewStory() {
     return (
         <div>
             <input id='storyTitle' type='text' />
-            <Editor
-                id='storyContent'
-                apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                init={{
-                    selector: 'textarea',
-                    skin_url: '/skins/ui/CUSTOM',
-                    plugins: 'wordcount table', 
-                    placeholder: 'Einu sinni var...',
-                    skin: 'content',
-                    // content_css: 'content',  
-                    height: 500,
-                    menubar: false,
-                    toolbar: 'undo redo bold italic underline indent outdent styleselect',
-                }}
-            />
+            <TextEditor />
+            <GenresArray />
             <button onClick={handleCreateStory}>Birta sögu</button>
         </div>
     )
