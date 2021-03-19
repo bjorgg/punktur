@@ -4,6 +4,7 @@ import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
 import { useEffect } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
+import StoryCard from "../components/StoryCard.js";
 
 import { connectToDatabase } from "../util/mongodb";
 
@@ -23,14 +24,7 @@ export default function Home({ stories, speech }) {
             {user && `Velkomin/n ${user.username}`}
             {stories &&
                 stories.map((story) => (
-                    <div key={story._id}>
-                        <p>title: {story.title}</p>
-                        <p>author: {story.author}</p>
-                        {/* <p>text: {story.text}</p> */}
-                        <p dangerouslySetInnerHTML={{__html: story.text}}></p>
-                        <p>genre: {story.genre}</p>
-                        <a href={`/stories/${story._id}`}>READ</a>
-                    </div>
+                    <StoryCard story={story} key={story._id}/>
                 ))}
         </div>
     );
