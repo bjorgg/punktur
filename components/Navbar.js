@@ -3,10 +3,13 @@ import { useCurrentUser } from "../hooks/user";
 
 export default function Navbar() {
     const [user, { mutate }] = useCurrentUser();
+    
+    // fetching delete request from api/auth
     const handleLogout = async () => {
         await fetch("/api/auth", {
             method: "DELETE",
         });
+        // setting user state to null
         mutate(null);
     };
     return (

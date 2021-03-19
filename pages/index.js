@@ -4,6 +4,8 @@ import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
 import { useEffect } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
+import StoryCard from "../components/StoryCard.js";
+import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
 
@@ -20,23 +22,28 @@ export default function Home({ stories, speech }) {
 
     return (
         <div>
+            <Hero />
             {user && `Velkomin/n ${user.username}`}
             {stories &&
                 stories.map((story) => (
-                    <div key={story._id}>
-                        <p>title: {story.title}</p>
-                        <p>author: {story.author}</p>
-                        {/* <p>text: {story.text}</p> */}
-                        <p dangerouslySetInnerHTML={{__html: story.text}}></p>
-                        <div>
-                            genre:
-                            {story.genres.map((genre) => 
-                                <div key={genre}>
-                                    {genre}
-                                </div>
-                            )}
+                    <div>
+                        <div key={story._id}>
+                            <p>title: {story.title}</p>
+                            <p>author: {story.author}</p>
+                            {/* <p>text: {story.text}</p> */}
+                            <p dangerouslySetInnerHTML={{__html: story.text}}></p>
+                            <div>
+                                genre:
+                                {story.genres.map((genre) => 
+                                    <div key={genre}>
+                                        {genre}
+                                    </div>
+                                )}
+                            </div>
+                            <a href={`/stories/${story._id}`}>READ</a>
                         </div>
-                        <a href={`/stories/${story._id}`}>READ</a>
+
+                        <StoryCard story={story} key={story._id}/>
                     </div>
                 ))}
         </div>

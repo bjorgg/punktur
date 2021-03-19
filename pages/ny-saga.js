@@ -7,10 +7,10 @@ export default function NewStory() {
     // const [subTitle, setSubTitle] = useState('')
     // const [text, setText] = useState('')
     // const [genre, setGenre] = useState('')
-    // Author and user_id defined from user info.
-    // Slug?
 
-    // How to prevent the same story to be saved more than once
+    // Author and user_id defined from user info.
+
+    // How to prevent the same story to be saved more than once?
     const handleCreateStory = async () => {
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
@@ -20,19 +20,18 @@ export default function NewStory() {
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
 
-        const result = await fetch("http://localhost:3000/api/createStory", {
-            method: "post",
+        const result = await fetch("/api/createStory", {
+            method: "POST",
             body: JSON.stringify({ 
                 title: title,
                 text: story,
                 genres, 
-                author: "Árnamaðkur",
+                author: "Árnamaðkur", // Tengja við user hér og líka user_id fyrir neðan
                 user_id: "2873926ea8458s29424u93u409" 
             }),
         });
         const savedStory = await result.json();
         // set to stories array, use concat to add to it
-        // spurning þá hvernig á að höndla save annars vegar og svo publish?
         alert('Story posted');
         window.location.href = `/stories/${savedStory._id}`;
         console.log("POSTED!", savedStory);

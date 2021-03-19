@@ -7,11 +7,13 @@ const SignupPage = () => {
     const [user, { mutate }] = useCurrentUser();
     const [errorMsg, setErrorMsg] = useState("");
     
+    // call whenever user changes or signs in
     useEffect(() => {
         // redirect to profile page if user is authenticated
         if (user) router.replace("/min-sida");
     }, [user]);
 
+    // making a POST request to api/users with email, name, passw
     const handleSubmit = async (e) => {
         e.preventDefault();
         const body = {
@@ -26,8 +28,10 @@ const SignupPage = () => {
         });
         if (res.status === 201) {
             const userObj = await res.json();
+            // writing our user object to the state
             mutate(userObj);
         } else {
+            // showing error in form fields
             setErrorMsg(await res.text());
         }
     };

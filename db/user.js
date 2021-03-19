@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import { ObjectID, ObjectId } from 'mongodb';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
 export async function findUserById(db, userId) {
@@ -32,3 +32,25 @@ export async function insertUser(db, {
     })
     .then(({ ops }) => ops[0]);
 }
+
+export async function updateUserById(db, id, update) {
+  return db.collection('users').findOneAndUpdate(
+    { _id: ObjectID(id) },
+    { $set: update },
+    { returnOriginal: false },
+  ).then(({ value }) => value);
+}
+
+/*
+export async function deleteUser(db, {
+  email, password, username,
+}) {
+  return db
+    .collection('users')
+    .deleteOne({
+      email,
+      password,
+      username,
+    })
+    .then(({ ops }) => ops[0]);
+} */
