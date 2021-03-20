@@ -4,6 +4,8 @@ import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
 import { useEffect, useState } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
+import StoryCard from "../components/StoryCard.js";
+import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
 import { useRouter } from "next/router";
@@ -37,17 +39,11 @@ export default function Home({ stories, speech }) {
             <div className={styles.deleteNotification} style={showDeleteMessage ? { opacity: 1, zIndex: 1} : {}}>
                 Notandareikning hefur verið eytt!
             </div>
+            <Hero />
             {user && `Velkomin/n ${user.username}`}
             {stories &&
                 stories.map((story) => (
-                    <div key={story._id}>
-                        <p>title: {story.title}</p>
-                        <p>author: {story.author}</p>
-                        {/* <p>text: {story.text}</p> */}
-                        <p dangerouslySetInnerHTML={{ __html: story.text }}></p>
-                        <p>genre: {story.genre}</p>
-                        <a href={`/stories/${story._id}`}>READ</a>
-                    </div>
+                        <StoryCard story={story} key={story._id}/>
                 ))}
         </div>
     );
@@ -82,6 +78,7 @@ export async function getServerSideProps(context) {
 
     // If no data ... ?
 
+    
     // AWS Polly TTS
     params.Text = stories.map((story) => {
         return story.text;

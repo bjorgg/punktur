@@ -17,9 +17,17 @@ export async function getStoryById(db, id) {
                 title: 1,
                 text: 1,
                 author: 1,
-                genre: 1,
+                genres: 1,
             },
         }
     );
     return convertMongoData(story);
 }
+
+export async function updateStoryById(db, id, update) {
+    return db.collection('stories').findOneAndUpdate(
+      { _id: ObjectID(id) },
+      { $set: update },
+      { returnOriginal: false },
+    )
+  }
