@@ -12,6 +12,8 @@ import { connectToDatabase } from "../util/mongodb";
 import { useRouter } from "next/router";
 
 export default function Home({ initialStories, speech }) {
+    const router = useRouter();
+    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
     const [stories, setStories] = useState(initialStories);
     const [user] = useCurrentUser();
     console.log(speech);
