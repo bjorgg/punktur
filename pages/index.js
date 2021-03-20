@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
 import StoryCard from "../components/StoryCard.js";
+import SortByGenres from "../components/SortByGenres.js";
 import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
@@ -13,7 +14,7 @@ export default function Home({ stories, speech }) {
     const [user] = useCurrentUser();
     console.log(stories);
     console.log(speech);
-
+    
     // useEffect(() => {
     //   const audio = new Audio(speech);
     //   audio.play();
@@ -23,6 +24,7 @@ export default function Home({ stories, speech }) {
     return (
         <div>
             <Hero />
+            <SortByGenres />
             {user && `Velkomin/n ${user.username}`}
             {stories &&
                 stories.map((story) => (

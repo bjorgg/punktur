@@ -2,8 +2,17 @@ import { ObjectID } from "mongodb";
 
 const convertMongoData = (data) => JSON.parse(JSON.stringify(data));
 
-export async function getStories(db, limit) {
-    const stories = await db.collection("stories").find({}).sort({ _id: 1 }).limit(limit).toArray();
+export async function getStories(db, limit, genres) {
+    const searchCriteria = genres !== undefined
+        ? { genres: { $all: genres } }
+        : {};
+
+    const stories = await db
+        .collection("stories")
+        .find(searchCriteria)
+        .sort({ _id: 1 })
+        .limit(limit)
+        .toArray();
     return convertMongoData(stories);
 }
 
