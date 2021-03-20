@@ -3,17 +3,26 @@ import React, { useState, useEffect, useRef } from "react";
 import  { connectToDatabase } from '../../util/mongodb'
 import { getStoryById } from '../../db/stories';
 import { Editor } from '@tinymce/tinymce-react';
+import { useRouter } from 'next/router'
+
 
 export default function EditStory({ story }) {
     // const [user] = useCurrentUser();
     // const [msg, setMsg] = useState({ message: "", isError: false });
-    const [updatedStory, setUpdatedStory] = useState({
+    const [updatedStory, setUpdatedStory] = useState({ 
         title: story.title,
         text: story.text,
         // genres: story.genres,
     })
+    
     // Þarf ég að hafa höfund og user id með ef það er ekki að fara að breytast?
     console.log(updatedStory)
+
+    const router = useRouter()
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
+
     // user id 605351b83ac44511943c4757
     const updateEntryInDb = async () => {
         const res = await fetch('/api/story', {
@@ -44,7 +53,7 @@ export default function EditStory({ story }) {
 
     return (
             <div>
-                {story ? (
+                {story &&
                     <div>
                     <div>                        
                         <input value={updatedStory.title} onChange={handleChange} name="title" type="text"></input>                            
@@ -76,7 +85,7 @@ export default function EditStory({ story }) {
                     <button onClick={updateEntryInDb}>Vista breytingar</button>
                     
                     </div>
-                ) : ''}
+                }
               
         </div>
         
