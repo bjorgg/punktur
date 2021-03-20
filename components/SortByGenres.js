@@ -1,11 +1,11 @@
 import Genres from './Genres';
 import { useState, useEffect } from 'react';
 
-export default function SortByGenres() {
+export default function SortByGenres({ setStories }) {
   const [selectedGenres, setSelectedGenres] = useState([]);
 
   useEffect(async () => {
-    let url = '/api/getStoriesByGenre';
+    let url = '/api/getStories';
     if (selectedGenres.length > 0) {
       url += '?';
       selectedGenres.forEach((genre, i) => {
@@ -15,11 +15,10 @@ export default function SortByGenres() {
         }
       })
     }
-    console.log(url)
     const res = await fetch(url);
-    const stories = await res.text();
-    console.log(stories)
-  })
+    const stories = await res.json();
+    setStories(stories);
+  }, [selectedGenres]);
 
   const onGenreClick = (e) => {
     if (e.target.checked) {

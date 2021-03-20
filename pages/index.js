@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.css";
 import { PollyClient, SynthesizeSpeechCommand } from "@aws-sdk/client-polly";
 import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
 import StoryCard from "../components/StoryCard.js";
@@ -10,9 +10,9 @@ import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
 
-export default function Home({ stories, speech }) {
+export default function Home({ initialStories, speech }) {
+    const [stories, setStories] = useState(initialStories);
     const [user] = useCurrentUser();
-    console.log(stories);
     console.log(speech);
     
     // useEffect(() => {
@@ -24,12 +24,11 @@ export default function Home({ stories, speech }) {
     return (
         <div>
             <Hero />
-            <SortByGenres />
+            <SortByGenres setStories={setStories} />
             {user && `Velkomin/n ${user.username}`}
-            {stories &&
-                stories.map((story) => (
-                        <StoryCard story={story} key={story._id}/>
-                ))}
+            {Array.isArray(stories) && stories.map((story) => (
+                <StoryCard story={story} key={story._id}/>
+            ))} 
         </div>
     );
 }
@@ -79,7 +78,7 @@ export async function getServerSideProps(context) {
     // Passing the data receved to the props object
     return {
         props: {
-            stories: stories,
+            initialStories: stories,
             speech: url,
         },
 

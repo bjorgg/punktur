@@ -3,9 +3,7 @@ import { getStories } from "../../db/stories";
 
 export default async function handler(req, res) {
   let genres;
-  if (req.query.genres === undefined) {
-    genres = [];
-  } else if (typeof req.query.genres === 'string') {
+  if (typeof req.query.genres === 'string') {
     genres = [req.query.genres];
   } else {
     genres = req.query.genres;
