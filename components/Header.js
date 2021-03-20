@@ -8,7 +8,7 @@ export default function Header() {
         <header>
             <Link href="/">
                 <a>
-                <Image src="/../public/img/logo_punktur_horizontal.png"  width={160} height={32.2} alt="logo"/>
+                <Image src="/img/logo_punktur_horizontal.png"  width={160} height={32.2} alt="logo"/>
                 </a>
             </Link>
         </header>
