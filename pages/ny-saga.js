@@ -6,7 +6,6 @@ import Genres from '../components/Genres'
 export default function NewStory() {
     const [user, { mutate }] = useCurrentUser();
     // const [title, setTitle] = useState('')
-    // const [subTitle, setSubTitle] = useState('')
     // const [text, setText] = useState('')
     // const [genre, setGenre] = useState('')
 

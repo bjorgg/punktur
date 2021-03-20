@@ -65,6 +65,7 @@ export async function getServerSideProps(context) {
 
     // If no data ... ?
 
+    
     // AWS Polly TTS
     params.Text = stories.map((story) => {
         return story.text;
