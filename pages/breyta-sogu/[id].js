@@ -9,11 +9,12 @@ import { useRouter } from 'next/router'
 export default function EditStory({ story }) {
     // const [user] = useCurrentUser();
     // const [msg, setMsg] = useState({ message: "", isError: false });
-    const [updatedStory, setUpdatedStory] = useState({ 
-        title: story.title,
-        text: story.text,
-        // genres: story.genres,
-    })
+    // const [updatedStory, setUpdatedStory] = useState({ 
+    //     title: story.title,
+    //     text: story.text,
+    //     // genres: story.genres,
+    // })
+    const [updatedStory, setUpdatedStory] = useState([])
     
     // Þarf ég að hafa höfund og user id með ef það er ekki að fara að breytast?
     console.log(updatedStory)
