@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Like from "./Like.js";
 import styles from '../styles/StoryCard.module.css';
 
 
@@ -17,10 +18,7 @@ const StoryCard = ({story}) => {
                         )}
                     </div>
                     {/* <p>genre:{story.genres}</p> */}
-                    <div>
-                        <p>25</p>
-                        <p>⭐</p>
-                    </div>
+                    <Like story={story} key={story._id} />
                 </div>
                 <div>
                     <p>title: {story.title}</p>
