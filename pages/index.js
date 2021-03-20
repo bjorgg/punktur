@@ -9,12 +9,24 @@ import SortByGenres from "../components/SortByGenres.js";
 import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
+import { useRouter } from "next/router";
 
 export default function Home({ initialStories, speech }) {
     const [stories, setStories] = useState(initialStories);
     const [user] = useCurrentUser();
     console.log(speech);
-    
+
+    useEffect(() => {
+        if (router.query.showUserDeleteMessage) {
+            setShowDeleteMessage(true);
+            setTimeout(() => {
+                router.push("/");
+            }, 3000);
+        } else if (showDeleteMessage) {
+            setShowDeleteMessage(false);
+        }
+    }, [router.query.showUserDeleteMessage]);
+
     // useEffect(() => {
     //   const audio = new Audio(speech);
     //   audio.play();
@@ -23,6 +35,9 @@ export default function Home({ initialStories, speech }) {
 
     return (
         <div>
+            <div className={styles.deleteNotification} style={showDeleteMessage ? { opacity: 1, zIndex: 1} : {}}>
+                Notandareikning hefur verið eytt!
+            </div>
             <Hero />
             <SortByGenres setStories={setStories} />
             {user && `Velkomin/n ${user.username}`}
@@ -57,9 +72,7 @@ const command = new SynthesizeSpeechCommand(params);
 // Getting sever side props from MongoDB and AWS Polly TTS
 export async function getServerSideProps(context) {
     // MongoBD
-    console.log(context.req.db, 'asdf')
     const { db } = await connectToDatabase();
-
     const stories = await getStories(db, 20);
 
     // If no data ... ?
