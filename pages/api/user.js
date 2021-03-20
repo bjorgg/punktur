@@ -2,7 +2,6 @@ import nextConnect from 'next-connect';
 import middleware from '../../middleware/middleware';
 import { updateUserById, findUserByEmail, findUserByName, deleteUserById } from "../../db/user";
 
-
 const handler = nextConnect();
 
 handler.use(middleware);
@@ -25,7 +24,7 @@ const isLoggedInUser = (user, req) => {
 handler.patch(async (req, res) => {
     // checking if user is logged in
     if (!req.user) {
-      req.status(401).end();
+      res.status(401).end();
       return;
     }
     const update = JSON.parse(req.body);

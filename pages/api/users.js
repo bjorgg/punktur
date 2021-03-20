@@ -13,7 +13,7 @@ handler.use(middleware);
 // handler validating email, password, username
 // if user is authenticated we return an object to the state
 handler.post(async (req, res) => {
-    const { username, password, terms } = req.body;
+    const { username, password } = req.body;
     const email = normalizeEmail(req.body.email);
     if (!isEmail(email)) {
         res.status(400).send("Netfangið er ógilt");
