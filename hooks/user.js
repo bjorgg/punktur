@@ -8,3 +8,4 @@ export function useCurrentUser() {
     const user = data?.user;
     return [user, { mutate: (data) => mutate("/api/user", data)}];
 }
+

@@ -3,18 +3,17 @@ import isEmail from "validator/lib/isEmail";
 import normalizeEmail from "validator/lib/normalizeEmail";
 import bcrypt from "bcryptjs";
 import middleware from "../../middleware/middleware";
-import { insertUser, findUserByEmail, /*findUserByName*/ } from "../../db/user";
+import { insertUser, findUserByEmail, findUserByName } from "../../db/user";
 
 
 const handler = nextConnect();
 
 handler.use(middleware);
 
-
 // handler validating email, password, username
 // if user is authenticated we return an object to the state
 handler.post(async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, terms } = req.body;
     const email = normalizeEmail(req.body.email);
     if (!isEmail(email)) {
         res.status(400).send("Netfangið er ógilt");

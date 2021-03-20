@@ -1,4 +1,6 @@
 import { useCurrentUser } from "../hooks/user";
+import Image from 'next/image'
+
 import Link from "next/link";
 
 
@@ -6,7 +8,7 @@ export default function Profile() {
     const [user] = useCurrentUser();
 
     const {
-        username, email, bio, profilePicture,
+        username, email, bio,
     } = user || {};
 
     return (
@@ -19,11 +21,13 @@ export default function Profile() {
                     </div>
                     <div>
                         <div>
-                        {profilePicture ? (
-                            <img src={profilePicture} width="256" height="256" alt={username} />
-                        ) : null}
+                            <Image
+                                src="/avatar.svg"
+                                alt="Avatar"
+                                width={100}
+                                height={100}
+                            />
                         </div>
-                        <p>Hér kemur frófílmynd</p>
                         <p>{username}</p>
                         <p>{email}</p>
                     <div>
