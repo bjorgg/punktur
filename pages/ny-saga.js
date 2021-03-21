@@ -30,7 +30,6 @@ export default function NewStory() {
             }),
         });
         const savedStory = await result.json();
-        // set to stories array, use concat to add to it
         alert('Story posted');
         window.location.href = `/stories/${savedStory._id}`;
         console.log("POSTED!", savedStory);

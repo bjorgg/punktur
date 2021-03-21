@@ -1,8 +1,25 @@
 import  { connectToDatabase } from '../../util/mongodb'
 import { getStoryById } from '../../db/stories';
+import { useCurrentUser } from "../../hooks/user";
+import {DataContext} from '../../components/Context'
+import { useContext, useEffect } from 'react'
+import Link from 'next/link'
 
 export default function Stories({ story }) {
-
+    const [user] = useCurrentUser();
+    // useContext reads the context and subscribes to its changes
+    const {storyToUpdate, setStoryToUpdate} = useContext(DataContext)
+    useEffect(() => {
+        if (!story) {
+            return
+        } else {
+            setStoryToUpdate(
+                   story
+                )
+        }
+        
+    }, [story]) 
+    console.log(storyToUpdate)
     return (
         <div>
             {story &&
@@ -17,6 +34,14 @@ export default function Stories({ story }) {
                         <div key={genre}>
                             {genre}
                         </div>
+                    )}
+                </div>
+                <div>
+                    {/* Breyta þannig að réttur notandi sjái bara við sínar sögur eða færa þetta á sögur á min-sida */}
+                    {!user ? '' : (
+                        <Link href="/breyta-sogu">
+                            <a>Breyta sögu</a>
+                        </Link>
                     )}
                 </div>
               </div>

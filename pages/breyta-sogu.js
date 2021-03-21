@@ -1,60 +1,62 @@
-import { useCurrentUser } from "../../hooks/user";
-import React, { useState, useEffect, useRef } from "react";
-import  { connectToDatabase } from '../../util/mongodb'
-import { getStoryById } from '../../db/stories';
+import { useCurrentUser } from "../hooks/user";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { Editor } from '@tinymce/tinymce-react';
-import { useRouter } from 'next/router'
+import {DataContext} from '../components/Context'
+import GenresArray from '../components/Genres'
+import Link from 'next/link'
 
-
-export default function EditStory({ story }) {
+export default function EditStory() {
     // const [user] = useCurrentUser();
-    // const [msg, setMsg] = useState({ message: "", isError: false });
-    // const [updatedStory, setUpdatedStory] = useState({ 
-    //     title: story.title,
-    //     text: story.text,
-    //     // genres: story.genres,
-    // })
-    const [updatedStory, setUpdatedStory] = useState([])
+
+    // useContext reads the context and subscribes to its changes
+    const {storyToUpdate, setStoryToUpdate} = useContext(DataContext)
+    console.log(storyToUpdate)
+
+    const [updatedStory, setUpdatedStory] = useState({ 
+        title: storyToUpdate.title,
+        genres: storyToUpdate.genres,
+    })
+
+    const [updatedStoryText, setUpdatedStoryText] = useState({ 
+        text: storyToUpdate.text,
+    })
     
     // Þarf ég að hafa höfund og user id með ef það er ekki að fara að breytast?
-    console.log(updatedStory)
-
-    const router = useRouter()
-    if (router.isFallback) {
-        return <div>Loading...</div>
-      }
-
     // user id 605351b83ac44511943c4757
     const updateEntryInDb = async () => {
         const res = await fetch('/api/story', {
             method: "PATCH",
             body: JSON.stringify({  // Updated entry array ...
-                // _id: "605368893ac44511943c4759",
+                _id: storyToUpdate._id,
                 title: updatedStory.title,
-                text: updatedStory.text,
-                // genres: ["Vinsælt", "Tragedía"],
+                text: updatedStoryText.text,
+                genres: updatedStory.genres,
                 // author: "Árnamaðkur", // Tengja við user hér og líka user_id fyrir neðan
                 // user_id: "2873926ea8458s29424u93u409" 
             }),
         });
-        // if (res.status === 200) {
-        //     setMsg({ message: "Saga uppfærð" });
-        // } else if (res.status === 500) {
-        //     setMsg({ message: "Eitthvað fór úrskeiðis, reyndu aftur", isError: true });
-        // } else {
-        //     setMsg({ message: await res.text(), isError: true });
-        // }
+        const updatedStory = await res.json();
+        alert('Story updated');
+        window.location.href = `/stories/${updatedStory._id}`;
+        // Handle errors ?
     };
+     // Gera kannski Handle submit og kalla í updateEntryInDb þar
 
     // Virkar ekki að sækja frá input og editor saman, þarf að skoða ...
-    const handleChange = (e, content, editor) => {
-        // setUpdatedStory({...updatedStory, content, [e.target.name]: e.target.value})
-        console.log(content)
+    const handleChange = (e) => {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setUpdatedStory({...updatedStory, [e.target.name]: value})
+        console.log(updatedStory.title)
+    }
+
+    const handleEditorChange = (content) => {
+        setUpdatedStoryText({...updatedStoryText, text: content})
+        console.log(updatedStoryText)
     }
 
     return (
             <div>
-                {story &&
+                {storyToUpdate &&
                     <div>
                     <div>                        
                         <input value={updatedStory.title} onChange={handleChange} name="title" type="text"></input>                            
@@ -63,9 +65,9 @@ export default function EditStory({ story }) {
                         <Editor
                             id='editStoryContent'
                             apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                            value={updatedStory.text}
+                            value={updatedStoryText.text}
                             textareaName='text'
-                            onEditorChange={handleChange}
+                            onEditorChange={handleEditorChange}
                             init={{
                                 selector: 'textarea',
                                 skin_url: '/skins/ui/CUSTOM',
@@ -79,10 +81,13 @@ export default function EditStory({ story }) {
                         />
                     </div>
                     <div>
-                        Flokkar                     
+                        {/* genres virkar ekki svona hér, þarf að skoða */}
+                        <GenresArray value={updatedStory.genres} onChange={handleChange}/>                   
                     </div>        
                        
-                    <button>Hætta við</button>
+                    <Link href={`/stories/${storyToUpdate._id}`}>
+                        <a>Hætta við</a>
+                    </Link>
                     <button onClick={updateEntryInDb}>Vista breytingar</button>
                     
                     </div>
@@ -91,19 +96,4 @@ export default function EditStory({ story }) {
         </div>
         
     )
-}
-
-export async function getStaticPaths(){
-    return {
-        paths: [],
-        fallback: true,
-    }
-}
-
-export async function getStaticProps({params}) {
-    const {db} = await connectToDatabase();
-    const story = await getStoryById(db, params.id);
-    return {
-        props: {story},
-    }
 }
