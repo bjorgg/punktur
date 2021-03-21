@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function GenresArray() {
-  
+
+export default function Genres({ onClick }) {
   const Genres = [
     'börn',
     'hryllingur',
@@ -15,16 +15,17 @@ export default function GenresArray() {
     'sannsögulegt',
     'nútíma',
     'hversdagsleiki',
+    'ljóð',
     'áskorun mánaðarins'
   ] 
 
   return (
     <div>
       {Genres &&
-        Genres.map((genre) => (
-            <div id='storyGenres' key={genre}>
-              <input type="checkbox" name="genre" value={genre}/>
-              <label for="genre">{genre}</label>
+        Genres.map((genre, i) => (
+            <div id='storyGenres' key={ genre }>
+              <input id={`genre${i}`} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
+              <label htmlFor={`genre${i}`}>{ genre }</label>
             </div>
         ))}
     </div>

@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import TextEditor from '../components/TextEditor'
-import GenresArray from '../components/Genres'
+import { useCurrentUser } from "../hooks/user";
+import { Editor } from '@tinymce/tinymce-react'
+import Genres from '../components/Genres'
 
 export default function NewStory() {
+    const [user, { mutate }] = useCurrentUser();
     // const [title, setTitle] = useState('')
     // const [text, setText] = useState('')
     // const [genre, setGenre] = useState('')
@@ -13,7 +15,6 @@ export default function NewStory() {
     const handleCreateStory = async () => {
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
-        // const genre = document.querySelector('#storyGenres').value;
         const checkboxes = Array.from(document.querySelectorAll('input[name="genre"]'));
         const genres = checkboxes
             .filter((checkbox) => checkbox.checked)
@@ -25,8 +26,8 @@ export default function NewStory() {
                 title: title,
                 text: story,
                 genres, 
-                author: "Árnamaðkur", // Tengja við user hér og líka user_id fyrir neðan
-                user_id: "605351b83ac44511943c4757" 
+                author: user.username,
+                user_id: user._id 
             }),
         });
         const savedStory = await result.json();
@@ -39,8 +40,21 @@ export default function NewStory() {
     return (
         <div>
             <input id='storyTitle' type='text' />
-            <TextEditor />
-            <GenresArray />
+            <Editor
+                id='storyContent'
+                apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                init={{
+                    selector: 'textarea',
+                    skin_url: '/skins/ui/CUSTOM',
+                    plugins: 'wordcount table', 
+                    placeholder: 'Einu sinni var...',
+                    skin: 'content',
+                    // content_css: 'content',  
+                    height: 500,
+                    menubar: false,
+                    toolbar: 'undo redo bold italic underline indent outdent styleselect',
+                }} />
+            <Genres />
             <button onClick={handleCreateStory}>Birta sögu</button>
         </div>
     )

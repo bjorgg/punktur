@@ -1,18 +1,33 @@
 import styles from "../styles/Home.module.css";
 import { PollyClient, SynthesizeSpeechCommand } from "@aws-sdk/client-polly";
 import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
 import StoryCard from "../components/StoryCard.js";
+import SortByGenres from "../components/SortByGenres.js";
 import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
+import { useRouter } from "next/router";
 
-export default function Home({ stories, speech }) {
+export default function Home({ initialStories, speech }) {
+    const router = useRouter();
+    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
+    const [stories, setStories] = useState(initialStories);
     const [user] = useCurrentUser();
-    console.log(stories);
     console.log(speech);
+
+    useEffect(() => {
+        if (router.query.showUserDeleteMessage) {
+            setShowDeleteMessage(true);
+            setTimeout(() => {
+                router.push("/");
+            }, 3000);
+        } else if (showDeleteMessage) {
+            setShowDeleteMessage(false);
+        }
+    }, [router.query.showUserDeleteMessage]);
 
     // useEffect(() => {
     //   const audio = new Audio(speech);
@@ -22,12 +37,15 @@ export default function Home({ stories, speech }) {
 
     return (
         <div>
+            <div className={styles.deleteNotification} style={showDeleteMessage ? { opacity: 1, zIndex: 1} : {}}>
+                Notandareikning hefur verið eytt!
+            </div>
             <Hero />
+            <SortByGenres setStories={setStories} />
             {user && `Velkomin/n ${user.username}`}
-            {stories &&
-                stories.map((story) => (
-                        <StoryCard story={story} key={story._id}/>
-                ))}
+            {Array.isArray(stories) && stories.map((story) => (
+                <StoryCard story={story} key={story._id}/>
+            ))} 
         </div>
     );
 }
@@ -56,9 +74,7 @@ const command = new SynthesizeSpeechCommand(params);
 // Getting sever side props from MongoDB and AWS Polly TTS
 export async function getServerSideProps(context) {
     // MongoBD
-    console.log(context.req.db, 'asdf')
     const { db } = await connectToDatabase();
-
     const stories = await getStories(db, 20);
 
     // If no data ... ?
@@ -77,7 +93,7 @@ export async function getServerSideProps(context) {
     // Passing the data receved to the props object
     return {
         props: {
-            stories: stories,
+            initialStories: stories,
             speech: url,
         },
 

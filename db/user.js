@@ -41,16 +41,9 @@ export async function updateUserById(db, id, update) {
   ).then(({ value }) => value);
 }
 
-/*
-export async function deleteUser(db, {
-  email, password, username,
-}) {
-  return db
-    .collection('users')
-    .deleteOne({
-      email,
-      password,
-      username,
-    })
-    .then(({ ops }) => ops[0]);
-} */
+
+export async function deleteUserById(db, id) {
+  return db.collection('users').findOneAndDelete(
+    { _id: ObjectID(id) },
+  );
+}
