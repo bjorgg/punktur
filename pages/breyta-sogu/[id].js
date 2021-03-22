@@ -1,52 +1,73 @@
-import { useCurrentUser } from "../hooks/user";
+import { useCurrentUser } from "../../hooks/user";
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Editor } from '@tinymce/tinymce-react';
-import {DataContext} from '../components/Context'
-import GenresArray from '../components/Genres'
+import Genres from '../../components/Genres'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import  { connectToDatabase } from '../../util/mongodb'
+import { getStoryById } from '../../db/stories';
 
-export default function EditStory() {
+
+// Ath ef síðan refresh-ast dettur sagan út ...
+// redirect on refresh kannski? eða reyna useRef aftur ...?
+
+export default function EditStory({story}) {
     // const [user] = useCurrentUser();
-
-    // useContext reads the context and subscribes to its changes
-    const {storyToUpdate, setStoryToUpdate} = useContext(DataContext)
-    console.log(storyToUpdate)
-
-    const [updatedStory, setUpdatedStory] = useState({ 
-        title: storyToUpdate.title,
-        genres: storyToUpdate.genres,
-    })
-
+    const router = useRouter()
+  
     const [updatedStoryText, setUpdatedStoryText] = useState({ 
-        text: storyToUpdate.text,
+        text: story.text,
     })
-    
-    // Þarf ég að hafa höfund og user id með ef það er ekki að fara að breytast?
-    // user id 605351b83ac44511943c4757
+    const [updatedStory, setUpdatedStory] = useState({ 
+        title: story.title,
+        genres: story.genres,
+    })
+
+    const Genres = [
+        'börn',
+        'hryllingur',
+        'rómantík',
+        'kómedía',
+        'tragedía',
+        'spenna',
+        'hasar',
+        'vísindaskáldskapur',
+        'ævintýri',
+        'sannsögulegt',
+        'nútíma',
+        'hversdagsleiki',
+        'ljóð',
+        'áskorun mánaðarins'
+      ] 
+
+
     const updateEntryInDb = async () => {
         const res = await fetch('/api/story', {
             method: "PATCH",
+            headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({  // Updated entry array ...
-                _id: storyToUpdate._id,
+                _id: story._id,
                 title: updatedStory.title,
                 text: updatedStoryText.text,
                 genres: updatedStory.genres,
+                // genres: updatedStory.genres,
                 // author: "Árnamaðkur", // Tengja við user hér og líka user_id fyrir neðan
                 // user_id: "2873926ea8458s29424u93u409" 
             }),
         });
-        const updatedStory = await res.json();
-        alert('Story updated');
-        window.location.href = `/stories/${updatedStory._id}`;
-        // Handle errors ?
-    };
-     // Gera kannski Handle submit og kalla í updateEntryInDb þar
+        const savedStory = await res.json();
+        alert('Story updated'); // Success modal í staðinn fyrir alert ...
+        console.log(`savedStory`, savedStory)
+        router.push(`/stories/${savedStory.story._id}`)
 
-    // Virkar ekki að sækja frá input og editor saman, þarf að skoða ...
+        // Validate ...
+    };
+     
+
     const handleChange = (e) => {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setUpdatedStory({...updatedStory, [e.target.name]: value})
-        console.log(updatedStory.title)
+        console.log(updatedStory.genres)
     }
 
     const handleEditorChange = (content) => {
@@ -54,9 +75,13 @@ export default function EditStory() {
         console.log(updatedStoryText)
     }
 
+
+    // const checked = 'name' === story.genres ? true : false
+
+
     return (
             <div>
-                {storyToUpdate &&
+                {story &&
                     <div>
                     <div>                        
                         <input value={updatedStory.title} onChange={handleChange} name="title" type="text"></input>                            
@@ -82,10 +107,17 @@ export default function EditStory() {
                     </div>
                     <div>
                         {/* genres virkar ekki svona hér, þarf að skoða */}
-                        <GenresArray value={updatedStory.genres} onChange={handleChange}/>                   
+                        {/* <Genres onChange={handleChange} checked={updatedStory.genres} value={ genres } />                    */}
+                        {Genres &&
+                            Genres.map((genre, i) => (
+                                <div id='editStoryGenres' key={ genre }>
+                                    <input id={`genre${i}`} type="checkbox" name="genres" onChange={handleChange} value={ genre } />
+                                    <label htmlFor={`genre${i}`}>{ genre }</label>
+                                </div>
+                        ))}
                     </div>        
                        
-                    <Link href={`/stories/${storyToUpdate._id}`}>
+                    <Link href={`/stories/${story._id}`}>
                         <a>Hætta við</a>
                     </Link>
                     <button onClick={updateEntryInDb}>Vista breytingar</button>
@@ -96,4 +128,19 @@ export default function EditStory() {
         </div>
         
     )
+}
+
+// Getting sever side props from MongoDB
+export async function getServerSideProps({params}) {
+    // MongoBD
+    const {db} = await connectToDatabase();
+    const story = await getStoryById(db, params.id);
+    console.log(story)
+    
+
+    return {
+        props: {
+            story,
+        },
+    }
 }

@@ -41,3 +41,18 @@ export async function updateStoryById(db, id, update) {
       { returnOriginal: false },
     )
   }
+
+  export async function insertStory(db, {
+    title, text, genres, author, user_id
+  }) {
+    return db
+      .collection('stories')
+      .insertOne({
+        title, 
+        text, 
+        genres, 
+        author, 
+        user_id
+      })
+      .then(({ ops }) => ops[0]);
+  }
