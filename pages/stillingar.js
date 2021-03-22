@@ -3,7 +3,6 @@ import { useCurrentUser } from "../hooks/user";
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "../components/modal";
 import { useRouter } from "next/router";
-
 import Link from "next/link";
 
 export default function Settings() {

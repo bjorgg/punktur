@@ -7,17 +7,26 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-// handler.get(async (req, res) => {
-//     const data = JSON.parse(req.body);
-//     const doc = await db.collection('stories').insertOne(data);
+handler.post(async (req, res) => {
 
-//     if (doc.insertedCount > 0) {
-//         res.json(JSON.stringify(doc.ops[0]));
-//     } else {
-//         res.error({error: 'Failed to post the story'})
-//     }
-// }),
+   const storyData = req.body;
+    // data = JSON.parse(data);
 
+    const story = await insertStory(req.db, {
+        storyData
+    });
+    // if (err) {
+    //     throw err;
+    // }
+    // res.status(201).json({
+    //     story,
+    // });
+    if (story.insertedCount > 0) {
+        res.json(JSON.stringify(story.ops[0]));
+    } else {
+        res.error({error: 'Failed to post the story'})
+    }
+});
 
 handler.patch(async (req, res) => {
     const storyData = req.body
@@ -35,9 +44,9 @@ handler.patch(async (req, res) => {
     }
     console.log(story)
     delete story._id
-    await updateStoryById(req.db, storyData._id, story)
+    const updatedStory = await updateStoryById(req.db, storyData._id, story)
 
-    res.json({ story: story });
+    res.json({ story: updatedStory.value });
   });
 
 export default handler;
