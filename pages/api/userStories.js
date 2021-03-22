@@ -14,7 +14,6 @@ handler.get(async (req, res) => {
     } 
 
     const userStories = await getStoriesByUser(req.db, req.user._id, 20);
-    console.log('hallooooo', userStories)
     return res.json({ userStories });
 });
 

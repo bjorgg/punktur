@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 export default function Profile() {
     const [user] = useCurrentUser();
     const [stories, setStories] = useState([]);
+    const defaultAvatar = '/avatar.svg'
 
     useEffect(() => {
         fetch('/api/userStories').then(res => res.json()).then(res => {
@@ -14,7 +15,7 @@ export default function Profile() {
     }, [])
 
     const {
-        username, email, bio,
+        username, email, bio, avatar
     } = user || {};
 
     return (
@@ -27,23 +28,27 @@ export default function Profile() {
                     </div>
                     <div>
                         <div>
-                            <Image
-                                src="/avatar.svg"
-                                alt="Avatar"
-                                width={100}
-                                height={100}
-                            />
+                        {!avatar ? 
+                                <Image
+                                    src={defaultAvatar}
+                                    alt="Avatar"
+                                    width={100}
+                                    height={100}
+                                /> :
+                                <img 
+                                    src={avatar} 
+                                    width="100" 
+                                    height="100" 
+                                    alt={username} 
+                                />
+                            }
                         </div>
                         <p>{username}</p>
                         <p>{email}</p>
-                    <div>
-                        <h3>Um mig</h3>
-                        <p>{bio}</p>
-                    </div>
-                    </div>
-                    <div>
-                        <h3>Mínir flokkar</h3>
-                        <p>Hér koma tögg</p>
+                        <div>
+                            <h3>Um mig</h3>
+                            <p>{bio}</p>
+                        </div>
                     </div>
                     <div>
                         <h3>Mínar sögur</h3>

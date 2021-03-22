@@ -4,6 +4,16 @@ import { useCurrentUser } from "../../hooks/user";
 import {DataContext} from '../../components/Context'
 import { useContext, useEffect } from 'react'
 import Link from 'next/link'
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    RedditIcon,
+    RedditShareButton,
+    TwitterShareButton,
+    TwitterIcon,
+    TelegramShareButton,
+    TelegramIcon,
+} from "react-share";
 
 export default function Stories({ story }) {
     const [user] = useCurrentUser();
@@ -19,7 +29,7 @@ export default function Stories({ story }) {
         }
         
     }, [story]) 
-    console.log(storyToUpdate)
+
     return (
         <div>
             {story &&
@@ -37,6 +47,36 @@ export default function Stories({ story }) {
                     )}
                 </div>
                 <div>
+                    <FacebookShareButton
+                        url={`https://punktur.vercel.app/stories/${story.id}`}
+                        quote={`${story.title} Eftir ${story.author}`}
+                        hashtag={'#punktur'}
+                        >
+                        <FacebookIcon size={32} round iconFillColor={"white"}/>
+                    </FacebookShareButton>                    
+                    <TwitterShareButton
+                        url={`https://punktur.vercel.app/stories/${story.id}`}
+                        title={`${story.title} Eftir ${story.author}`}
+                        hashtag={'#punktur'}
+                        >
+                        <TwitterIcon size={32} round />
+                    </TwitterShareButton>
+                    <TelegramShareButton
+                        url={`https://punktur.vercel.app/stories/${story.id}`}
+                        title={`${story.title} Eftir ${story.author}`}
+                        hashtag={'#punktur'}
+                        >
+                        <TelegramIcon size={32} round />
+                    </TelegramShareButton>
+                    <RedditShareButton
+                        url={`https://punktur.vercel.app/stories/${story.id}`}
+                        title={`${story.title} Eftir ${story.author}`}
+                        hashtag={'#punktur'}
+                        >
+                        <RedditIcon size={32} round />
+                    </RedditShareButton>
+                </div> 
+                <div>
                     {/* Breyta þannig að réttur notandi sjái bara við sínar sögur eða færa þetta á sögur á min-sida */}
                     {!user ? '' : (
                         <Link href="/breyta-sogu">
@@ -44,6 +84,7 @@ export default function Stories({ story }) {
                         </Link>
                     )}
                 </div>
+                
               </div>
             }
         </div>
@@ -60,8 +101,6 @@ export async function getStaticPaths(){
 export async function getStaticProps({params}) {
     const {db} = await connectToDatabase();
     const story = await getStoryById(db, params.id);
-    console.log(story);
-
     return {
         props: {story},
         revalidate: 1, 

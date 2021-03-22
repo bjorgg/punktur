@@ -47,7 +47,6 @@ export async function updateUserById(db, id, update) {
     { $set: update },
     { returnOriginal: false },
   );
-
   await db.collection('stories').updateMany(
     { user_id: id.toString() },
     { $set: { author: update.username }},

@@ -23,7 +23,6 @@ export async function getStoriesByUser(db, id, limit) {
         .sort({ _id: 1 })
         .limit(limit)
         .toArray();
-    console.log('blleeee',stories)
     return convertMongoData(stories);
 }
 
