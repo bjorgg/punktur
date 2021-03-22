@@ -2,16 +2,13 @@ import { useState } from 'react'
 import { useCurrentUser } from "../hooks/user";
 import { Editor } from '@tinymce/tinymce-react'
 import Genres from '../components/Genres'
+import { useRouter } from 'next/router'
+import { route } from 'next/dist/next-server/server/router';
 
 export default function NewStory() {
     const [user, { mutate }] = useCurrentUser();
-    // const [title, setTitle] = useState('')
-    // const [text, setText] = useState('')
-    // const [genre, setGenre] = useState('')
+    const router = useRouter()
 
-    // Author and user_id defined from user info.
-
-    // How to prevent the same story to be saved more than once?
     const handleCreateStory = async () => {
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
@@ -22,6 +19,7 @@ export default function NewStory() {
 
         const result = await fetch("/api/createStory", {
             method: "POST",
+            headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({ 
                 title: title,
                 text: story,
@@ -31,10 +29,11 @@ export default function NewStory() {
             }),
         });
         const savedStory = await result.json();
-        alert('Story posted');
-        window.location.href = `/stories/${savedStory._id}`;
+        alert('Story posted'); // Success modal í staðinn fyrir alert ...
+        route.push(`/stories/${savedStory._id}`);
         console.log("POSTED!", savedStory);
-        // Catch error?
+        
+        // Validate ...
     };
 
     return (

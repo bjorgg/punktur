@@ -18,7 +18,7 @@ const StoryCard = ({story}) => {
                         )}
                     </div>
                     {/* <p>genre:{story.genres}</p> */}
-                    <Like story={story} key={story._id} />
+                    <Like story={story}/>
                 </div>
                 <div>
                     <p>title: {story.title}</p>

@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal from "../components/modal";
 import Image from 'next/image'
 import { useRouter } from "next/router";
-
 import Link from "next/link";
 
 export default function Settings() {
@@ -14,7 +13,7 @@ export default function Settings() {
     const [isUpdating, setIsUpdating] = useState(false);
     const formRef = useRef();
     const [msg, setMsg] = useState({ message: "", isError: false });
-    const defaultAvatar = 'avatar.svg'
+    const defaultAvatar = '/avatar.svg'
 
 
     useEffect(() => {
@@ -48,7 +47,8 @@ export default function Settings() {
         // disable submitting while updating is in progress
         if (isUpdating) return;
         setIsUpdating(true);
-        console.log(getFormData());
+        console.log(user);
+
         const res = await fetch("api/user", {
             method: "PATCH",
             body: getFormData(),

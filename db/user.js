@@ -1,23 +1,33 @@
 import { ObjectID, ObjectId } from 'mongodb';
 import normalizeEmail from 'validator/lib/normalizeEmail';
 
+function formatUser(user) {
+  if(!user) return null
+
+  if(!Array.isArray(user.likedStories)){
+    user.likedStories = []
+  }
+
+  return user
+}
+
 export async function findUserById(db, userId) {
   return db.collection('users').findOne({
     _id: ObjectId(userId),
-  }).then((user) => user || null);
+  }).then(formatUser);
 }
 
 export async function findUserByEmail(db, email) {
   email = normalizeEmail(email);
   return db.collection('users').findOne({
     email,
-  }).then((user) => user || null);
+  }).then(formatUser);
 }
 
 export async function findUserByName(db, username) {
   return db.collection('users').findOne({
     username,
-  }).then((user) => user || null);
+  }).then(formatUser);
 }
 
 export async function insertUser(db, {
