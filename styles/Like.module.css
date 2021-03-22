@@ -1,0 +1,15 @@
+.star {
+    background-color: tomato;
+    width: 200px;
+}
+
+.active {
+    background-color: teal;
+    width: 200px;
+}
+
+.kolla {
+    color: yellowgreen;
+    background-color: violet;
+}
+

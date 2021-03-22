@@ -38,6 +38,7 @@ export default function Settings() {
         // disable submitting while updating is in progress
         if (isUpdating) return;
         setIsUpdating(true);
+        console.log(user);
 
         const res = await fetch("api/user", {
             method: "PATCH",
