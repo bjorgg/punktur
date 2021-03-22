@@ -41,8 +41,8 @@ export default function Home({ initialStories, speech }) {
                 Notandareikning hefur verið eytt!
             </div>
             <Hero />
-            <SortByGenres setStories={setStories} />
             {user && `Velkomin/n ${user.username}`}
+            <SortByGenres setStories={setStories} />
             {Array.isArray(stories) && stories.map((story) => (
                 <StoryCard story={story} key={story._id}/>
             ))} 
