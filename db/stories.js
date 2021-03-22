@@ -16,6 +16,17 @@ export async function getStories(db, limit, genres) {
     return convertMongoData(stories);
 }
 
+export async function getStoriesByUser(db, id, limit) {
+    const stories = await db
+        .collection("stories")
+        .find({ user_id: id.toString() })
+        .sort({ _id: 1 })
+        .limit(limit)
+        .toArray();
+    console.log('blleeee',stories)
+    return convertMongoData(stories);
+}
+
 export async function getStoryById(db, id) {
     const story = await db.collection("stories").findOne(
         {

@@ -1,11 +1,17 @@
 import { useCurrentUser } from "../hooks/user";
 import Image from 'next/image'
-
-import Link from "next/link";
-
+import StoryCard from "../components/StoryCard.js";
+import { useEffect, useState } from 'react'
 
 export default function Profile() {
     const [user] = useCurrentUser();
+    const [stories, setStories] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/userStories').then(res => res.json()).then(res => {
+            setStories(res.userStories);
+        })
+    }, [])
 
     const {
         username, email, bio,
@@ -41,7 +47,9 @@ export default function Profile() {
                     </div>
                     <div>
                         <h3>Mínar sögur</h3>
-                        <p>Hér koma Sögur notendans</p>
+                        {Array.isArray(stories) && stories.map((story) => (
+                            <StoryCard story={story} key={story._id}/>
+                        ))} 
                     </div>
                 </div> 
             )}
