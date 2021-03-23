@@ -1,33 +1,14 @@
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/middleware';
-import { getStoryById, updateStoryById } from "../../db/stories";
+import { getStoryById, updateStoryById, deleteStoryById } from "../../db/stories";
 
 
 const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.post(async (req, res) => {
 
-   const storyData = req.body;
-    // data = JSON.parse(data);
-
-    const story = await insertStory(req.db, {
-        storyData
-    });
-    // if (err) {
-    //     throw err;
-    // }
-    // res.status(201).json({
-    //     story,
-    // });
-    if (story.insertedCount > 0) {
-        res.json(JSON.stringify(story.ops[0]));
-    } else {
-        res.error({error: 'Failed to post the story'})
-    }
-});
-
+// edit story
 handler.patch(async (req, res) => {
     const storyData = req.body
   
@@ -48,6 +29,17 @@ handler.patch(async (req, res) => {
 
     res.json({ story: updatedStory.value });
   });
+
+// delete story
+handler.delete(async (req, res) => {
+    // if (!req.user) {
+    //     res.status(401).end();
+    //     return;
+    // }
+    const deleteResult = await deleteStoryById(req.db, req.body._id);
+    res.json({ deleted: !!deleteResult.ok });
+});
+
 
 export default handler;
 

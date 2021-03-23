@@ -1,0 +1,80 @@
+/* Delete this file when you are done using it :´( */
+
+
+
+/* // COLORS // */
+
+/* ///////////////////////////////////////////////////////////////////////// */
+/* OVERCAST - White color, used often for background colors, text and cards */
+
+.overcast {
+    background-color: #F3F1EE;
+    color: #F3F1EE;
+}
+
+.overcast_lighter {
+    background-color: #F9F8F6;
+    color: #F9F8F6;
+}
+
+.overcast_darker {
+    background-color: #E8E7E3;
+    color: #E8E7E3;
+}
+
+
+/* ////////////////////////////////////////// */
+/* RAVEN - Black color, used often for texts */
+
+.raven {
+    background-color: #1D2222;
+    color: #1D2222;
+}
+
+.raven_lighter {
+    background-color: #333838;
+    color: #333838;
+}
+
+.raven_darker {
+    background-color: #141616;
+    color: #141616;
+}
+
+
+/* ////////////////////////////////////////////////////////////////////////////////// */
+/* OLDCOPPER - Muted blue-green color, used for many things like text, icon and more */
+
+.oldCopper {
+    background-color: #546769;
+    color: #546769;
+}
+
+.oldCopper_lighter {
+    background-color: #788788;
+    color: #788788;
+}
+
+.oldCopper_darker {
+    background-color: #405557;
+    color: #405557;
+}
+
+
+/* ////////////////////////////////////////////////////////////////////////////////////// */
+/* BEER - Dark yellow color, a happy relatable splash of color that makes us warm inside */
+
+.beer {
+    background-color: #EA9215;
+    color: #EA9215;
+}
+
+.beer_lighter {
+    background-color: #FDA82E;
+    color: #FDA82E;
+}
+
+.beer_darker {
+    background-color: #D98611;
+    color: #D98611;
+}

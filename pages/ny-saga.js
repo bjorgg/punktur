@@ -4,6 +4,7 @@ import { Editor } from '@tinymce/tinymce-react'
 import Genres from '../components/Genres'
 import { useRouter } from 'next/router'
 import { route } from 'next/dist/next-server/server/router';
+import Image from 'next/image'
 
 export default function NewStory() {
     const [user, { mutate }] = useCurrentUser();
@@ -12,6 +13,8 @@ export default function NewStory() {
     const handleCreateStory = async () => {
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
+        const decodedStory = tinymce.html.Entities.decode(story)
+        console.log(decodedStory)
         const checkboxes = Array.from(document.querySelectorAll('input[name="genre"]'));
         const genres = checkboxes
             .filter((checkbox) => checkbox.checked)
@@ -22,7 +25,7 @@ export default function NewStory() {
             headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({ 
                 title: title,
-                text: story,
+                text: decodedStory,
                 genres, 
                 author: user.username,
                 user_id: user._id 
@@ -30,7 +33,7 @@ export default function NewStory() {
         });
         const savedStory = await result.json();
         alert('Story posted'); // Success modal í staðinn fyrir alert ...
-        route.push(`/stories/${savedStory._id}`);
+        router.push(`/stories/${savedStory._id}`);
         console.log("POSTED!", savedStory);
         
         // Validate ...
@@ -54,7 +57,14 @@ export default function NewStory() {
                     toolbar: 'undo redo bold italic underline indent outdent styleselect',
                 }} />
             <Genres />
-            <button onClick={handleCreateStory}>Birta sögu</button>
+            <button onClick={handleCreateStory}>
+                <Image  
+                    src="/Icons/BookOpen.svg"
+                    alt="Ný saga"
+                    width={24}
+                    height={24}/>
+                Birta sögu
+            </button>
         </div>
     )
 }

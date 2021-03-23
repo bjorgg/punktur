@@ -85,7 +85,12 @@ export default function Settings() {
                 <div>
                     <div>
                         <Link href="/min-sida">
-                            <a>Til baka</a>
+                            {/* <a>Til baka</a> */}
+                            <Image  
+                            src="/Icons/ArrowLeft.svg"
+                            alt="til baka"
+                            width={24}
+                            height={24}/>
                         </Link>
                         <h2>Stillingar</h2>
                     </div>
@@ -131,13 +136,24 @@ export default function Settings() {
                             </label>
                         </div>
                         <button disabled={isUpdating} type="submit">
+                            <Image  
+                            src="/Icons/save.svg"
+                            alt="Ný saga"
+                            width={24}
+                            height={24}/>
                             Vista breytingar
                         </button>
                     </form>
 
-                    <button 
-                        onClick={() => setModalOpen(true)}>Eyða aðgangi</button>
-                    <Modal show={isOpen} title="Eyða aðgangi?" onSubmit={handleDeleteUser} onClose={() => setModalOpen(false)} submitText="Já" cancelText="Nei">
+                    <button onClick={() => setModalOpen(true)}>
+                    <Image  
+                        src="/Icons/Trash.svg"
+                        alt="Ný saga"
+                        width={24}
+                        height={24}/>
+                        Eyða aðgangi
+                    </button>
+                    <Modal show={isOpen} title="Ertu viss um að þú viljir eyða aðgangi þínum?" onSubmit={handleDeleteUser} onClose={() => setModalOpen(false)} submitText="Já" cancelText="Nei">
                         <p>Allar upplýsingar verða eyddar út af punkti</p>
                     </Modal>
                 </div>

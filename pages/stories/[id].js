@@ -79,14 +79,7 @@ export default function Stories({ story, speechUrl }) {
                         <RedditIcon size={32} round />
                     </RedditShareButton>
                 </div> 
-                <div>
-                    {/* Breyta þannig að réttur notandi sjái bara við sínar sögur eða færa þetta á sögur á min-sida */}
-                    {!user ? '' : (
-                        <Link href={`/breyta-sogu/${story._id}`}>
-                            <a>Breyta sögu</a>
-                        </Link>
-                    )}
-                </div>
+               
                 
               </div>
             }
@@ -123,10 +116,11 @@ export async function getStaticProps({params}) {
     });
 
     // Sameina values úr story array fyrir Polly
-
+    console.log(story)
+    console.log(story.text)
     const speechParams = {
         OutputFormat: "mp3",
-        Text: story.title,
+        Text: story.text,
         TextType: "text",
         VoiceId: "Dora",
     }

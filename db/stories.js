@@ -66,3 +66,9 @@ export async function updateStoryById(db, id, update) {
       })
       .then(({ ops }) => ops[0]);
   }
+
+  export async function deleteStoryById(db, id) {
+    return db.collection('stories').findOneAndDelete(
+      { _id: ObjectID(id) },
+    );
+  }
