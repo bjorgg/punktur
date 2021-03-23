@@ -1,7 +1,9 @@
+import styles from "../styles/Form.module.css";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useCurrentUser } from "../hooks/user";
 import Modal from "../components/modal";
+
 
 const SignupPage = () => {
     const router = useRouter();
@@ -55,19 +57,26 @@ const SignupPage = () => {
                 <form onSubmit={handleSubmit}>
                     {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
                     <div>
-                        <label htmlFor="username">Nafn/höfundarnafn</label>
-                        <input id="username" name="username" type="text" />
+                        <label htmlFor="username">
+                            <h5>Nafn/höfundarnafn</h5>
+                        </label>
+                        <input className={styles.formInput} id="username" name="username" type="text" />
                     </div>
                     <div>
-                        <label htmlFor="email">Netfang</label>
-                        <input id="email" name="email" type="email" />
+                        <label htmlFor="email">
+                            <h5>Netfang</h5>
+                        </label>
+                        <input className={styles.formInput} id="email" name="email" type="email" />
                     </div>
                     <div>
-                        <label htmlFor="password">Lykilorð</label>
-                        <input id="password" name="password" type="password" />
+                        <label htmlFor="password">
+                            <h5>Lykilorð</h5>
+                        </label>
+                        <input className={styles.formInput} id="password" name="password" type="password" />
                     </div>
-                    <div>
+                    <div className={styles.formTerms}>
                         <input 
+                            className={styles.checkbox}
                             type="checkbox" 
                             id="terms" 
                             name="terms" 
@@ -75,12 +84,10 @@ const SignupPage = () => {
                             onChange={() => setHasAcceptedTerms(!hasAcceptedterms)}
                             >
                         </input>
-                        <label>
-                            Ég hef lesið og samþykki
-                            <a onClick={() => setModalOpen(true)}>Notendaskilmála</a>
-                        </label>
+                        <a onClick={() => setModalOpen(true)}>
+                            <p>Ég hef lesið og samþykki Notendaskilmála</p>
+                        </a>
                     </div>
-
                     <button type="submit">Innskrá</button>
                 </form>
                 <Modal 

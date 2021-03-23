@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Modal.module.css";
 
 const Modal = ({ show, onClose, onSubmit, title, submitText = "Já", cancelText = "Nei", children }) => {
     if (!show) {
@@ -10,9 +10,9 @@ const Modal = ({ show, onClose, onSubmit, title, submitText = "Já", cancelText 
             <div className={styles.modal}>
                 <h3>{title}</h3>
                 <div>{children}</div>
-                <div>
-                    <button onClick={onSubmit}>{submitText}</button>
-                    <button onClick={onClose}>{cancelText}</button>
+                <div className={styles.modalButtons}>
+                    <button className={styles.modalButton} onClick={onSubmit}>{submitText}</button>
+                    <button className={styles.modalButton} onClick={onClose}>{cancelText}</button>
                 </div>
             </div>
         </div>
