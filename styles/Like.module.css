@@ -1,15 +1,9 @@
 .star {
-    background-color: tomato;
-    width: 200px;
+    background: #aadee2;
+    border-radius: 100rem;
 }
 
 .active {
-    background-color: teal;
-    width: 200px;
+    background: #ffcd61;
+    border-radius: 100rem;
 }
-
-.kolla {
-    color: yellowgreen;
-    background-color: violet;
-}
-
