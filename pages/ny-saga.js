@@ -4,6 +4,7 @@ import { Editor } from '@tinymce/tinymce-react'
 import Genres from '../components/Genres'
 import { useRouter } from 'next/router'
 import { route } from 'next/dist/next-server/server/router';
+import Image from 'next/image'
 
 export default function NewStory() {
     const [user, { mutate }] = useCurrentUser();
@@ -54,7 +55,14 @@ export default function NewStory() {
                     toolbar: 'undo redo bold italic underline indent outdent styleselect',
                 }} />
             <Genres />
-            <button onClick={handleCreateStory}>Birta sögu</button>
+            <button onClick={handleCreateStory}>
+                <Image  
+                    src="/Icons/BookOpen.svg"
+                    alt="Ný saga"
+                    width={24}
+                    height={24}/>
+                Birta sögu
+            </button>
         </div>
     )
 }
