@@ -1,0 +1,23 @@
+.header {
+  background-color: #f3f1ee;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100vw;
+  height: 128px;
+  border-radius: 0 0 30px 30px;
+}
+
+.logoHeim {
+  padding: 1rem;
+}
+
+.nav {
+  display: flex;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.skra {
+margin-right: 0.7rem;
+}
