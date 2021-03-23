@@ -89,9 +89,9 @@ export default function Profile() {
                                 <StoryCard story={story}/>
                                 <div>
                                     <Link href={`/breyta-sogu/${story._id}`}>
-                                        <a><Image src="/img/PencilSimple.svg"  width={30} height={30} alt="blýantur"/></a>
+                                        <a><Image src="/Icons/edit.svg"  width={30} height={30} alt="blýantur"/></a>
                                     </Link>                                   
-                                    <Image src="/img/Trash.svg"  width={30} height={30} alt="rusl" onClick={() => handleModal(story)}/>           
+                                    <Image src="/Icons/Trash.svg"  width={30} height={30} alt="rusl" onClick={() => handleModal(story)}/>           
                                 </div>
                             </div>
                         ))} 
