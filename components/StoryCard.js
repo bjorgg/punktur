@@ -3,6 +3,7 @@ import Like from "./Like.js";
 import styles from '../styles/StoryCard.module.css';
 
 
+
 const StoryCard = ({story}) => {
     return ( 
       
@@ -24,6 +25,7 @@ const StoryCard = ({story}) => {
                     <p>title: {story.title}</p>
                     <p>author: {story.author}</p>
                 </div>
+                
             </div>
         </Link>
     );

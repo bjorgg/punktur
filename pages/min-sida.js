@@ -2,10 +2,15 @@ import { useCurrentUser } from "../hooks/user";
 import Image from 'next/image'
 import StoryCard from "../components/StoryCard.js";
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Modal from '../components/modal'
+
 
 export default function Profile() {
     const [user] = useCurrentUser();
     const [stories, setStories] = useState([]);
+    const [isOpen, setModalOpen] = useState(false);
+    const [activeStory, setActiveStory] = useState([])
     const defaultAvatar = '/avatar.svg'
 
     useEffect(() => {
@@ -17,6 +22,33 @@ export default function Profile() {
     const {
         username, email, bio, avatar
     } = user || {};
+
+    const handleDelete = async () => {
+        if (!activeStory) return
+
+        try {
+          const res = await fetch('/api/story', {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({_id: activeStory._id})
+            }
+          );
+          setModalOpen(false);
+          setActiveStory(null)
+          const data = await res.json();
+          console.log(data)
+          alert('Story deleted'); // Success modal í staðinn fyrir alert ...
+        } catch (err) {
+          console.log(err);
+        }
+    
+      };
+      const handleModal = (story) => {
+        setModalOpen(true)
+        setActiveStory(story)
+      }
 
     return (
         <div>
@@ -53,10 +85,28 @@ export default function Profile() {
                     <div>
                         <h3>Mínar sögur</h3>
                         {Array.isArray(stories) && stories.map((story) => (
-                            <StoryCard story={story} key={story._id}/>
+                            <div key={story._id}>
+                                <StoryCard story={story}/>
+                                <div>
+                                    <Link href={`/breyta-sogu/${story._id}`}>
+                                        <a><Image src="/img/PencilSimple.svg"  width={30} height={30} alt="blýantur"/></a>
+                                    </Link>                                   
+                                    <Image src="/img/Trash.svg"  width={30} height={30} alt="rusl" onClick={() => handleModal(story)}/>           
+                                </div>
+                            </div>
                         ))} 
                     </div>
+                    <Modal 
+                        show={isOpen} 
+                        onSubmit={handleDelete} 
+                        submitText="Staðfesta" 
+                        title="Eyða sögu!" 
+                        onClose={() => setModalOpen(false)} 
+                        cancelText="Hætta við">
+                        <p>Þú ert að fara að eyða sögunni þinni!</p>
+                    </Modal>
                 </div> 
+                
             )}
         </div>
     )
