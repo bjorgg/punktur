@@ -32,12 +32,12 @@ const Like = ({story}) => {
 
         const likedStoriesCopy = user.likedStories.slice(0);
 
-        console.log(story, user);
+        console.log(user, "likedStories:" ,likedStoriesCopy, story._id);
         
         if(userLikesStory) { // remove a story from the array
-            
+            likedStoriesCopy.slice(0);
         } else { // add a story to the array
-
+            user.likedStories.push(likedStoriesCopy);
         }
 
         // Update user with new stories array
@@ -48,15 +48,15 @@ const Like = ({story}) => {
                 likedStories: likedStoriesCopy,
             }),
         });
+
         if (res.status === 200) {
             const data = await res.json();
             mutate(data)
         } else if (res.status === 500) {
-            setMsg({ message: "Eitthvað fór úrskeiðis, reyndu aftur", isError: true });
+            return
         } else {
-            setMsg({ message: await res.text(), isError: true });
+            return
         }
-
     };
 
     
@@ -65,9 +65,9 @@ const Like = ({story}) => {
             {!user ? '' : (
                 
                 <div >
-                    <p>{story.Likes}</p>
+                    <p>{story.Likes}</p> 
                     <button onClick={handleLike} className={userLikesStory ? "active" : "star"}>
-                        <Image src="/img/stjarna.svg"  width={30} height={30} alt="stjarna"/>
+                        <Image src="/img/stjarna.svg"  width={20} height={20} alt="stjarna"/>
                     </button>
                 </div>
 
