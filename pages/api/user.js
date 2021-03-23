@@ -48,7 +48,7 @@ handler.patch(upload.single('avatar'), async (req, res) => {
         avatar = image.secure_url;
         
     }
-    const update = req.body;
+    const update = Object.assign({}, req.body);
 
     const userByEmail = await findUserByEmail(req.db, update.email);
     if (userByEmail && !isLoggedInUser(userByEmail, req)) {
@@ -60,6 +60,17 @@ handler.patch(upload.single('avatar'), async (req, res) => {
         res.status(403).send("Notendanafnið er nú þegar í notkun");
         return;
     }
+
+    try {
+         if(update.hasOwnProperty('likedStories')){
+             update.likedStories = JSON.parse(update.likedStories)
+         }
+
+    } catch (error) {
+        console.log('Error on likedStories', error)
+         res.json({ error, message: 'Liked stories could not be parsed' });
+    }
+
     await updateUserById(req.db, req.user._id, {...update, avatar});
 
     res.json({ user: update });
