@@ -10,7 +10,7 @@ export async function getStories(db, limit, genres) {
     const stories = await db
         .collection("stories")
         .find(searchCriteria)
-        .sort({ _id: 1 })
+        .sort({ _id: -1 }) // newest story shows first
         .limit(limit)
         .toArray();
     return convertMongoData(stories);
@@ -20,7 +20,7 @@ export async function getStoriesByUser(db, id, limit) {
     const stories = await db
         .collection("stories")
         .find({ user_id: id.toString() })
-        .sort({ _id: 1 })
+        .sort({ _id: -1 }) // newest story shows first
         .limit(limit)
         .toArray();
     return convertMongoData(stories);

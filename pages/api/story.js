@@ -8,32 +8,22 @@ const handler = nextConnect();
 handler.use(middleware);
 
 
-// edit story
+// edit/update story
 handler.patch(async (req, res) => {
-    const storyData = req.body
-  
-    const story = await getStoryById(req.db, storyData._id);
-    console.log(story)
-    if (storyData.title) {
-        story.title = storyData.title
-    }
-    if (storyData.text) {
-        story.text = storyData.text
-    }
-    if (storyData.html) {
-        story.html = storyData.html
-    }
-    if (storyData.genres) {
-        story.genres = storyData.genres
-    }
-    if (storyData.publishDate) {
-        story.publishDate = storyData.publishDate
-    }
-    
-    delete story._id
-    const updatedStory = await updateStoryById(req.db, storyData._id, story)
 
-    res.json({ story: updatedStory.value });
+    const storyData = req.body
+
+    const storyId = storyData._id;
+  
+    const story = await getStoryById(req.db, storyId);
+
+    const updatedStory = {...story, ...storyData};
+
+    delete updatedStory._id
+    const savedStory = await updateStoryById(req.db, storyId, updatedStory)
+
+    res.json({ story: savedStory.value });
+
   });
 
 // delete story
