@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../styles/tag.module.css";
+import styles from "../styles/Genres.module.css";
 import Image from 'next/image'
 
 
@@ -22,22 +22,25 @@ export default function Genres({ onClick }) {
   ] 
 
   return (
-    <div className={`tags ${styles.tags}`}>
-      {Genres &&
-        Genres.map((genre, i) => (
-          <div>
-            <div className={styles.container} id='storyGenres' key={ genre }>
-              <input id={`genre${i}`} className={styles.checkbox} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
-              <label className={styles.label} htmlFor={`genre${i}`}>{ genre }</label>
-                {/* <Image  
-                  src="/img/triangle.svg"
-                  alt=""
-                  className={styles.triangle}
-                  width={19}
-                  height={30}/> */}
+    <div>
+      <h4>Síur</h4>
+      <div className={`tags ${styles.tags}`}>
+        {Genres &&
+          Genres.map((genre, i) => (
+            <div>
+              <div className={styles.container} id='storyGenres' key={ genre }>
+                <input id={`genre${i}`} className={styles.checkbox} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
+                <label className={styles.label} htmlFor={`genre${i}`}>{ genre }</label>
+                  {/* <Image  
+                    src="/img/triangle.svg"
+                    alt=""
+                    className={styles.triangle}
+                    width={19}
+                    height={30}/> */}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+      </div>
     </div>
   )
 };
