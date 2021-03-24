@@ -4,7 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Modal from '../components/modal';
 import StoryCard from "../components/StoryCard.js";
-import styles from  '../styles/minSida.module.css';
+import styles from "../styles/Profile.module.css";
+import { useRouter } from "next/router";
+
+
+
 
 
 export default function Profile() {
@@ -13,6 +17,8 @@ export default function Profile() {
     const [isOpen, setModalOpen] = useState(false);
     const [activeStory, setActiveStory] = useState([])
     const defaultAvatar = '/avatar.svg'
+    const router = useRouter();
+
 
     useEffect(() => {
         fetch('/api/userStories').then(res => res.json()).then(res => {
@@ -39,10 +45,10 @@ export default function Profile() {
           setModalOpen(false);
           setActiveStory(null)
           const data = await res.json();
-          console.log(data)
-          alert('Story deleted'); // Success modal í staðinn fyrir alert ...
+          // todo check if delete was ok?
+          router.push('/min-sida?showStoryDeleteMessage=true')
         } catch (err) {
-          console.log(err);
+          console.log(err); // Validate / error message
         }
     
       };
@@ -55,44 +61,27 @@ export default function Profile() {
         <div>
             {!user ? 'Þú hefur skráð þig út' : (
                 <div>
-                    <div>
-                        <div className={styles.minStilling}>
-                            <h2>Mín síða</h2>
-                            <div className={styles.stilling}>
-                                <Link href="/stillingar">
-                                    {/* <a>Stillingar</a> */}
-                                    <Image  
-                                        src="/Icons/stillingar.svg"
-                                        alt="Stillingar"
-                                        width={32}
-                                        height={32}/>
-                                </Link>
-                            </div>
-                        </div>
-                        <h3>{user && `Velkomin/n ${user.username}!`}</h3>
-                    </div>
-                    <div>
-                        <div>
-                        {!avatar ? 
+                    <div className={styles.aboutDiv}>
+                        <div className={styles.avatarDiv}>
+                            {!avatar ? 
                                 <Image
                                     src={defaultAvatar}
                                     alt="Avatar"
                                     width={100}
                                     height={100}
                                 /> :
-                                <img 
+                                <img
+                                    className={styles.avatar}
                                     src={avatar} 
                                     width="100" 
                                     height="100" 
                                     alt={username} 
                                 />
                             }
+                            <h4>{username}</h4>  
                         </div>
-                        <p>{username}</p>
-                        <p>{email}</p>
                         <div>
-                            <h3>Um mig</h3>
-                            <p>{bio}</p>
+                            <p className={styles.bio}>{bio}</p>
                         </div>
                     </div>
                     <div>

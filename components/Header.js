@@ -2,16 +2,21 @@ import Link from "next/link";
 import Image from 'next/image';
 import styles from "../styles/Header.module.css";
 import { useCurrentUser } from "../hooks/user";
+import { useRouter } from "next/router";
 
 
 export default function Header() {
     const [user, { mutate }] = useCurrentUser();
+    const router = useRouter();
     
     // fetching delete request from api/auth
     const handleLogout = async () => {
-        await fetch("/api/auth", {
+        const res = await fetch("/api/auth", {
             method: "DELETE",
         });
+        if(res.ok) {
+            router.push("/?showLogOutMessage=true")
+        }
         // setting user state to null
         mutate(null);
     }
@@ -35,7 +40,7 @@ export default function Header() {
                                     alt="mín síða"
                                     width={32}
                                     height={32}/>
-                                <p>Síðan mín</p>
+                                {/* <p>Síðan mín</p> */}
                             </div>
                         </Link>
                     )}
@@ -47,7 +52,7 @@ export default function Header() {
                                     alt="Ný saga"
                                     width={32}
                                     height={32}/>
-                            <p>Ný saga</p>
+                            {/* <p>Ný saga</p> */}
                             </div>
                         </Link>
                     )}
@@ -59,7 +64,7 @@ export default function Header() {
                                 alt="skrá inn"
                                 width={32}
                                 height={32}/>
-                            <p>Skrá Inn</p>
+                            {/* <p>Skrá Inn</p> */}
                         </Link>
                     ) : (
                         <a tabIndex={0} role="button" onClick={handleLogout}>
@@ -69,7 +74,7 @@ export default function Header() {
                                 alt="skrá út"
                                 width={32}
                                 height={32}/>
-                        <p>Skrá Út</p>
+                        {/* <p>Skrá Út</p> */}
                         </a>
                     )}
                     

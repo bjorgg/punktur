@@ -14,7 +14,7 @@ const LoginPage = () => {
     // call when user changes or signs in
     useEffect(() => {
         // redirect to profile if user is authenticated
-        if (user) router.push("/min-sida");
+        if (user) router.push("/");
     }, [user]);
 
     // making a POST request to api/auth that authenticates user
@@ -39,17 +39,18 @@ const LoginPage = () => {
 
     return (
         <>
-            <div>
+            <div className={styles.formHeader}>
                 <Image
-                    src='/img/avatar1.svg'
+                    className={styles.jumpingDot}
+                    src='/img/dot.png'
                     alt="Punktur"
                     width={80}
                     height={80}
                 /> 
             </div>
-            
+        
             <form onSubmit={onSubmit}>
-                {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
+                {errorMsg ? <h5 style={{ color: "#D94D11" }}>{errorMsg}</h5> : null}
                 <label htmlFor="email">
                     <h5>Netfang</h5>
                     <input className={styles.formInput} id="email" type="email" name="email" placeholder="Netfang" />

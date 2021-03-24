@@ -12,23 +12,11 @@
     border: 0.5px solid #d98611;
 }
 
-.deleteNotification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 16px;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 250ms ease;
-    color: #d98611;
-}
-
 .customFileInput {
     border: none;
     padding: 0;
+    width: 374px;;
+
 }
 
 .customFileInput:hover {
@@ -72,3 +60,83 @@
     display: flex;
     padding: 16px 0;
 }
+
+.formHeader {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 2rem;
+}
+
+.deleteButton {
+    background: #f9f8f6;
+    color: #788788;
+    border: 0.5px solid #788788;
+    border-radius: 4px;
+    height: 40px;
+    padding: 12px;
+    margin: 1rem 0 2rem 0;
+    font-size: 15px;
+    font-weight: semi-bold;
+    line-height: 18px;
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    box-shadow: 0px 1px 4px 1px rgba(123, 136, 137, 0.2);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05));
+}
+
+.deleteButton:hover {
+    border: 0.5px solid #d98611;
+    border-radius: 4px;
+}
+
+.deleteDiv {
+    display: flex;
+    width: 374px;
+    justify-content: flex-end;
+    margin: auto;
+}
+
+
+/* animation */
+
+.jumpingDot {
+    animation: jump 4s ease;
+}
+
+@keyframes jump {
+    0%  { transform: translate(-0%, -0%) }
+    30% { transform: translate(-0%, -10%) }
+    40% { transform: translate(-0%, -0%) }
+    50% { transform: translate(-0%, -10%) }
+    60% { transform: translate(-0%, -0%) }
+    70% { transform: translate(-0%, -10%) }
+    80% { transform: translate(-0%, -0%) }
+    100% { transform: translate(-0%, -0%) }
+} 
+
+.dotLogo {
+    margin-bottom: 2rem;
+    animation: rotate 4s ease;
+}
+
+@keyframes rotate {
+    0%  { transform: rotate(0deg) }
+    10%  { transform: rotate(0deg) }
+    20%  { transform: rotate(5deg) }
+    30% { transform: rotate(-5deg) }
+    40% { transform: rotate(5deg) }
+    50% { transform: rotate(-5deg) }
+    60% { transform: rotate(5deg) }
+    70% { transform: rotate(-5deg) }
+    80% { transform: rotate(0deg) }
+    100% { transform: rotate(0deg) }
+}
+
+

@@ -1,0 +1,53 @@
+.avatar {
+    border-radius: 100%;
+}
+
+.aboutDiv {
+    display: flex;
+    gap: 4rem;
+}
+
+.avatarDiv {
+    text-align: center;
+}
+
+.bio {
+    width: 200px;
+    margin: 0;
+}
+
+/* .minStilling {
+    display: flex;
+  }
+  
+  .stilling {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 1.6rem;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 20px;
+  }
+
+  
+  <div>
+  <div className={styles.minStilling}>
+      <h2>Mín síða</h2>
+      <div className={styles.stilling}>
+          <Link href="/stillingar">
+              {/* <a>Stillingar</a> }*/
+              /* <Image  
+                  src="/Icons/stillingar.svg"
+                  alt="Stillingar"
+                  width={32}
+                  height={32}/>
+          </Link>
+      </div>
+  </div>
+  <h3>{user && `Velkomin/n ${user.username}!`}</h3>
+</div>
+<div>
+  <div> */
+  /* {!avatar ?  */

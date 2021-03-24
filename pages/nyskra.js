@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useCurrentUser } from "../hooks/user";
 import Modal from "../components/modal";
+import Image from 'next/image'
+
 
 
 const SignupPage = () => {
@@ -15,7 +17,7 @@ const SignupPage = () => {
     // call whenever user changes or signs in
     useEffect(() => {
         // redirect to profile page if user is authenticated
-        if (user) router.replace("/min-sida");
+        if (user) router.replace("/");
     }, [user]);
 
     // making a POST request to api/users with email, name, passw
@@ -53,9 +55,18 @@ const SignupPage = () => {
     return (
         <>
             <div>
-                <h2>Nýskráning</h2>
+            <div className={styles.formHeader}>    
+                <Image
+                    className={styles.dotLogo}
+                    src='/img/dot.png'
+                    alt="Punktur"
+                    width={80}
+                    height={80}
+                /> 
+            </div>
+                
                 <form onSubmit={handleSubmit}>
-                    {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
+                    {errorMsg ? <h5 style={{ color: "#D94D11" }}>{errorMsg}</h5> : null}
                     <div>
                         <label htmlFor="username">
                             <h5>Nafn/höfundarnafn</h5>
@@ -88,7 +99,7 @@ const SignupPage = () => {
                             <p>Ég hef lesið og samþykki Notendaskilmála</p>
                         </a>
                     </div>
-                    <button type="submit">Innskrá</button>
+                    <button type="submit">Nýskrá</button>
                 </form>
                 <Modal 
                     show={isOpen} 
@@ -97,7 +108,16 @@ const SignupPage = () => {
                     title="Notendaskilmálar" 
                     onClose={() => setModalOpen(false)} 
                     cancelText="Loka">
-                    <p>Texti um Notendaskilmála Punkts, Má ekki eigna sér annara manna sögur, birta óviðeigandi sögur, við getum eytt þér... blabla</p>
+                    <div>
+                        <p>Punktur (hér eftir “Punktur”, “við” eða “okkar”) býður upp á forrit sem gerir þér (hér eftir nefnt “þú” eða “notandi”) kleift að fá aðgang að sögum eftir aðra notendur í gegnum vafra.</p>
+                        <p>Með því að stofna reikning hjá Punkt ert þú að gera bindandi samning við Punkt og samþykkir að fara eftir þessum notendaskilmálum.</p>
+                        <p>1. Allar sögur sem eru birtar falla undir höfundarrétt notenda. Ekki er leyfilegt að stela, afrita og birta sögur frá öðrum notendum undir sínu nafni. Punktur hefur rétt á að eyða þeim sögum sem ekki fylgja þessari reglu.</p>
+                        <p>2. Sögur sem innihalda ítarlegar lýsingar af óviðeigandi umræðuefnum eru ekki leyfðar. Punktur hefur rétt á að eyða þeim sögum sem ekki fylgja þessari reglu.</p>
+                        <p>3. Notendur hafa ekki leyfi fyrir því að hlaða inn nektarmyndum eða annarskonar óviðeigandi myndum sem prófílmynd. Punktur hefur rétt á að eyða aðgöngum sem ekki fylgja þessari reglu.</p>
+                        <p>4. Þessir notendaskilmálar hafa þá undantekningu að geta breyst með tímanum.</p>
+                        <p>Síðast yfirfarið 24 mars 2021</p>
+                        <p>Punktur ehf.</p>
+                    </div>
                 </Modal>
             </div>
         </>
