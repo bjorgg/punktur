@@ -78,7 +78,18 @@ export default function Profile() {
                                     alt={username} 
                                 />
                             }
-                            <h4>{username}</h4>  
+                            <div className={styles.minStilling}>
+                                <h4>{username}</h4>  
+                                <div className={styles.stilling}>
+                                    <Link href="/stillingar">
+                                        <Image  
+                                            src="/Icons/stillingar.svg"
+                                            alt="Stillingar"
+                                            width={32}
+                                            height={32}/>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <p className={styles.bio}>{bio}</p>
