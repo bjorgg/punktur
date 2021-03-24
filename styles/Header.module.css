@@ -27,6 +27,7 @@
   .skra {
     /* margin-right: 0.7rem; */
     display: flex;
+    padding-right: 0.5rem;
   }
 
   .skra div {
@@ -70,6 +71,7 @@
     width: auto;
     height: 5.5rem;
     text-decoration: none;
+    padding-right: 2rem;
   }
   
   .write {
