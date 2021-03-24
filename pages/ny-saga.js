@@ -21,28 +21,29 @@ export default function NewStory() {
         const genres = checkboxes
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
-
-        const result = await fetch("/api/createStory", {
-            method: "POST",
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify({ 
-                title: title,
-                text: pureStory,
-                html: decodedStory,
-                genres, 
-                author: user.username,
-                user_id: user._id, 
-                publishDate: new Date()
-            }),
-        });
-        const savedStory = await result.json();
-        router.push({
-            pathname: `/stories/${savedStory._id}`,
-            query: { showStoryCreatedMessage: true },
-        });
-        console.log("POSTED!", savedStory);
-        
-        // Validate ...
+        try {
+            const result = await fetch("/api/createStory", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json',},
+                body: JSON.stringify({ 
+                    title: title,
+                    text: pureStory,
+                    html: decodedStory,
+                    genres, 
+                    author: user.username,
+                    user_id: user._id, 
+                    publishDate: new Date()
+                }),
+            });
+            const savedStory = await result.json();
+            router.push({
+                pathname: `/stories/${savedStory._id}`,
+                query: { showStoryCreatedMessage: true },
+            });
+            console.log("POSTED!", savedStory);   
+        } catch (err) {
+            console.log(err); 
+        }
     };
 
     return (

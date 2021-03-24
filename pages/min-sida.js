@@ -39,15 +39,12 @@ export default function Profile() {
             setModalOpen(false);
             setActiveStory(null);
             const data = await res.json();
-            // todo check if delete was ok?
-            // removing story from state and showing notification
-            console.log(data);
             if (data.deleted) {
                 setStories(stories.filter((story) => story._id !== activeStory._id));
                 router.push("/min-sida?showStoryDeleteMessage=true");
             }
         } catch (err) {
-            console.log(err); // Validate / error message
+            console.log(err); 
         }
     };
     const handleModal = (story) => {
