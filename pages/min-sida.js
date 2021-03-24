@@ -40,8 +40,9 @@ export default function Profile() {
           const data = await res.json();
           console.log(data)
           alert('Story deleted'); // Success modal í staðinn fyrir alert ...
+          // Todo: Refresh or remove data from stories array
         } catch (err) {
-          console.log(err);
+          console.log(err); // Validate / error message
         }
     
       };

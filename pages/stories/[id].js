@@ -1,12 +1,9 @@
 import  { connectToDatabase } from '../../util/mongodb'
 import { getStoryById } from '../../db/stories';
-import { useCurrentUser } from "../../hooks/user";
 import { Polly } from "@aws-sdk/client-polly";
 import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
-import React, { useEffect } from "react";
+import AudioPlayer from '../../components/AudioPlayer'
 
-
-import Link from 'next/link'
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -17,11 +14,9 @@ import {
     TelegramShareButton,
     TelegramIcon,
 } from "react-share";
-import AudioPlayer from '../../components/AudioPlayer'
 
 
 export default function Stories({ story, speechUrl }) {
-    const [user] = useCurrentUser();
 
     return (
         <div>
@@ -107,14 +102,23 @@ export async function getStaticProps({params}) {
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_MYAPP,
         },
     });
-    // Athuga hvort það sé hægt að bæta við texta fyrir framan, s.s. höfundur osvfr.
-    const storyForPolly = {title: `Titill: ${story.title}`, author: story.author, genres: story.genres, text: story.text}
-    // Sameina values úr story array fyrir Polly
-    console.log(Object.values(storyForPolly))
-    // console.log(story.text)
+    
+    // Configuring the text to speech for Polly
+    const unitedStory = {
+        title: `Titill: ${story.title}`, 
+        author: `. Höfundur: ${story.author}`, 
+        genres: `. Flokkur: ${story.genres}`, 
+        text: `. Nú hefst sagan: ${story.text}`,
+    }
+
+    // Getting all the values from the unitedStory object
+    const unitedStoryValues = Object.values(unitedStory)
+    // Setting the united values to string
+    const textForPolly = unitedStoryValues.toString()
+   
     const speechParams = {
         OutputFormat: "mp3",
-        Text: story.text,
+        Text: textForPolly,
         TextType: "text",
         VoiceId: "Dora",
     }
