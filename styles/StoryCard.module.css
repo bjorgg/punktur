@@ -3,6 +3,7 @@
     min-height: 11.5rem;
     background-color: #F9F8F6; /* overcast_lighter*/
     margin: 2rem 0 0.5rem;
+    width: 100%;
     border-radius: 6px;
     max-width: 50rem;
     box-shadow: 
@@ -53,3 +54,4 @@
 .cardBottom h6 {
     margin: 0 0 2.2rem;
 }
+
