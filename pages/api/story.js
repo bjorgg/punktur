@@ -20,10 +20,16 @@ handler.patch(async (req, res) => {
     if (storyData.text) {
         story.text = storyData.text
     }
+    if (storyData.html) {
+        story.html = storyData.html
+    }
     if (storyData.genres) {
         story.genres = storyData.genres
     }
-    console.log(story)
+    if (storyData.publishDate) {
+        story.publishDate = storyData.publishDate
+    }
+    
     delete story._id
     const updatedStory = await updateStoryById(req.db, storyData._id, story)
 
@@ -32,10 +38,10 @@ handler.patch(async (req, res) => {
 
 // delete story
 handler.delete(async (req, res) => {
-    // if (!req.user) {
-    //     res.status(401).end();
-    //     return;
-    // }
+    if (!req.user) {
+        res.status(401).end();
+        return;
+    }
     const deleteResult = await deleteStoryById(req.db, req.body._id);
     res.json({ deleted: !!deleteResult.ok });
 });
