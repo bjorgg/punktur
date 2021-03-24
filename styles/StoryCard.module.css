@@ -22,7 +22,7 @@
 .genres {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
+    width: 85%;
     margin: 0.5rem 0 0.5rem 0.5rem;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .like {
-    width: 3rem;
+    width: 5rem;
 }
 
 .cardBottom {

@@ -99,11 +99,17 @@ const Like = ({story}) => {
 
     
     return ( 
-        <div>
+        <div className={styles.container}>
             {!user ? '' : (
-                <div>
+                <div className={styles.likes}>
                     <p>{!!currentStory.likes && currentStory.likes.length}</p> 
-                    <Image onClick={ () => handleLike(!userLikesStory)} className={userLikesStory ? styles.active : styles.star } src="/img/stjarna.svg"  width={20} height={20} alt="stjarna"/>
+                    <Image 
+                    onClick={ () => handleLike(!userLikesStory)} 
+                    className={userLikesStory ? styles.active : styles.star } 
+                    src="/img/stjarna.svg"  
+                    width={24} 
+                    height={24} 
+                    alt="stjarna"/>
                 </div>
             )}
         </div>

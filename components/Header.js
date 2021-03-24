@@ -65,7 +65,7 @@ export default function Header() {
                                     width={32}
                                     height={32}/>
                                 <h5>Skrá Inn</h5>
-                                </div>
+                            </div>
                         </Link>
                     ) : (
                         <a tabIndex={0} role="button" onClick={handleLogout}>
