@@ -20,8 +20,8 @@
 
   .nav {
     display: flex;
-    padding: 1rem;
     cursor: pointer;
+    height: 100%;
   }
 
   .skra {
@@ -48,7 +48,10 @@
 
   .skra {
     display: flex;
+    justify-content: center;
+    align-content: center;
     width: auto;
+    height: 5.5rem;
     text-decoration: none;
   }
   .skra a {
@@ -56,9 +59,16 @@
     text-decoration: none;
     margin-right: 2rem;
   }
-  /* .skra p {
+  .skra div {
+    display: flex;
+  }
+
+  .skra h5 {
     padding-left: 0.5rem;
-  } */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 0.55rem;
+  } 
 
   .write {
     visibility: visible;

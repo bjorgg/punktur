@@ -40,7 +40,7 @@ export default function Header() {
                                     alt="mín síða"
                                     width={32}
                                     height={32}/>
-                                {/* <p>Síðan mín</p> */}
+                                <h5>Prófíll</h5>
                             </div>
                         </Link>
                     )}
@@ -52,29 +52,31 @@ export default function Header() {
                                     alt="Ný saga"
                                     width={32}
                                     height={32}/>
-                            {/* <p>Ný saga</p> */}
+                                <h5>Ný saga</h5>
                             </div>
                         </Link>
                     )}
                     {!user ? (
                         <Link href="/skra-inn">
-                            {/* <a>Skrá inn</a> */}
-                            <Image  
-                                src="/Icons/SignIn.svg"
-                                alt="skrá inn"
-                                width={32}
-                                height={32}/>
-                            {/* <p>Skrá Inn</p> */}
+                            <div>
+                                <Image  
+                                    src="/Icons/SignIn.svg"
+                                    alt="skrá inn"
+                                    width={32}
+                                    height={32}/>
+                                <h5>Skrá Inn</h5>
+                                </div>
                         </Link>
                     ) : (
                         <a tabIndex={0} role="button" onClick={handleLogout}>
-                            {/* Skrá út */}
-                            <Image  
-                                src="/Icons/SignOut.svg"
-                                alt="skrá út"
-                                width={32}
-                                height={32}/>
-                        {/* <p>Skrá Út</p> */}
+                            <div>
+                                <Image  
+                                    src="/Icons/SignOut.svg"
+                                    alt="skrá út"
+                                    width={32}
+                                    height={32}/>
+                                <h5>Skrá Út</h5>
+                            </div>
                         </a>
                     )}
                     
