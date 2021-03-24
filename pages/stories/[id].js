@@ -1,8 +1,9 @@
 import  { connectToDatabase } from '../../util/mongodb'
-import { getStoryById } from '../../db/stories';
+import { getStoryById, getStories } from '../../db/stories';
 import { Polly } from "@aws-sdk/client-polly";
 import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
 import AudioPlayer from '../../components/AudioPlayer'
+import { useRouter } from 'next/router'
 
 import {
     FacebookShareButton,
@@ -17,6 +18,11 @@ import {
 
 
 export default function Stories({ story, speechUrl }) {
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
 
     return (
         <div>
@@ -77,12 +83,18 @@ export default function Stories({ story, speechUrl }) {
 
 
 
-
-
-// Það þarf að skilgreina paths hér annars rebuildast í hvert skipti ... 
 export async function getStaticPaths(){
+    const { db } = await connectToDatabase();
+    const stories = await getStories(db, 100);
+
+    const paths = stories.map(story => ({
+        params: {
+            id: story._id,
+        },
+    }))
+
     return {
-        paths: [],
+        paths,
         fallback: true,
     }
 }
@@ -93,6 +105,12 @@ export async function getStaticProps({params}) {
     // MongoBD
     const {db} = await connectToDatabase();
     const story = await getStoryById(db, params.id);
+
+    if (!story) {
+        return {
+          notFound: true,
+        }
+      }
 
      // Connecting to Amazon Polly TTS client
      const client = new Polly({

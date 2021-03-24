@@ -148,6 +148,11 @@ export async function getServerSideProps({params}) {
     const story = await getStoryById(db, params.id);
     console.log(story)
     
+    if (!story) {
+        return {
+          notFound: true,
+        }
+      }
 
     return {
         props: {
