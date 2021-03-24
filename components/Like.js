@@ -5,13 +5,15 @@ import styles from '../styles/Like.module.css';
 
 
 const Like = ({story}) => {
-
-    console.log("story", story.likes)
-
+    const [ currentStory, setCurrentStory ] = useState(story);
     const [ userLikesStory, setUserLikesStory ] = useState();
-    // const [isActive, setActive] = useState("false");
-
     const [user, {mutate}] = useCurrentUser();
+
+    useEffect(() => {
+        if(!Array.isArray(currentStory.likes)){
+            setCurrentStory({...currentStory, likes: []});
+        }
+    }, []);
 
     useEffect(()=> {
         if(!user)return
@@ -26,45 +28,71 @@ const Like = ({story}) => {
         } else {
             setUserLikesStory(false);
         }
-
     }, [user] );
 
     const handleLike = async (newUserLikesStory) =>  {
 
+        //Pre-emptive status update
         setUserLikesStory(newUserLikesStory);
 
+        // Compose new liked stories for the user
         const likedStoriesCopy = user.likedStories.slice(0);
-
         
         if(newUserLikesStory) { // add story to the array
             likedStoriesCopy.push(story._id);
         } else { // remove a story from the array
-            let i = likedStoriesCopy.indexOf(story._id)
+            const i = likedStoriesCopy.indexOf(story._id)
             if(i < 0) return
             likedStoriesCopy.splice(i, 1);
         } 
 
-        // NEED A WAY To COUNT LIKES ON A SINGLE STORY FROM MANY USERS AND DISPLAY THE NUMBER NEXT TO THE STAR
-        // Update user with new stories array
-    
+        // Create formdata for user patch
         const formData = new FormData();
         formData.append("email", user.email);
         formData.append("username", user.username);
         formData.append("likedStories", JSON.stringify(likedStoriesCopy));
-
-        const res = await fetch("api/user", {
+         // Update User
+         const userRes = await fetch("api/user", {
             method: "PATCH",
             body: formData
         });
 
-        if (res.status === 200) {
-            const data = await res.json();
-            mutate(data)
-        } else if (res.status === 500) {
+        // If the user was not updated, return
+        if (userRes.status !== 200) {
+            console.log("Error on user update") 
+            setUserLikesStory(!newUserLikesStory);
             return
+        } 
+
+        // Update user data
+        const data = await userRes.json(); 
+        mutate(data) // Changing the user data inside the app
+    
+        // Compose story patch payload
+        const storyLikesCopy = currentStory.likes.slice(0);
+        if (newUserLikesStory) {
+            storyLikesCopy.push(user._id)
         } else {
-            return
+            const i = storyLikesCopy.indexOf(user._id)
+            if(i< 0) return
+            storyLikesCopy.splice(i, 1);
         }
+        
+        const storyRes = await fetch("api/story", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({_id: currentStory._id, likes: storyLikesCopy})
+        });
+
+        if (storyRes.status !== 200) {
+            console.log("Error on story update")
+            setUserLikesStory(!newUserLikesStory); 
+            return
+        } 
+
+        setCurrentStory({...currentStory, likes: storyLikesCopy})
     };
 
     
@@ -73,7 +101,7 @@ const Like = ({story}) => {
             {!user ? '' : (
                 
                 <div >
-                    <p>{story.Likes}</p> 
+                    <p>{!!currentStory.likes && currentStory.likes.length}</p> 
                     <Image onClick={ () => handleLike(!userLikesStory)} className={userLikesStory ? styles.active : styles.star } src="/img/stjarna.svg"  width={20} height={20} alt="stjarna"/>
                 </div>
 
