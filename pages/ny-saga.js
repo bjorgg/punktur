@@ -14,7 +14,7 @@ export default function NewStory() {
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
         const decodedStory = tinymce.html.Entities.decode(story)
-        console.log(decodedStory)
+        const pureStory = tinymce.get('storyContent').getContent({format : 'text'});
         const checkboxes = Array.from(document.querySelectorAll('input[name="genre"]'));
         const genres = checkboxes
             .filter((checkbox) => checkbox.checked)
@@ -25,10 +25,12 @@ export default function NewStory() {
             headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({ 
                 title: title,
-                text: decodedStory,
+                text: pureStory,
+                html: decodedStory,
                 genres, 
                 author: user.username,
-                user_id: user._id 
+                user_id: user._id, 
+                publishDate: new Date()
             }),
         });
         const savedStory = await result.json();

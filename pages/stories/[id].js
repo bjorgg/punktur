@@ -27,20 +27,13 @@ export default function Stories({ story, speechUrl }) {
         <div>
             {story &&
               <div>
-                  {/* Ekki komin virkni á að velja rödd */}
-                <div>
-                    <input type="radio" id="dora" name="voice" value="dora"/>
-                    <label for="dora">Dóra</label>
-                    <input type="radio" id="karl" name="voice" value="karl"/>
-                    <label for="karl">Karl</label>
-                </div>
                 <div>
                     <AudioPlayer url={speechUrl}/>
                 </div>
                 <p>hello title: {story.title}</p>
                 <p>hello author: {story.author}</p>
                 {/* <p>hello text: {story.text}</p> */}
-                <p dangerouslySetInnerHTML={{__html: story.text}}></p>
+                <p dangerouslySetInnerHTML={{__html: story.html}}></p>
                 <div>
                     genres:
                     {story.genres.map((genre) => 
@@ -114,10 +107,11 @@ export async function getStaticProps({params}) {
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_MYAPP,
         },
     });
-
+    // Athuga hvort það sé hægt að bæta við texta fyrir framan, s.s. höfundur osvfr.
+    const storyForPolly = {title: `Titill: ${story.title}`, author: story.author, genres: story.genres, text: story.text}
     // Sameina values úr story array fyrir Polly
-    console.log(story)
-    console.log(story.text)
+    console.log(Object.values(storyForPolly))
+    // console.log(story.text)
     const speechParams = {
         OutputFormat: "mp3",
         Text: story.text,
@@ -129,7 +123,6 @@ export async function getStaticProps({params}) {
         client,
         params: speechParams,
     });
-  
 
     return {
         props: {

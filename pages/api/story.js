@@ -28,10 +28,10 @@ handler.patch(async (req, res) => {
 
 // delete story
 handler.delete(async (req, res) => {
-    // if (!req.user) {
-    //     res.status(401).end();
-    //     return;
-    // }
+    if (!req.user) {
+        res.status(401).end();
+        return;
+    }
     const deleteResult = await deleteStoryById(req.db, req.body._id);
     res.json({ deleted: !!deleteResult.ok });
 });
