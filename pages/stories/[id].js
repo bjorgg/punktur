@@ -1,12 +1,10 @@
 import  { connectToDatabase } from '../../util/mongodb'
-import { getStoryById } from '../../db/stories';
-import { useCurrentUser } from "../../hooks/user";
+import { getStoryById, getStories } from '../../db/stories';
 import { Polly } from "@aws-sdk/client-polly";
 import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
-import React, { useEffect } from "react";
+import AudioPlayer from '../../components/AudioPlayer'
+import { useRouter } from 'next/router'
 
-
-import Link from 'next/link'
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -17,30 +15,26 @@ import {
     TelegramShareButton,
     TelegramIcon,
 } from "react-share";
-import AudioPlayer from '../../components/AudioPlayer'
 
 
 export default function Stories({ story, speechUrl }) {
-    const [user] = useCurrentUser();
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+      }
 
     return (
         <div>
             {story &&
               <div>
-                  {/* Ekki komin virkni á að velja rödd */}
-                <div>
-                    <input type="radio" id="dora" name="voice" value="dora"/>
-                    <label for="dora">Dóra</label>
-                    <input type="radio" id="karl" name="voice" value="karl"/>
-                    <label for="karl">Karl</label>
-                </div>
                 <div>
                     <AudioPlayer url={speechUrl}/>
                 </div>
                 <p>hello title: {story.title}</p>
                 <p>hello author: {story.author}</p>
                 {/* <p>hello text: {story.text}</p> */}
-                <p dangerouslySetInnerHTML={{__html: story.text}}></p>
+                <p dangerouslySetInnerHTML={{__html: story.html}}></p>
                 <div>
                     genres:
                     {story.genres.map((genre) => 
@@ -89,12 +83,18 @@ export default function Stories({ story, speechUrl }) {
 
 
 
-
-
-// Það þarf að skilgreina paths hér annars rebuildast í hvert skipti ... 
 export async function getStaticPaths(){
+    const { db } = await connectToDatabase();
+    const stories = await getStories(db, 100);
+
+    const paths = stories.map(story => ({
+        params: {
+            id: story._id,
+        },
+    }))
+
     return {
-        paths: [],
+        paths,
         fallback: true,
     }
 }
@@ -106,6 +106,12 @@ export async function getStaticProps({params}) {
     const {db} = await connectToDatabase();
     const story = await getStoryById(db, params.id);
 
+    if (!story) {
+        return {
+          notFound: true,
+        }
+      }
+
      // Connecting to Amazon Polly TTS client
      const client = new Polly({
         region: process.env.AWS_REGION_MYAPP,
@@ -114,13 +120,23 @@ export async function getStaticProps({params}) {
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_MYAPP,
         },
     });
+    
+    // Configuring the text to speech for Polly
+    const unitedStory = {
+        title: `Titill: ${story.title}`, 
+        author: `. Höfundur: ${story.author}`, 
+        genres: `. Flokkur: ${story.genres}`, 
+        text: `. Nú hefst sagan: ${story.text}`,
+    }
 
-    // Sameina values úr story array fyrir Polly
-    console.log(story)
-    console.log(story.text)
+    // Getting all the values from the unitedStory object
+    const unitedStoryValues = Object.values(unitedStory)
+    // Setting the united values to string
+    const textForPolly = unitedStoryValues.toString()
+   
     const speechParams = {
         OutputFormat: "mp3",
-        Text: story.text,
+        Text: textForPolly,
         TextType: "text",
         VoiceId: "Dora",
     }
@@ -129,7 +145,6 @@ export async function getStaticProps({params}) {
         client,
         params: speechParams,
     });
-  
 
     return {
         props: {

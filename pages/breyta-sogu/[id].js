@@ -15,12 +15,15 @@ export default function EditStory({story}) {
     // const [user] = useCurrentUser();
     const router = useRouter()
   
-    const [updatedStoryText, setUpdatedStoryText] = useState({ 
-        text: story.text,
+    const [updatedStoryHtml, setUpdatedStoryHtml] = useState({ 
+        html: story.html,
     })
     const [updatedStory, setUpdatedStory] = useState({ 
         title: story.title,
         genres: story.genres,
+    })
+    const [updatedPureStory, setUpdatedPureStory] = useState({
+        text: story.text
     })
 
     const Genres = [
@@ -42,21 +45,24 @@ export default function EditStory({story}) {
 
 
     const updateEntryInDb = async () => {
+        const decodedStory = tinymce.html.Entities.decode(updatedStoryHtml.html)
+        console.log('decodedStory', decodedStory)
+        const pureStory = tinymce.get('editStoryContent').getContent({format : 'text'});
+        console.log('pureStory', pureStory)
         const res = await fetch('/api/story', {
             method: "PATCH",
             headers: {'Content-Type': 'application/json',},
             body: JSON.stringify({  // Updated entry array ...
                 _id: story._id,
                 title: updatedStory.title,
-                text: updatedStoryText.text,
+                text: pureStory,
+                html: decodedStory,
                 genres: updatedStory.genres,
-                // genres: updatedStory.genres,
-                // author: "Árnamaðkur", // Tengja við user hér og líka user_id fyrir neðan
-                // user_id: "2873926ea8458s29424u93u409" 
+                publishDate: new Date()
             }),
         });
         const savedStory = await res.json();
-        alert('Story updated'); // Success modal í staðinn fyrir alert ...
+       // Success modal ... ?
         console.log(`savedStory`, savedStory)
         router.push(`/stories/${savedStory.story._id}`)
 
@@ -65,18 +71,26 @@ export default function EditStory({story}) {
      
 
     const handleChange = (e) => {
-        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-        setUpdatedStory({...updatedStory, [e.target.name]: value})
-        console.log(updatedStory.genres)
+        setUpdatedStory({...updatedStory, [e.target.name]: e.target.value})
     }
 
     const handleEditorChange = (content) => {
-        setUpdatedStoryText({...updatedStoryText, text: content})
-        console.log(updatedStoryText)
+        setUpdatedStoryHtml({...updatedStoryHtml, html: content})
     }
 
-
-    // const checked = 'name' === story.genres ? true : false
+    const handleGenreChange = (e) => {
+        const isChecked = e.target.checked
+        const value = e.target.value
+        const genresCopy = updatedStory.genres.slice(0)
+        if (isChecked) {
+            genresCopy.push(value)
+        } else {
+            const index = genresCopy.indexOf(value)
+            if (index < 0) return // Bæta við error message
+            genresCopy.splice(index, 1)
+        }
+        setUpdatedStory({...updatedStory, genres: genresCopy})
+    }
 
 
     return (
@@ -90,7 +104,7 @@ export default function EditStory({story}) {
                         <Editor
                             id='editStoryContent'
                             apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                            value={updatedStoryText.text}
+                            value={updatedStoryHtml.html}
                             textareaName='text'
                             onEditorChange={handleEditorChange}
                             init={{
@@ -106,12 +120,10 @@ export default function EditStory({story}) {
                         />
                     </div>
                     <div>
-                        {/* genres virkar ekki svona hér, þarf að skoða */}
-                        {/* <Genres onChange={handleChange} checked={updatedStory.genres} value={ genres } />                    */}
                         {Genres &&
                             Genres.map((genre, i) => (
                                 <div id='editStoryGenres' key={ genre }>
-                                    <input id={`genre${i}`} type="checkbox" name="genres" onChange={handleChange} value={ genre } />
+                                    <input id={`genre${i}`} type="checkbox" name="genres" checked={updatedStory.genres.includes(genre)} onChange={handleGenreChange} value={ genre } />
                                     <label htmlFor={`genre${i}`}>{ genre }</label>
                                 </div>
                         ))}
@@ -132,11 +144,15 @@ export default function EditStory({story}) {
 
 // Getting sever side props from MongoDB
 export async function getServerSideProps({params}) {
-    // MongoBD
     const {db} = await connectToDatabase();
     const story = await getStoryById(db, params.id);
     console.log(story)
     
+    if (!story) {
+        return {
+          notFound: true,
+        }
+      }
 
     return {
         props: {

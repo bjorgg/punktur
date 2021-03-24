@@ -4,6 +4,7 @@ body {
     margin: 0;
     font-family: "Open Sans", sans-serif;
     color: #1d2222;
+    background-color: #F9F8F6; /* overcast_lighter */
 }
 
 * {
@@ -79,6 +80,12 @@ h5 {
     font-weight: semibold;
 }
 
+h6 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333838; /*raven lighter*/
+}
+
 /* Buttons */
 
 .tags {
@@ -86,6 +93,7 @@ h5 {
     font-weight: 600;
     line-height: 18px;
     letter-spacing: 0.03em;
+    color: #788788;
 }
 
 /* Form - global */

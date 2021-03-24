@@ -45,7 +45,7 @@ export default function Profile() {
           // todo check if delete was ok?
           router.push('/min-sida?showStoryDeleteMessage=true')
         } catch (err) {
-          console.log(err);
+          console.log(err); // Validate / error message
         }
     
       };

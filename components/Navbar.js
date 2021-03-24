@@ -16,39 +16,39 @@ export default function Navbar() {
     };
     return (
         <nav className={styles.nav}>
-            <div className={styles.logo}>
-                {!user ? '' : (
-                    <MyLink href="/">
+            {!user ? '' : (
+                <MyLink href="/">
+                    <div className={styles.logo}>
                         <Image  
                             src="/Icons/NavbarLogo.svg"
                             alt="heim"
                             width={32}
                             height={32}/>
-                    </MyLink>
-                )}
-            </div>
-            <div className={styles.write}>
-                {!user ? '' : (
-                    <MyLink href="/ny-saga" className={styles.abc} >
+                    </div>
+                </MyLink>
+            )}
+            {!user ? '' : (
+                <MyLink href="/ny-saga" className={styles.abc} >
+                    <div className={styles.write}>
                         <Image  
                             src="/Icons/write.svg"
                             alt="Ný saga"
                             width={32}
                             height={32}/>
-                    </MyLink>
-                )}
-            </div>
-            <div className={styles.user}>
-                {!user ? '' : (
-                    <MyLink href="/min-sida">
+                    </div>
+                </MyLink>
+            )}
+            {!user ? '' : (
+                <MyLink href="/min-sida">
+                    <div className={styles.user}>
                         <Image  
                             src="/Icons/User.svg"
                             alt="mín síða"
                             width={32}
                             height={32}/>
-                    </MyLink>
-                )}
-            </div>
+                    </div>
+                </MyLink>
+            )}
             {/* <MyLink href="/um-punkt">
                 {/* <a>Um punkt</a> */}
                 {/* <Image  

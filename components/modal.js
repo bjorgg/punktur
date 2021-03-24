@@ -8,7 +8,7 @@ const Modal = ({ show, onClose, onSubmit, title, submitText = "Já", cancelText 
     return (
         <div className={styles.modalContainer}>
             <div className={styles.modal}>
-                <h3>{title}</h3>
+                <h4>{title}</h4>
                 <div>{children}</div>
                 <div className={styles.modalButtons}>
                     <button className={styles.modalButton} onClick={onSubmit}>{submitText}</button>
