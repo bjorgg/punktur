@@ -26,7 +26,7 @@ export default function Header() {
             <div className={styles.logoHeim}>
                 <Link href="/">
                     <a>
-                    <Image src="/img/logo_punktur_horizontal.png"  width={160} height={32.2} alt="logo"/>
+                    <Image src="/img/logo_punktur_horizontal.svg"  width={160} height={32.2} alt="logo"/>
                     </a>
                 </Link>
             </div>

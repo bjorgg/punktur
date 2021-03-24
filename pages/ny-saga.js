@@ -34,7 +34,6 @@ export default function NewStory() {
             }),
         });
         const savedStory = await result.json();
-        alert('Story posted'); // Success modal í staðinn fyrir alert ...
         router.push(`/stories/${savedStory._id}`);
         console.log("POSTED!", savedStory);
         
