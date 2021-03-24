@@ -5,6 +5,8 @@ import Genres from '../components/Genres'
 import { useRouter } from 'next/router'
 import { route } from 'next/dist/next-server/server/router';
 import Image from 'next/image'
+import styles from "../styles/Form.module.css";
+
 
 export default function NewStory() {
     const [user, { mutate }] = useCurrentUser();
@@ -34,8 +36,10 @@ export default function NewStory() {
             }),
         });
         const savedStory = await result.json();
-        alert('Story posted'); // Success modal í staðinn fyrir alert ...
-        router.push(`/stories/${savedStory._id}`);
+        router.push({
+            pathname: `/stories/${savedStory._id}`,
+            query: { showStoryCreatedMessage: true },
+        });
         console.log("POSTED!", savedStory);
         
         // Validate ...
@@ -43,7 +47,8 @@ export default function NewStory() {
 
     return (
         <div>
-            <input id='storyTitle' type='text' />
+            <h5>Titill</h5>
+            <input className={styles.storyTitleInput} id='storyTitle' type='text' />
             <Editor
                 id='storyContent'
                 apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
@@ -59,14 +64,20 @@ export default function NewStory() {
                     toolbar: 'undo redo bold italic underline indent outdent styleselect',
                 }} />
             <Genres />
-            <button onClick={handleCreateStory}>
-                <Image  
-                    src="/Icons/BookOpen.svg"
-                    alt="Ný saga"
-                    width={24}
-                    height={24}/>
-                Birta sögu
-            </button>
+            <div className={styles.storyButtonDiv}>
+                <button 
+                    className={styles.storyButton}
+                    onClick={handleCreateStory}>
+                    <Image  
+                        src="/Icons/BookOpen.svg"
+                        alt="Ný saga"
+                        width={24}
+                        height={24}
+                    />
+                    Birta sögu
+                </button>
+            </div>
+            
         </div>
     )
 }
