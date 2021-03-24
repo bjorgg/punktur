@@ -99,7 +99,9 @@ const SignupPage = () => {
                             <p>Ég hef lesið og samþykki Notendaskilmála</p>
                         </a>
                     </div>
-                    <button type="submit">Nýskrá</button>
+                    <div className={styles.buttonDiv}>
+                       <button type="submit">Nýskrá</button> 
+                    </div>
                 </form>
                 <Modal 
                     show={isOpen} 

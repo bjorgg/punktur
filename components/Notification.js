@@ -6,31 +6,30 @@ export default function Notification() {
     const router = useRouter();
     const [notificationMessage, setNotificationMessage] = useState(null);
 
-    const showNotificationMessage = useCallback(
+    const handleNotification = useCallback(
         (show, message) => {
+            const messageAlreadyShown = notificationMessage === message;
             if (show) {
-                setNotificationMessage(message);
-                setTimeout(() => {
-                    router.replace(router.pathname, undefined, { shallow: true });
-                }, 3000);
-            } else if (notificationMessage) {
+                // Dont want to trigger the timout multiple times if message has already been shown
+                if (!messageAlreadyShown) {
+                    setNotificationMessage(message);
+                    setTimeout(() => {
+                        router.replace(router.asPath.split('?')[0], undefined, { shallow: true });
+                    }, 3000);
+                }
+            } else if (messageAlreadyShown) {
                 setNotificationMessage(null);
             }
         },
-        [notificationMessage, setNotificationMessage]
+        [router, notificationMessage, setNotificationMessage]
     );
 
     useEffect(() => {
-        showNotificationMessage(router.query.showUserDeleteMessage, "Notandareikning hefur verið eytt!");
-    }, [router.query.showUserDeleteMessage, showNotificationMessage]);
-
-    useEffect(() => {
-        showNotificationMessage(router.query.showLogoutMessage, "Útskráning tókst");
-    }, [router.query.showLogoutMessage, showNotificationMessage]);
-
-    useEffect(() => {
-        showNotificationMessage(router.query.showStoryDeleteMessage, "Sögunni hefur verið eytt");
-    }, [router.query.showStoryDeleteMessage, showNotificationMessage]);
+        handleNotification(router.query.showUserDeleteMessage, "Notandareikning hefur verið eytt!");
+        handleNotification(router.query.showLogOutMessage, "Útskráning tókst");
+        handleNotification(router.query.showStoryCreatedMessage, "Saga þín er birt!");
+        handleNotification(router.query.showStoryDeleteMessage, "Sögunni hefur verið eytt");
+    }, [router.query, handleNotification]);
 
     return (
         <div>
