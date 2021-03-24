@@ -1,9 +1,26 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
 .star {
     background: #aadee2;
-    border-radius: 100rem;
+    border-radius: 1rem;
 }
 
 .active {
     background: #ffcd61;
-    border-radius: 100rem;
+    border-radius: 1rem;
 }
+
+.likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.likes p {
+    padding-right: 0.5rem;
+}
+

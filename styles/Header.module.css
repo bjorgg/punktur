@@ -16,7 +16,7 @@
 
   .logoHeim {
     padding: 1rem;
-  }
+    }
 
   .nav {
     display: flex;
@@ -25,16 +25,34 @@
   }
 
   .skra {
-    margin-right: 0.7rem;
+    /* margin-right: 0.7rem; */
     display: flex;
-    
+    padding-right: 0.5rem;
   }
 
-  .write {
-    visibility: hidden;
+  .skra div {
+    display: flex;
   }
+  
+  .skra a {
+    display: flex;
+    text-decoration: none;
+    margin-right: 2rem;
+  }
+
+  .skra h5 {
+    padding-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 0.55rem;
+  } 
+
+  .write {
+    display: none !important;
+  }
+  
   .user {
-    visibility: hidden;
+    display: none !important;
   }
 
 
@@ -53,32 +71,16 @@
     width: auto;
     height: 5.5rem;
     text-decoration: none;
+    padding-right: 2rem;
   }
-  .skra a {
-    display: flex;
-    text-decoration: none;
-    margin-right: 2rem;
-  }
-  .skra div {
-    display: flex;
-  }
-
-  .skra h5 {
-    padding-left: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-top: 0.55rem;
-  } 
-
+  
   .write {
-    visibility: visible;
-    display: flex;
+    display: flex !important; 
     margin-right: 2rem;
   }
 
   .user {
-    visibility: visible;
-    display: flex;
+    display: flex !important; 
     margin-right: 2rem;
   }
 

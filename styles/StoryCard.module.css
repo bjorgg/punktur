@@ -23,7 +23,7 @@
 .genres {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
+    width: 85%;
     margin: 0.5rem 0 0.5rem 0.5rem;
 }
 
@@ -38,16 +38,20 @@
 }
 
 .like {
-    width: 3rem;
+    width: 5rem;
 }
 
 .cardBottom {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     padding-left: 1.2rem;
 }
 
 .cardBottom h3 {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
     margin: 1.6rem 0 0.3rem;
 }
 
