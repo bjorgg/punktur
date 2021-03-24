@@ -46,6 +46,8 @@ const Like = ({story}) => {
             likedStoriesCopy.splice(i, 1);
         } 
 
+        
+
         // Create formdata for user patch
         const formData = new FormData();
         formData.append("email", user.email);
@@ -99,14 +101,11 @@ const Like = ({story}) => {
     return ( 
         <div>
             {!user ? '' : (
-                
-                <div >
+                <div>
                     <p>{!!currentStory.likes && currentStory.likes.length}</p> 
                     <Image onClick={ () => handleLike(!userLikesStory)} className={userLikesStory ? styles.active : styles.star } src="/img/stjarna.svg"  width={20} height={20} alt="stjarna"/>
                 </div>
-
             )}
-
         </div>
     );
 }
