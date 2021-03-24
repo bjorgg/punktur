@@ -22,7 +22,7 @@ export default function Genres({ onClick }) {
   ] 
 
   return (
-    <div class="tags" className={styles.tags}>
+    <div className={`tags ${styles.tags}`}>
       {Genres &&
         Genres.map((genre, i) => (
           <div>
