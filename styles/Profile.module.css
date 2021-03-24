@@ -1,0 +1,18 @@
+.avatar {
+    border-radius: 100%;
+}
+
+.aboutDiv {
+    display: flex;
+    gap: 4rem;
+}
+
+.avatarDiv {
+    text-align: center;
+}
+
+.bio {
+    width: 200px;
+    margin: 0;
+}
+

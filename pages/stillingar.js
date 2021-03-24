@@ -13,8 +13,6 @@ export default function Settings() {
     const [isUpdating, setIsUpdating] = useState(false);
     const formRef = useRef();
     const [msg, setMsg] = useState({ message: "", isError: false });
-    const defaultAvatar = '/avatar.svg'
-
 
     useEffect(() => {
         // initializing user data in form input
@@ -29,11 +27,9 @@ export default function Settings() {
     const getFormData = () => {
         const form = formRef.current;
         let avatar = null;
-        console.log(form.avatar.files)
         if (form.avatar.files[0]) {
             avatar = form.avatar.files[0];
         }
-        console.log({avatar})
         const formData = new FormData();
         formData.append("email", form.email.value);
         formData.append("username", form.username.value);
@@ -47,7 +43,6 @@ export default function Settings() {
         // disable submitting while updating is in progress
         if (isUpdating) return;
         setIsUpdating(true);
-        console.log(user);
 
         const res = await fetch("api/user", {
             method: "PATCH",
@@ -80,7 +75,7 @@ export default function Settings() {
     return (
         <div>
             {!user ? (
-                "Það þarf að skrá sig inn til þess að sjá prófílinn sinn"
+                "Þú hefur skráð þig út"
             ) : (
                 <div>
                     <div>
@@ -92,26 +87,13 @@ export default function Settings() {
                             width={24}
                             height={24}/>
                         </Link>
-                        <h2>Stillingar</h2>
+                        
                     </div>
 
                     <form onSubmit={handleSubmit} ref={formRef}>
-                        {msg.message ? <p style={{ color: msg.isError ? "red" : "#0070f3", textAlign: "center" }}>{msg.message}</p> : null}
+                        {msg.message ? <h5 style={{ color: msg.isError ? "#D94D11" : "#73B07D", textAlign: "center" }}>{msg.message}</h5> : null}
+                        <h3>Stillingar</h3>
                         <div>
-                            {/* {!user.avatar ? 
-                                <Image
-                                    src={defaultAvatar}
-                                    alt="Avatar"
-                                    width={100}
-                                    height={100}
-                                /> :
-                                <img 
-                                    src={user.avatar} 
-                                    width="100" 
-                                    height="100" 
-                                    alt={user.username} 
-                                />
-                            } */}
                             <label htmlFor="avatar">
                                 <input className={styles.customFileInput} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
                             </label>
@@ -132,7 +114,7 @@ export default function Settings() {
                         <div>
                             <label htmlFor="bio">
                                 <h5>Um mig</h5>
-                                <textarea id="bio" name="bio" maxLength="50" />
+                                <textarea id="bio" name="bio" maxLength="200" />
                             </label>
                         </div>
                         <button disabled={isUpdating} type="submit">
@@ -141,18 +123,22 @@ export default function Settings() {
                             alt="Ný saga"
                             width={24}
                             height={24}/>
-                            Vista breytingar
+                            Uppfæra
                         </button>
                     </form>
+                    <div className={styles.deleteDiv}>
+                       <button className={styles.deleteButton}
+                        onClick={() => setModalOpen(true)}>
+                        <Image  
+                            src="/Icons/Trash.svg"
+                            alt="Ný saga"
+                            width={24}
+                            height={24}/>
+                            Eyða aðgangi
+                        </button> 
+                    </div>
 
-                    <button onClick={() => setModalOpen(true)}>
-                    <Image  
-                        src="/Icons/Trash.svg"
-                        alt="Ný saga"
-                        width={24}
-                        height={24}/>
-                        Eyða aðgangi
-                    </button>
+                    
                     <Modal show={isOpen} title="Ertu viss um að þú viljir eyða aðgangi þínum?" onSubmit={handleDeleteUser} onClose={() => setModalOpen(false)} submitText="Já" cancelText="Nei">
                         <p>Allar upplýsingar verða eyddar út af punkti</p>
                     </Modal>

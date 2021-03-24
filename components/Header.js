@@ -2,16 +2,21 @@ import Link from "next/link";
 import Image from 'next/image';
 import styles from "../styles/Header.module.css";
 import { useCurrentUser } from "../hooks/user";
+import { useRouter } from "next/router";
 
 
 export default function Header() {
     const [user, { mutate }] = useCurrentUser();
+    const router = useRouter();
     
     // fetching delete request from api/auth
     const handleLogout = async () => {
-        await fetch("/api/auth", {
+        const res = await fetch("/api/auth", {
             method: "DELETE",
         });
+        if(res.ok) {
+            router.push("/?showLogOutMessage=true")
+        }
         // setting user state to null
         mutate(null);
     }

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useCurrentUser } from "../hooks/user";
 import Modal from "../components/modal";
+import Image from 'next/image'
+
 
 
 const SignupPage = () => {
@@ -15,7 +17,7 @@ const SignupPage = () => {
     // call whenever user changes or signs in
     useEffect(() => {
         // redirect to profile page if user is authenticated
-        if (user) router.replace("/min-sida");
+        if (user) router.replace("/");
     }, [user]);
 
     // making a POST request to api/users with email, name, passw
@@ -53,9 +55,18 @@ const SignupPage = () => {
     return (
         <>
             <div>
-                <h2>Nýskráning</h2>
+            <div className={styles.formHeader}>    
+                <Image
+                    className={styles.dotLogo}
+                    src='/img/dot.png'
+                    alt="Punktur"
+                    width={80}
+                    height={80}
+                /> 
+            </div>
+                
                 <form onSubmit={handleSubmit}>
-                    {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
+                    {errorMsg ? <h5 style={{ color: "#D94D11" }}>{errorMsg}</h5> : null}
                     <div>
                         <label htmlFor="username">
                             <h5>Nafn/höfundarnafn</h5>
@@ -88,7 +99,7 @@ const SignupPage = () => {
                             <p>Ég hef lesið og samþykki Notendaskilmála</p>
                         </a>
                     </div>
-                    <button type="submit">Innskrá</button>
+                    <button type="submit">Nýskrá</button>
                 </form>
                 <Modal 
                     show={isOpen} 

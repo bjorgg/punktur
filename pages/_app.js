@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import Layout from '../components/Layout'
 import styles from '../styles/Home.module.css'
 import Head from 'next/head'
+import Notification from '../components/Notification'
 
 
 function MyApp({ Component, pageProps }) {
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
           </Head>
           <Layout>
             <main>
+              <Notification />
               <Component {...pageProps} />
             </main>
           </Layout>

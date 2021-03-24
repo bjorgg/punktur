@@ -13,7 +13,6 @@ handler.patch(async (req, res) => {
     const storyData = req.body
   
     const story = await getStoryById(req.db, storyData._id);
-    console.log(story)
     if (storyData.title) {
         story.title = storyData.title
     }
@@ -23,7 +22,6 @@ handler.patch(async (req, res) => {
     if (storyData.genres) {
         story.genres = storyData.genres
     }
-    console.log(story)
     delete story._id
     const updatedStory = await updateStoryById(req.db, storyData._id, story)
 
