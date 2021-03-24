@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useCurrentUser } from "../hooks/user";
 import Image from "next/image";
 import StoryCard from "../components/StoryCard.js";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Modal from "../components/modal";
 import styles from "../styles/Profile.module.css";
