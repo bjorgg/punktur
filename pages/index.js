@@ -17,18 +17,13 @@ export default function Home({ initialStories }) {
             <Hero />
             <div className={styles.rex}>
                 <div className={styles.rex1}>
-                    {user && `Velkomin/n ${user.username}`}
+                    <h5>{user && `Hæ ${user.username}!`}</h5>
                     <SortByGenres setStories={setStories} />
                 </div>
                 <div className={styles.rex2}>
-                    {Array.isArray(stories) && stories.map((story) => (
-                        <StoryCard story={story} key={story._id}/>
-                    ))}
+                    {Array.isArray(stories) && stories.map((story) => <StoryCard story={story} key={story._id} />)}
                 </div>
             </div>
-            <h5>{user && `Hæ ${user.username}!`}</h5>
-            <SortByGenres setStories={setStories} />
-            {Array.isArray(stories) && stories.map((story) => <StoryCard story={story} key={story._id} />)}
         </div>
     );
 }
