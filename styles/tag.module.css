@@ -1,0 +1,41 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.container {
+  margin-bottom: 1rem;
+  margin-right: 0.6rem;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(121, 120, 117, 0.2);
+}
+
+/* Hide default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* custom checkbox */
+.label {
+  top: 0;
+  left: 0;
+  border-radius: 6px;
+  height: 1.3rem;
+  width: auto;
+  padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+  background-color: #E8E7E3;
+}
+
+.container:hover input ~ .label {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .label {
+  background-color: #788788; /* oldCopper_lighter */
+  color: #F9F8F6;
+}

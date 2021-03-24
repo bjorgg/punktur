@@ -1,7 +1,10 @@
+import styles from "../styles/Form.module.css";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCurrentUser } from "../hooks/user";
+import Image from 'next/image'
+
 
 const LoginPage = () => {
     const router = useRouter();
@@ -36,16 +39,29 @@ const LoginPage = () => {
 
     return (
         <>
-            <h2>Innskráning</h2>
+            <div>
+                <Image
+                    src='/img/avatar1.svg'
+                    alt="Punktur"
+                    width={80}
+                    height={80}
+                /> 
+            </div>
+            
             <form onSubmit={onSubmit}>
                 {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
-                <label htmlFor="email">Netfang
-                    <input id="email" type="email" name="email" placeholder="Netfang" />
+                <label htmlFor="email">
+                    <h5>Netfang</h5>
+                    <input className={styles.formInput} id="email" type="email" name="email" placeholder="Netfang" />
                 </label>
-                <label htmlFor="password">Lykilorð
-                    <input id="password" type="password" name="password" placeholder="Lykilorð" />
+                <label htmlFor="password">
+                    <h5>Lykilorð</h5>
+                    <input className={styles.formInput} id="password" type="password" name="password" placeholder="Lykilorð" />
                 </label>
-                <button type="submit">Ská inn</button>
+                <div>
+                   <button type="submit">Skrá inn</button> 
+                </div>
+                
                 <div>
                     <Link href="/nyskra">
                         <a>Stofna reikning</a>

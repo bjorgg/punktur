@@ -10,6 +10,8 @@ function MyApp({ Component, pageProps }) {
       <div className={styles.container}>
           <Head>
             <title>Punktur</title>
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link href="https://fonts.googleapis.com/css2?family=Newsreader&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Layout>
@@ -17,7 +19,7 @@ function MyApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </main>
           </Layout>
-        </div>
+      </div>
 
   )
 }

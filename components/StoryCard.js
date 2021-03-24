@@ -10,7 +10,7 @@ const StoryCard = ({story}) => {
         <Link href={`/stories/${story._id}`}>
             <div className={styles.cardWrapper}> 
                 <div className={styles.cardTop}>
-                    <div>
+                    <div className={styles.genres}>
                         genre:
                         {story.genres.map((genre) => 
                             <div key={genre}>

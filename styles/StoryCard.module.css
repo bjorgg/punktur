@@ -8,10 +8,16 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
+    width: 80%;
 }
 
 .cardTop div {
     background-color: rgb(238, 166, 85);
     display: flex;
     flex-direction: row;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
 }

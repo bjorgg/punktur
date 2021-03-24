@@ -1,0 +1,74 @@
+.formInput {
+    border: 0.5px solid #333838;
+    border-radius: 6px;
+    background: white;
+    height: 40px;
+    width: 374px;
+    border-radius: 6px;
+    padding-left: 6px;
+}
+
+.formInput:hover {
+    border: 0.5px solid #d98611;
+}
+
+.deleteNotification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 16px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 250ms ease;
+    color: #d98611;
+}
+
+.customFileInput {
+    border: none;
+    padding: 0;
+}
+
+.customFileInput:hover {
+    border: none;
+    padding: 0;
+}
+
+.customFileInput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.customFileInput::before {
+    content: "Veldu prófílmynd";
+    display: inline-block;
+    background: white;
+    border: 0.5px solid #333838;
+    border-radius: 4px;
+    padding: 6px 10px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 10pt;
+}
+
+.customFileInput:hover::before {
+    border: 0.5px solid #d98611;
+    background: #d98611;
+    color: white;
+}
+.customFileInput:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+}
+
+.formTerms {
+    display: flex;
+    padding: 16px 0;
+}

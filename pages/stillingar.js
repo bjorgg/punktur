@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Form.module.css";
 import { useCurrentUser } from "../hooks/user";
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "../components/modal";
@@ -98,7 +98,7 @@ export default function Settings() {
                     <form onSubmit={handleSubmit} ref={formRef}>
                         {msg.message ? <p style={{ color: msg.isError ? "red" : "#0070f3", textAlign: "center" }}>{msg.message}</p> : null}
                         <div>
-                            {!user.avatar ? 
+                            {/* {!user.avatar ? 
                                 <Image
                                     src={defaultAvatar}
                                     alt="Avatar"
@@ -111,28 +111,27 @@ export default function Settings() {
                                     height="100" 
                                     alt={user.username} 
                                 />
-                            }
+                            } */}
                             <label htmlFor="avatar">
-                                Veldu prófílmynd
-                                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                                <input className={styles.customFileInput} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
                             </label>
                         </div>
 
                         <div>
                             <label htmlFor="username">
-                                Nafn/Höfundarnafn
-                                <input required id="username" name="username" type="text" />
+                                <h5>Nafn/Höfundarnafn</h5>
+                                <input className={styles.formInput} required id="username" name="username" type="text" />
                             </label>
                         </div>
                         <div>
                             <label htmlFor="email">
-                                Netfang
-                                <input id="email" name="email" type="email" />
+                                <h5>Netfang</h5>
+                                <input className={styles.formInput} id="email" name="email" type="email" />
                             </label>
                         </div>
                         <div>
                             <label htmlFor="bio">
-                                Um mig
+                                <h5>Um mig</h5>
                                 <textarea id="bio" name="bio" maxLength="50" />
                             </label>
                         </div>
@@ -154,8 +153,8 @@ export default function Settings() {
                         height={24}/>
                         Eyða aðgangi
                     </button>
-                    <Modal show={isOpen} title="Ertu viss um að þú viljir eyða aðgangi þínum?" onSubmit={handleDeleteUser} onClose={() => setModalOpen(false)} submitText="Já" cancelText="Nei, hætta við">
-                        <p>Her er texti sem þú vilt setja i dialoginn</p>
+                    <Modal show={isOpen} title="Ertu viss um að þú viljir eyða aðgangi þínum?" onSubmit={handleDeleteUser} onClose={() => setModalOpen(false)} submitText="Já" cancelText="Nei">
+                        <p>Allar upplýsingar verða eyddar út af punkti</p>
                     </Modal>
                 </div>
             )}
