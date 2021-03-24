@@ -1,27 +1,41 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
+  margin: 2rem 0;
 }
 
-.tag {
-  display: flex;
-  justify-content: center;
-  /* align-items: center; */
-  /* align-content: center; */
-  margin: 0 0.8rem 1rem 0;
-  color: #405557;}
-
-.inputHide {
-  position: absolute;
+.container {
+  margin-bottom: 1rem;
+  margin-right: 0.6rem;
   cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(121, 120, 117, 0.2);
+}
+
+/* Hide default checkbox */
+.container input {
+  position: absolute;
   opacity: 0;
+  cursor: pointer;
   height: 0;
   width: 0;
 }
 
+/* custom checkbox */
 .label {
-  padding: 0.2rem 0 0 0.7rem;
-  height: 30px;
+  top: 0;
+  left: 0;
+  border-radius: 6px;
+  height: 1.3rem;
+  width: auto;
+  padding: 0.3rem 0.7rem 0.3rem 0.7rem;
   background-color: #E8E7E3;
-  border-radius: 6px 0 0 6px;
+}
+
+.container:hover input ~ .label {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .label {
+  background-color: #788788; /* oldCopper_lighter */
+  color: #F9F8F6;
 }

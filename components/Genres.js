@@ -26,14 +26,15 @@ export default function Genres({ onClick }) {
       {Genres &&
         Genres.map((genre, i) => (
           <div>
-            <div className={styles.tag} id='storyGenres' key={ genre }>
-              <input id={`genre${i}`} className={styles.inputHide} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
+            <div className={styles.container} id='storyGenres' key={ genre }>
+              <input id={`genre${i}`} className={styles.checkbox} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
               <label className={styles.label} htmlFor={`genre${i}`}>{ genre }</label>
-              <Image  
-                src="/img/triangle.svg"
-                alt=""
-                width={19}
-                height={30}/>
+                {/* <Image  
+                  src="/img/triangle.svg"
+                  alt=""
+                  className={styles.triangle}
+                  width={19}
+                  height={30}/> */}
             </div>
           </div>
         ))}
