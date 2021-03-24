@@ -32,11 +32,17 @@ export default function Home({ initialStories }) {
                 Notandareikning hefur verið eytt!
             </div>
             <Hero />
-            {user && `Velkomin/n ${user.username}`}
-            <SortByGenres setStories={setStories} />
-            {Array.isArray(stories) && stories.map((story) => (
-                <StoryCard story={story} key={story._id}/>
-            ))} 
+            <div className={styles.rex}>
+                <div className={styles.rex1}>
+                    {user && `Velkomin/n ${user.username}`}
+                    <SortByGenres setStories={setStories} />
+                </div>
+                <div className={styles.rex2}>
+                    {Array.isArray(stories) && stories.map((story) => (
+                        <StoryCard story={story} key={story._id}/>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,14 @@
+.minStilling {
+  display: flex;
+}
+
+.stilling {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 1.6rem;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 20px;
+}

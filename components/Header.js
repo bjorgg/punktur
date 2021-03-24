@@ -27,6 +27,30 @@ export default function Header() {
             </div>
             <nav className={styles.nav}>
                 <div className={styles.skra}>
+                    {!user ? '' : (
+                        <Link href="/min-sida">
+                            <div className={styles.user}>
+                                <Image  
+                                    src="/Icons/UserHeader.svg"
+                                    alt="mín síða"
+                                    width={32}
+                                    height={32}/>
+                                <p>Síðan mín</p>
+                            </div>
+                        </Link>
+                    )}
+                     {!user ? '' : (
+                         <Link href="/ny-saga" >
+                            <div className={styles.write}>
+                                <Image  
+                                    src="/Icons/writeHeader.svg"
+                                    alt="Ný saga"
+                                    width={32}
+                                    height={32}/>
+                            <p>Ný saga</p>
+                            </div>
+                        </Link>
+                    )}
                     {!user ? (
                         <Link href="/skra-inn">
                             {/* <a>Skrá inn</a> */}
@@ -35,6 +59,7 @@ export default function Header() {
                                 alt="skrá inn"
                                 width={32}
                                 height={32}/>
+                            <p>Skrá Inn</p>
                         </Link>
                     ) : (
                         <a tabIndex={0} role="button" onClick={handleLogout}>
@@ -44,20 +69,10 @@ export default function Header() {
                                 alt="skrá út"
                                 width={32}
                                 height={32}/>
+                        <p>Skrá Út</p>
                         </a>
                     )}
-                </div>
-                <div>
-                    {!user ? '' : (
-                        <Link href="/stillingar">
-                            {/* <a>Stillingar</a> */}
-                            <Image  
-                                src="/Icons/stillingar.svg"
-                                alt="Stillingar"
-                                width={32}
-                                height={32}/>
-                        </Link>
-                    )}
+                    
                 </div>
             </nav>
         </header>

@@ -7,4 +7,19 @@
     align-items: center;
 }
 
+@media only screen and (min-width: 1024px) {
+    
+    .rex {
+        display: flex;
+        justify-content: center;
+    }
 
+    .rex1 {
+        max-width: 20rem;
+    }
+
+    .rex2 {
+        min-width: 50rem;
+    }
+
+}

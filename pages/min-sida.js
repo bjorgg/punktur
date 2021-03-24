@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { useCurrentUser } from "../hooks/user";
-import Image from 'next/image'
+import Image from 'next/image';
+import Link from 'next/link';
+import Modal from '../components/modal';
 import StoryCard from "../components/StoryCard.js";
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Modal from '../components/modal'
+import styles from  '../styles/minSida.module.css';
 
 
 export default function Profile() {
@@ -55,7 +56,19 @@ export default function Profile() {
             {!user ? 'Þú hefur skráð þig út' : (
                 <div>
                     <div>
-                        <h2>Mín síða</h2>
+                        <div className={styles.minStilling}>
+                            <h2>Mín síða</h2>
+                            <div className={styles.stilling}>
+                                <Link href="/stillingar">
+                                    {/* <a>Stillingar</a> */}
+                                    <Image  
+                                        src="/Icons/stillingar.svg"
+                                        alt="Stillingar"
+                                        width={32}
+                                        height={32}/>
+                                </Link>
+                            </div>
+                        </div>
                         <h3>{user && `Velkomin/n ${user.username}!`}</h3>
                     </div>
                     <div>
