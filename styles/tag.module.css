@@ -1,0 +1,27 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  /* align-content: center; */
+  margin: 0 0.8rem 1rem 0;
+  color: #405557;}
+
+.inputHide {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.label {
+  padding: 0.2rem 0 0 0.7rem;
+  height: 30px;
+  background-color: #E8E7E3;
+  border-radius: 6px 0 0 6px;
+}

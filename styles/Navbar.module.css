@@ -24,12 +24,6 @@
   width: 25%;
 }
 
-.nav a.active {
-  background-image: url("/Icons/active.svg");
-  background-repeat: no-repeat;
-  background-position: center bottom;
-}
-
 .write {
   display: flex;
   justify-content: center;
@@ -48,3 +42,6 @@
   width: 25%;
 }
 
+.abc {
+  background-color: indigo;
+}

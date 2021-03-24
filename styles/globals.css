@@ -13,6 +13,7 @@ body {
 
 main {
     width: 80%;
+    margin-top: 6rem;
 }
 
 footer {
@@ -80,7 +81,7 @@ h5 {
 
 /* Buttons */
 
-.tag {
+.tags {
     font-size: 16px;
     font-weight: 600;
     line-height: 18px;
