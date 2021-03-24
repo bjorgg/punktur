@@ -4,6 +4,7 @@ import { getStories } from "../db/stories";
 import StoryCard from "../components/StoryCard.js";
 import SortByGenres from "../components/SortByGenres.js";
 import Hero from "../components/Hero.js";
+import styles from "../styles/Home.module.css";
 
 import { connectToDatabase } from "../util/mongodb";
 
@@ -14,9 +15,15 @@ export default function Home({ initialStories }) {
     return (
         <div>
             <Hero />
-            <h5>{user && `Hæ ${user.username}!`}</h5>
-            <SortByGenres setStories={setStories} />
-            {Array.isArray(stories) && stories.map((story) => <StoryCard story={story} key={story._id} />)}
+            <div className={styles.rex}>
+                <div className={styles.rex1}>
+                    <h5>{user && `Hæ ${user.username}!`}</h5>
+                    <SortByGenres setStories={setStories} />
+                </div>
+                <div className={styles.rex2}>
+                    {Array.isArray(stories) && stories.map((story) => <StoryCard story={story} key={story._id} />)}
+                </div>
+            </div>
         </div>
     );
 }

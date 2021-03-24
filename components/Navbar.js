@@ -49,47 +49,7 @@ export default function Navbar() {
                     </div>
                 </MyLink>
             )}
-            {/* <MyLink href="/um-punkt">
-                {/* <a>Um punkt</a> */}
-                {/* <Image  
-                            src="/Icons/User.svg"
-                            alt="um punkt"
-                            width={32}
-                            height={32}/> */}
-            {/* </MyLink>  */}
-            {/* <div>
-                {!user ? (
-                    <MyLink href="/skra-inn">
-                        {/* <a>Skrá inn</a> */}
-                        {/* <Image  
-                            src="/Icons/SignIn.svg"
-                            alt="skrá inn"
-                            width={32}
-                            height={32}/>
-                    </MyLink>
-                ) : ( */}
-                    {/* <a tabIndex={0} role="button" onClick={handleLogout}>
-                        {/* Skrá út */}
-                        {/* <Image  
-                            src="/Icons/SignOut.svg"
-                            alt="skrá út"
-                            width={32}
-                            height={32}/>
-                    </a> */}
-            {/*                 
-            </div> */}
-            {/* <div>
-                {!user ? '' : (
-                    <MyLink href="/stillingar">
-                        {/* <a>Stillingar</a> */}
-                        {/* <Image  
-                            src="/Icons/stillingar.svg"
-                            alt="Stillingar"
-                            width={32}
-                            height={32}/>
-                    </MyLink>
-                )} */}
-            {/* </div> */}
+            
         </nav>
     );
 }

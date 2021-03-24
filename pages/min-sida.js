@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useCurrentUser } from "../hooks/user";
 import Image from "next/image";
 import StoryCard from "../components/StoryCard.js";
@@ -63,8 +64,33 @@ export default function Profile() {
                 <div>
                     <div className={styles.aboutDiv}>
                         <div className={styles.avatarDiv}>
-                            {!avatar ? <Image src={defaultAvatar} alt="Avatar" width={100} height={100} /> : <img className={styles.avatar} src={avatar} width="100" height="100" alt={username} />}
-                            <h4>{username}</h4>
+                            {!avatar ? 
+                                <Image
+                                    src={defaultAvatar}
+                                    alt="Avatar"
+                                    width={100}
+                                    height={100}
+                                /> :
+                                <img
+                                    className={styles.avatar}
+                                    src={avatar} 
+                                    width="100" 
+                                    height="100" 
+                                    alt={username} 
+                                />
+                            }
+                            <div className={styles.minStilling}>
+                                <h4>{username}</h4>  
+                                <div className={styles.stilling}>
+                                    <Link href="/stillingar">
+                                        <Image  
+                                            src="/Icons/stillingar.svg"
+                                            alt="Stillingar"
+                                            width={32}
+                                            height={32}/>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <p className={styles.bio}>{bio}</p>

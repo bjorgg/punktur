@@ -32,37 +32,54 @@ export default function Header() {
             </div>
             <nav className={styles.nav}>
                 <div className={styles.skra}>
+                    {!user ? '' : (
+                        <Link href="/min-sida">
+                            <div className={styles.user}>
+                                <Image  
+                                    src="/Icons/UserHeader.svg"
+                                    alt="mín síða"
+                                    width={32}
+                                    height={32}/>
+                                <h5>Prófíll</h5>
+                            </div>
+                        </Link>
+                    )}
+                     {!user ? '' : (
+                         <Link href="/ny-saga" >
+                            <div className={styles.write}>
+                                <Image  
+                                    src="/Icons/writeHeader.svg"
+                                    alt="Ný saga"
+                                    width={32}
+                                    height={32}/>
+                                <h5>Ný saga</h5>
+                            </div>
+                        </Link>
+                    )}
                     {!user ? (
                         <Link href="/skra-inn">
-                            {/* <a>Skrá inn</a> */}
-                            <Image  
-                                src="/Icons/SignIn.svg"
-                                alt="skrá inn"
-                                width={32}
-                                height={32}/>
+                            <div>
+                                <Image  
+                                    src="/Icons/SignIn.svg"
+                                    alt="skrá inn"
+                                    width={32}
+                                    height={32}/>
+                                <h5>Skrá Inn</h5>
+                                </div>
                         </Link>
                     ) : (
                         <a tabIndex={0} role="button" onClick={handleLogout}>
-                            {/* Skrá út */}
-                            <Image  
-                                src="/Icons/SignOut.svg"
-                                alt="skrá út"
-                                width={32}
-                                height={32}/>
+                            <div>
+                                <Image  
+                                    src="/Icons/SignOut.svg"
+                                    alt="skrá út"
+                                    width={32}
+                                    height={32}/>
+                                <h5>Skrá Út</h5>
+                            </div>
                         </a>
                     )}
-                </div>
-                <div>
-                    {!user ? '' : (
-                        <Link href="/stillingar">
-                            {/* <a>Stillingar</a> */}
-                            <Image  
-                                src="/Icons/stillingar.svg"
-                                alt="Stillingar"
-                                width={32}
-                                height={32}/>
-                        </Link>
-                    )}
+                    
                 </div>
             </nav>
         </header>

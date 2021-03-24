@@ -20,5 +20,32 @@
     transition: opacity 250ms ease;
     color: #d98611;
 }
+@media only screen and (min-width: 1024px) {
+    
+    .rex {
+        display: flex;
+        justify-content: center;
+    }
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 16px;
+        opacity: 0;
+        z-index: -4;
+        transition: opacity 250ms ease;
+        color: #d98611;
+    }
 
+    .rex1 {
+        max-width: 20rem;
+    }
 
+    .rex2 {
+        min-width: 50rem;
+    }
+
+}

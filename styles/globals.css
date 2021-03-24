@@ -5,6 +5,7 @@ body {
     font-family: "Open Sans", sans-serif;
     color: #1d2222;
     background-color: #F9F8F6; /* overcast_lighter */
+    overflow-x: hidden;
 }
 
 * {

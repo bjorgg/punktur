@@ -1,6 +1,6 @@
 /* --------------- mobile -------------- */
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+
   .header {
     background-color: #f3f1ee;
     position: absolute;
@@ -20,29 +20,69 @@
 
   .nav {
     display: flex;
-    padding: 1rem;
     cursor: pointer;
+    height: 100%;
   }
 
   .skra {
     margin-right: 0.7rem;
+    display: flex;
+    
   }
-}
+
+  .write {
+    visibility: hidden;
+  }
+  .user {
+    visibility: hidden;
+  }
+
 
 /* --------------- tablet -------------- */
 
-@media only screen and (min-width: 768px) and (max-width: 979px) {
-  .header {
-    background-color: #f19408;
-    position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100vw;
-    height: 8rem;
-    border-radius: 0 0 30px 30px;
+@media only screen and (min-width: 1024px) {
+
+  .logoHeim {
+    margin-left: 5rem;
   }
+
+  .skra {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    height: 5.5rem;
+    text-decoration: none;
+  }
+  .skra a {
+    display: flex;
+    text-decoration: none;
+    margin-right: 2rem;
+  }
+  .skra div {
+    display: flex;
+  }
+
+  .skra h5 {
+    padding-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 0.55rem;
+  } 
+
+  .write {
+    visibility: visible;
+    display: flex;
+    margin-right: 2rem;
+  }
+
+  .user {
+    visibility: visible;
+    display: flex;
+    margin-right: 2rem;
+  }
+
+
 }
 
 /* --------------- small Desktop -------------- */
