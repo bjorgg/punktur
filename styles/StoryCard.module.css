@@ -11,6 +11,10 @@
         0px 1px 4px 1px rgba(123, 136, 137, 0.2);
 }
 
+.cardWrapper:last-child {
+    margin-bottom: 5rem;
+}
+
 .cardTop {
     display: flex;
     justify-content: space-between;

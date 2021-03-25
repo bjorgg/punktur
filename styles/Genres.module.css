@@ -13,8 +13,8 @@
 /* Hide default checkbox */
 .container input {
   position: absolute;
-  cursor: pointer;
   opacity: 0;
+  cursor: pointer;
   height: 0;
   width: 0;
 }
