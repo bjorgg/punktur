@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Editor } from '@tinymce/tinymce-react';
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import  { connectToDatabase } from '../../util/mongodb'
 import { getStoryById } from '../../db/stories'
@@ -89,7 +88,7 @@ export default function EditStory({story}) {
 
 
     return (
-            <div>
+            <div className={styles.editorContainer}>
                 {story &&
                     <div>
                     <div> 
@@ -115,6 +114,7 @@ export default function EditStory({story}) {
                             }}
                         />
                     </div>
+                    <h4>Síur</h4>
                     <div className={`tags ${styles.tags}`}>
                         {Genres &&
                             Genres.map((genre, i) => (

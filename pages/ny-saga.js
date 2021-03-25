@@ -45,8 +45,8 @@ export default function NewStory() {
     };
 
     return (
-        <div>
-            <h5>Titill</h5>
+        <div className={styles.editorContainer}>
+            <h4>Titill</h4>
             <input className={styles.storyTitleInput} id='storyTitle' type='text' />
             <div className={styles.editor}> 
                 <Editor
