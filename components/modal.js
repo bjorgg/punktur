@@ -1,12 +1,12 @@
 import styles from "../styles/Modal.module.css";
 
-const Modal = ({ show, onClose, onSubmit, title, submitText = "Já", cancelText = "Nei", children }) => {
+const Modal = ({ show, onClose, onSubmit, title, submitText = "Já", cancelText = "Nei", children, clickOutside }) => {
     if (!show) {
         return null;
     }
 
     return (
-        <div className={styles.modalContainer}>
+        <div className={styles.modalContainer} onClick={clickOutside}>
             <div className={styles.modal}>
                 <h4>{title}</h4>
                 <div>{children}</div>

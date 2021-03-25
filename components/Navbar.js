@@ -22,7 +22,7 @@ export default function Navbar() {
                     <MyLink href="/">
                         <div className={styles.logo}>
                             <Image  
-                                src="/Icons/NavbarLogo.svg"
+                                src="/Icons/navbarLogo.svg"
                                 alt="heim"
                                 width={32}
                                 height={32}/>
