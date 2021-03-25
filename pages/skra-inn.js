@@ -59,10 +59,9 @@ const LoginPage = () => {
                     <h5>Lykilorð</h5>
                     <input className={styles.formInput} id="password" type="password" name="password" placeholder="Lykilorð" />
                 </label>
-                <div>
-                   <button type="submit">Skrá inn</button> 
+                <div className={styles.buttonDiv}>
+                    <button type="submit">Skrá inn</button> 
                 </div>
-                
                 <div>
                     <Link href="/nyskra">
                         <a>Stofna reikning</a>

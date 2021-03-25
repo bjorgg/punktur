@@ -1,0 +1,60 @@
+.listenBtn {
+    cursor: pointer;
+    height: 40px;
+    border-radius: 4px;
+    border: none;
+    padding: 12px 16px 12px 16px;
+    margin-bottom: 20px;
+    color: #f9f8f6;
+    background: #546769;
+    box-shadow: 0px 1px 4px 1px rgba(123, 136, 137, 0.2);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05));
+    font-size: 15px;
+    font-weight: semi-bold;
+    line-height: 18px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.storyWrapper {
+    background: #F9F8F6;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05), 0px 1px 4px 1px rgba(123, 136, 137, 0.2);
+    border-radius: 6px;
+    /* width: 90%; */
+}
+
+.storyHeader {
+    background: #F3F1EE;
+    border-radius: 6px 6px 0px 0px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.storyMain {
+    padding: 2rem;
+}
+
+.headWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.storyTitles {
+    width: 100%;
+}
+
+.storyTitle{ 
+    margin-bottom: 0px;
+}
+
+.like {
+    width: 5rem;
+}

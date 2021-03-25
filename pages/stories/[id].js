@@ -4,6 +4,8 @@ import { Polly } from "@aws-sdk/client-polly";
 import { getSynthesizeSpeechUrl } from "@aws-sdk/polly-request-presigner";
 import AudioPlayer from '../../components/AudioPlayer'
 import { useRouter } from 'next/router'
+import styles from '../../styles/Story.module.css'
+import Like from "../../components/Like";
 
 import {
     FacebookShareButton,
@@ -27,54 +29,61 @@ export default function Stories({ story, speechUrl }) {
     return (
         <div>
             {story &&
-              <div>
-                <div>
-                    <AudioPlayer url={speechUrl}/>
+              <div className={styles.storyWrapper}>
+                <div className={styles.storyHeader}>
+                    <div>
+                        {story.genres.map((genre) => 
+                            <div key={genre}>
+                                {genre}
+                            </div>
+                        )}
+                    </div>
+                    <div className={styles.like}>
+                        <Like story={story}/>
+                    </div>
                 </div>
-                <p>hello title: {story.title}</p>
-                <p>hello author: {story.author}</p>
-                {/* <p>hello text: {story.text}</p> */}
-                <p dangerouslySetInnerHTML={{__html: story.html}}></p>
-                <div>
-                    genres:
-                    {story.genres.map((genre) => 
-                        <div key={genre}>
-                            {genre}
+                <div className={styles.storyMain}>
+                    <div className={styles.headWrapper}>
+                        <div className={styles.storyTitles}>
+                            <h3 className={styles.storyTitle}>{story.title}</h3>
+                            <h5>Höfundur: {story.author}</h5>
                         </div>
-                    )}
-                </div>
-                <div>
-                    <FacebookShareButton
-                        url={`https://punktur.vercel.app/stories/${story.id}`}
-                        quote={`${story.title} Eftir ${story.author}`}
-                        hashtag={'#punktur'}
-                        >
-                        <FacebookIcon size={32} round iconFillColor={"white"}/>
-                    </FacebookShareButton>                    
-                    <TwitterShareButton
-                        url={`https://punktur.vercel.app/stories/${story.id}`}
-                        title={`${story.title} Eftir ${story.author}`}
-                        hashtag={'#punktur'}
-                        >
-                        <TwitterIcon size={32} round />
-                    </TwitterShareButton>
-                    <TelegramShareButton
-                        url={`https://punktur.vercel.app/stories/${story.id}`}
-                        title={`${story.title} Eftir ${story.author}`}
-                        hashtag={'#punktur'}
-                        >
-                        <TelegramIcon size={32} round />
-                    </TelegramShareButton>
-                    <RedditShareButton
-                        url={`https://punktur.vercel.app/stories/${story.id}`}
-                        title={`${story.title} Eftir ${story.author}`}
-                        hashtag={'#punktur'}
-                        >
-                        <RedditIcon size={32} round />
-                    </RedditShareButton>
-                </div> 
+                        <AudioPlayer url={speechUrl}/>
+                    </div>
+                    <div dangerouslySetInnerHTML={{__html: story.html}}></div>
+                    
+                    <div>
+                        <FacebookShareButton
+                            url={`https://punktur.vercel.app/stories/${story.id}`}
+                            quote={`${story.title} Eftir ${story.author}`}
+                            hashtag={'#punktur'}
+                            >
+                            <FacebookIcon size={32} round iconFillColor={"white"}/>
+                        </FacebookShareButton>                    
+                        <TwitterShareButton
+                            url={`https://punktur.vercel.app/stories/${story.id}`}
+                            title={`${story.title} Eftir ${story.author}`}
+                            hashtag={'#punktur'}
+                            >
+                            <TwitterIcon size={32} round />
+                        </TwitterShareButton>
+                        <TelegramShareButton
+                            url={`https://punktur.vercel.app/stories/${story.id}`}
+                            title={`${story.title} Eftir ${story.author}`}
+                            hashtag={'#punktur'}
+                            >
+                            <TelegramIcon size={32} round />
+                        </TelegramShareButton>
+                        <RedditShareButton
+                            url={`https://punktur.vercel.app/stories/${story.id}`}
+                            title={`${story.title} Eftir ${story.author}`}
+                            hashtag={'#punktur'}
+                            >
+                            <RedditIcon size={32} round />
+                        </RedditShareButton>
+                    </div> 
                
-                
+                </div>
               </div>
             }
         </div>

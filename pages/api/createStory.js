@@ -1,6 +1,11 @@
 import { connectToDatabase } from "../../util/mongodb";
 
 export default async function handler(req, res) {
+    // if (!req.user) {
+    //     res.status(401).end();
+    //     return;
+    // }
+
     const { db } = await connectToDatabase();
     const data = Object.assign({}, req.body);
     

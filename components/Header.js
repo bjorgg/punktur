@@ -26,7 +26,7 @@ export default function Header() {
             <div className={styles.logoHeim}>
                 <Link href="/">
                     <a>
-                    <Image src="/img/logo_punktur_horizontal.png"  width={160} height={32.2} alt="logo"/>
+                    <Image src="/img/logo_punktur_horizontal.svg"  width={160} height={32.2} alt="logo"/>
                     </a>
                 </Link>
             </div>
@@ -65,7 +65,7 @@ export default function Header() {
                                     width={32}
                                     height={32}/>
                                 <h5>Skrá Inn</h5>
-                                </div>
+                            </div>
                         </Link>
                     ) : (
                         <a tabIndex={0} role="button" onClick={handleLogout}>

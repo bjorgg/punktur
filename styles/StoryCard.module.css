@@ -3,6 +3,7 @@
     min-height: 11.5rem;
     background-color: #F9F8F6; /* overcast_lighter*/
     margin: 2rem 0 0.5rem;
+    width: 100%;
     border-radius: 6px;
     max-width: 50rem;
     box-shadow: 
@@ -22,7 +23,7 @@
 .genres {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
+    width: 85%;
     margin: 0.5rem 0 0.5rem 0.5rem;
 }
 
@@ -37,19 +38,24 @@
 }
 
 .like {
-    width: 3rem;
+    width: 5rem;
 }
 
 .cardBottom {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     padding-left: 1.2rem;
 }
 
 .cardBottom h3 {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
     margin: 1.6rem 0 0.3rem;
 }
 
 .cardBottom h6 {
     margin: 0 0 2.2rem;
 }
+

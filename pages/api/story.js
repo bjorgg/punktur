@@ -10,6 +10,10 @@ handler.use(middleware);
 
 // edit/update story
 handler.patch(async (req, res) => {
+    if (!req.user) {
+        res.status(401).end();
+        return;
+    }
 
     const storyData = req.body
 
