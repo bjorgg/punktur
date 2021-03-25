@@ -1,32 +1,122 @@
+.profilePage {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .avatar {
     border-radius: 100%;
 }
 
 .aboutDiv {
     display: flex;
-    gap: 4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    flex-direction: column;
 }
 
 .avatarDiv {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 
 .bio {
-    width: 200px;
+    min-width: 80px;
+    max-width: 400px;
     margin: 0;
 }
 
 .minStilling {
-  display: flex;
+    display: flex;
 }
 
 .stilling {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-top: 1rem;
-  height: 4rem;
-  width: 4rem;
-  border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 1rem;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 20px;
+}
+
+.storyContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.storyEditDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4rem;
+    height: 12rem;
+    margin-top: 2rem;
+}
+
+.myStories {
+    width: 100%;
+}
+
+.myStoriesHeader {
+    display: flex;
+    flex-direction: column;
+}
+
+.iconButton {
+    border: none;
+    padding: 2px;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border-bottom: 1px solid #f3f1ee;
+}
+
+.iconButton:hover {
+    border-bottom: 1px solid #d98611;
+    border-radius: 2px;
+}
+
+@media only screen and (min-width: 500px) {
+    .aboutDiv {
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .aboutDiv {
+        flex-direction: column;
+        width: 200px;
+        justify-content: end;
+    }
+
+    .profilePage {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        gap: 4rem;
+        margin: auto;
+    }
+
+    .myStories {
+        width: 100%;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .storyContainer {
+        gap: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .myStoriesHeader {
+        text-align: center;
+    }
 }

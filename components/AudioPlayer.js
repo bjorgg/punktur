@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import styles from '../styles/Story.module.css'
+import Image from 'next/image'
 
 const useAudio = url => {
     const [audio] = useState( typeof Audio !== "undefined" && new Audio(url));
@@ -27,7 +29,14 @@ const AudioPlayer = ({ url }) => {
 
   return (
     <div>
-      <button onClick={toggle}>{playing ? "Pása" : "Hlusta"}</button>
+      <button className={styles.listenBtn} onClick={toggle} >
+        {playing ? "Pása" : "Hlusta"}
+        <Image  
+            src="/img/sound.svg"
+            alt="Hlusta"
+            width={24}
+            height={24}
+        /></button>
     </div>
   );
 };
