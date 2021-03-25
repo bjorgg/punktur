@@ -33,14 +33,12 @@ export async function getServerSideProps(context) {
     const { db } = await connectToDatabase();
     const stories = await getStories(db, 20);
 
-    // If no data ... ?
-
     // Passing the data receved to the props object
     return {
         props: {
             initialStories: stories,
         },
 
-        // revalidate: 1,
+        revalidate: 1,
     };
 }
