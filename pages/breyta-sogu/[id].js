@@ -3,7 +3,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import  { connectToDatabase } from '../../util/mongodb'
-import { getStoryById } from '../../db/stories';
+import { getStoryById } from '../../db/stories'
+import styles from "../../styles/Form.module.css";
+;
 
 
 export default function EditStory({story}) {
@@ -88,8 +90,9 @@ export default function EditStory({story}) {
             <div>
                 {story &&
                     <div>
-                    <div>                        
-                        <input value={updatedStory.title} onChange={handleChange} name="title" type="text"></input>                            
+                    <div> 
+                        <h5>Titill</h5>                       
+                        <input className={styles.storyTitleInput} value={updatedStory.title} onChange={handleChange} name="title" type="text"></input>                            
                     </div>
                     <div>
                         <Editor
@@ -123,7 +126,9 @@ export default function EditStory({story}) {
                     <Link href={`/stories/${story._id}`}>
                         <a>Hætta við</a>
                     </Link>
-                    <button onClick={updateEntryInDb}>Vista breytingar</button>
+                    <div className={styles.storyButtonDiv}>
+                        <button className={styles.storyButton} onClick={updateEntryInDb}>Vista breytingar</button>
+                    </div>
                     
                     </div>
                 }

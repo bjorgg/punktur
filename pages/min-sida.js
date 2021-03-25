@@ -55,14 +55,15 @@ export default function Profile() {
     return (
         <div>
             {!user ? (
-                "Þú hefur skráð þig út"
+                ""
             ) : (
-                <div>
+                <div className={styles.profilePage}>
                     <div className={styles.aboutDiv}>
                         <div className={styles.avatarDiv}>
                             {!avatar ? 
                                 <Image
                                     src={defaultAvatar}
+                                    className={styles.avatar}
                                     alt="Avatar"
                                     width={100}
                                     height={100}
@@ -75,6 +76,8 @@ export default function Profile() {
                                     alt={username} 
                                 />
                             }
+                        </div>
+                        <div>
                             <div className={styles.minStilling}>
                                 <h4>{username}</h4>  
                                 <div className={styles.stilling}>
@@ -87,24 +90,29 @@ export default function Profile() {
                                     </Link>
                                 </div>
                             </div>
-                        </div>
-                        <div>
                             <p className={styles.bio}>{bio}</p>
                         </div>
                     </div>
-                    <div>
-                        <h3>Mínar sögur</h3>
+                    <div className={styles.myStories}>
+                        <div className={styles.myStoriesHeader}>
+                            <h4 >Mínar sögur</h4>
+                        </div>
                         {Array.isArray(stories) &&
                             stories.map((story) => (
-                                <div key={story._id}>
+                                <div className={styles.storyContainer} key={story._id}>
                                     <StoryCard story={story} />
-                                    <div>
-                                        <Link href={`/breyta-sogu/${story._id}`}>
+                                    <div className={styles.storyEditDiv}>
+                                        <button className={styles.iconButton}>
+                                            <Link  href={`/breyta-sogu/${story._id}`}>
                                             <a>
-                                                <Image src="/Icons/edit.svg" width={30} height={30} alt="blýantur" />
+                                                <Image 
+                                                src="/Icons/edit.svg" width={30} height={30} alt="blýantur" />
                                             </a>
                                         </Link>
-                                        <Image src="/Icons/Trash.svg" width={30} height={30} alt="rusl" onClick={() => handleModal(story)} />
+                                        </button>
+                                        <button className={styles.iconButton}>
+                                            <Image className={styles.storyEditDiv} src="/Icons/Trash.svg" width={30} height={30} alt="rusl" onClick={() => handleModal(story)} />
+                                        </button>
                                     </div>
                                 </div>
                             ))}
