@@ -49,6 +49,7 @@ handler.patch(upload.single('avatar'), async (req, res) => {
         
     }
     const update = Object.assign({}, req.body);
+    update.avatar = avatar || req.user.avatar;
 
     const userByEmail = await findUserByEmail(req.db, update.email);
     if (userByEmail && !isLoggedInUser(userByEmail, req)) {
@@ -71,7 +72,7 @@ handler.patch(upload.single('avatar'), async (req, res) => {
          res.json({ error, message: 'Liked stories could not be parsed' });
     }
 
-    await updateUserById(req.db, req.user._id, {...update, avatar});
+    await updateUserById(req.db, req.user._id, update);
 
     res.json({ user: update });
 });
