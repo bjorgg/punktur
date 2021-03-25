@@ -6,6 +6,7 @@
 
 .avatar {
     border-radius: 100%;
+    box-shadow: 0 20px 30px #5467692d;
 }
 
 .aboutDiv {
@@ -89,6 +90,11 @@
     }
 }
 @media only screen and (min-width: 1024px) {
+    .avatar {
+        width: 14.5rem;
+        height: 14.5rem;
+    }
+
     .aboutDiv {
         flex-direction: column;
         width: 200px;
@@ -98,7 +104,7 @@
     .profilePage {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-content: center;
         gap: 4rem;
         margin: auto;

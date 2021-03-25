@@ -22,12 +22,12 @@
     display: flex;
     cursor: pointer;
     height: 100%;
+    padding-top: 0.4rem;
   }
 
   .skra {
-    /* margin-right: 0.7rem; */
     display: flex;
-    padding-right: 0.5rem;
+    padding-right: 1rem;
   }
 
   .skra div {
@@ -44,7 +44,7 @@
     padding-left: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding-top: 0.55rem;
+    padding-top: 0.5rem;
   } 
 
   .write {

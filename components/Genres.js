@@ -31,12 +31,6 @@ export default function Genres({ onClick }) {
               <div className={styles.container} id='storyGenres' >
                 <input id={`genre${i}`} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
                 <label className={styles.label} htmlFor={`genre${i}`}>{ genre }</label>
-                  {/* <Image  
-                    src="/img/triangle.svg"
-                    alt=""
-                    className={styles.triangle}
-                    width={19}
-                    height={30}/> */}
               </div>
             </div>
           ))}
