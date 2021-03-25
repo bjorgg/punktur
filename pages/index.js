@@ -38,7 +38,5 @@ export async function getServerSideProps(context) {
         props: {
             initialStories: stories,
         },
-
-        revalidate: 1,
     };
 }
