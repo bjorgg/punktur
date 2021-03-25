@@ -3,8 +3,8 @@ import { useCurrentUser } from "../hooks/user";
 import { getStories } from "../db/stories";
 import StoryCard from "../components/StoryCard.js";
 import SortByGenres from "../components/SortByGenres.js";
-import Hero from "../components/Hero.js";
 import styles from "../styles/Home.module.css";
+import Hero from "../components/Hero.js";
 
 import { connectToDatabase } from "../util/mongodb";
 
