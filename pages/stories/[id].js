@@ -31,9 +31,9 @@ export default function Stories({ story, speechUrl }) {
             {story &&
               <div className={styles.storyWrapper}>
                 <div className={styles.storyHeader}>
-                    <div>
+                    <div className={`tags ${styles.genres}`}>
                         {story.genres.map((genre) => 
-                            <div key={genre}>
+                            <div key={genre} className={styles.genre}>
                                 {genre}
                             </div>
                         )}
@@ -44,15 +44,15 @@ export default function Stories({ story, speechUrl }) {
                 </div>
                 <div className={styles.storyMain}>
                     <div className={styles.headWrapper}>
+                        <AudioPlayer url={speechUrl}/>
                         <div className={styles.storyTitles}>
-                            <h3 className={styles.storyTitle}>{story.title}</h3>
+                            <h3>{story.title}</h3>
                             <h5>Höfundur: {story.author}</h5>
                         </div>
-                        <AudioPlayer url={speechUrl}/>
                     </div>
                     <div dangerouslySetInnerHTML={{__html: story.html}}></div>
                     
-                    <div>
+                    <div className={styles.socialIcons}>
                         <FacebookShareButton
                             url={`https://punktur.vercel.app/stories/${story.id}`}
                             quote={`${story.title} Eftir ${story.author}`}
