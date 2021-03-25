@@ -27,8 +27,8 @@ export default function Genres({ onClick }) {
       <div className={`tags ${styles.tags}`}>
         {Genres &&
           Genres.map((genre, i) => (
-            <div>
-              <div className={styles.container} id='storyGenres' key={ genre }>
+            <div key={ genre }>
+              <div className={styles.container} id='storyGenres' >
                 <input id={`genre${i}`} type="checkbox" name="genre" value={ genre } onClick={onClick}/>
                 <label className={styles.label} htmlFor={`genre${i}`}>{ genre }</label>
                   {/* <Image  

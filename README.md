@@ -1,77 +1,63 @@
-## Example app using MongoDB
+# Module 6 - Growing complexity
 
-[MongoDB](https://www.mongodb.com/) is a general purpose, document-based, distributed database built for modern application developers and for the cloud era. This example will show you how to connect to and use MongoDB as your backend for your Next.js app.
+This is our Module 6 group project for Web development at Reykjavík Technical School.
 
-If you want to learn more about MongoDB, visit the following pages:
+In this project we were supposed to create a complex web application. We worked with Agile methodologies, UI/UX, full design sprint, frameworks, data persistance, authentication, user accounts, user interface for CRUD operations, static page generation, continuous intergration, API connections, file uploading, sharing capabilities, AI intergration and public deployment.
 
-- [MongoDB Atlas](https://mongodb.com/atlas)
-- [MongoDB Documentation](https://docs.mongodb.com/)
+## Punktur - Story sharing web application
 
-## Deploy your own
+[Punktur](https://punktur.vercel.app/) is a new medium for Iceland's reading enthusiasts and creative wordsmiths.
 
-Once you have access to the environment variables you'll need, deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+In our web application, everyone can come and read short stories and poems in Icelandic. You can categorize stories according to your interests and also listen to them with the speech synthesizer voice Dóra.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb&project-name=with-mongodb&repository-name=with-mongodb&env=MONGODB_URI,MONGODB_DB&envDescription=Required%20to%20connect%20the%20app%20with%20MongoDB)
+Users can log in and create a user account. As a user, you can post your own writing on the web and also give stories stars if you like them. This is the first version of the Punktur site and hopefully more features will come in the future!
 
-## How to use
+One of the goals of the website is to maintain the Icelandic language and to help people publish their writings.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+We at Punktur hope you like it and we accept all suggestions with thanks.
 
-```bash
-npx create-next-app --example with-mongodb with-mongodb-app
-# or
-yarn create next-app --example with-mongodb with-mongodb-app
-```
+## Live version
 
-## Configuration
+Here is a link to the live version:
 
-### Set up a MongoDB database
+> [Punktur](https://punktur.vercel.app/)
 
-Set up a MongoDB database either locally or with [MongoDB Atlas for free](https://mongodb.com/atlas).
+## Technology
 
-### Set up environment variables
+- Next.js | React Framework
+- MongoDB Atlas | Database
+- Amazon Polly | Text To Speech
+- TinyMCE | Text Editor
+- Vercel | Deployment
+- Github | Code Sharing
+- Cloudinary | Image Hosting
+- Authentication - User Accounts
+  > - MongoDB Database
+  > - API browser fetch library
+  > - Validator.js for validating emails
+  > - Bcrypt to encrypt passwords
+  > - Next-connect
+  > - Session middleware
+  > - Email / Password authentication using Passport.js
+  > - State management using swr
 
-Copy the `env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
+## Future vision
 
-```bash
-cp .env.local.example .env.local
-```
+- Comments - being able to comment on stories and give each others pointers.
+- Forum - to interact with other readers/writers, swap ideas, get advise and more.
+- Follow - being able to follow writers you like.
+- Bookmark - being able to bookmark stories you want to read later.
+- Save - enable writers to save their stories in progress to publish later.
+- Search - being able to search for stories by keywords.
+- Most read - record how many times the story has been read and filter by reading count.
+- Public profile page - enable users to see each others profile pages.
+- Monthly challanges - push writers to go out of their comfort zone, be creative and have some fun.
 
-Set each variable on `.env.local`:
+## Creators of Punktur
 
-- `MONGODB_URI` - Your MongoDB connection string. If you are using [MongoDB Atlas](https://mongodb.com/atlas) you can find this by clicking the "Connect" button for your cluster.
-- `MONGODB_DB` - The name of the MongoDB database you want to use.
+This project was an awesome collaboration by these upcoming developers and designers!
 
-### Run Next.js in development mode
-
-```bash
-npm install
-npm run dev
-
-# or
-
-yarn install
-yarn dev
-```
-
-Your app should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
-
-You will either see a message stating "You are connected to MongoDB" or "You are NOT connected to MongoDB". Ensure that you have provided the correct `MONGODB_URI` and `MONGODB_DB` environment variables.
-
-When you are successfully connected, you can refer to the [MongoDB Node.js Driver docs](https://mongodb.github.io/node-mongodb-native/3.4/tutorials/collections/) for further instructions on how to query your database.
-
-## Deploy on Vercel
-
-You can deploy this app to the cloud with [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-#### Deploy Your Local Project
-
-To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example).
-
-**Important**: When you import your project on Vercel, make sure to click on **Environment Variables** and set them to match your `.env.local` file.
-
-#### Deploy from Our Template
-
-Alternatively, you can deploy using our template by clicking on the Deploy button below.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb&project-name=with-mongodb&repository-name=with-mongodb&env=MONGODB_URI,MONGODB_DB&envDescription=Required%20to%20connect%20the%20app%20with%20MongoDB)
+- [Iris Elva](https://github.com/iriselva)
+- [Kolbrun](https://github.com/kollaaj)
+- [Hulda Sól](https://github.com/Huldas96)
+- [Bjorg](https://github.com/bjorgg)
