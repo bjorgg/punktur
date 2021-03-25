@@ -4,13 +4,15 @@
 }
 
 .star {
-    background: #aadee2;
+    background: none;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .active {
     background: #ffcd61;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .likes {

@@ -15,41 +15,45 @@ export default function Navbar() {
         mutate(null);
     };
     return (
-        <nav className={styles.nav}>
-            {!user ? '' : (
-                <MyLink href="/">
-                    <div className={styles.logo}>
-                        <Image  
-                            src="/Icons/NavbarLogo.svg"
-                            alt="heim"
-                            width={32}
-                            height={32}/>
-                    </div>
-                </MyLink>
-            )}
-            {!user ? '' : (
-                <MyLink href="/ny-saga" className={styles.abc} >
-                    <div className={styles.write}>
-                        <Image  
-                            src="/Icons/write.svg"
-                            alt="Ný saga"
-                            width={32}
-                            height={32}/>
-                    </div>
-                </MyLink>
-            )}
-            {!user ? '' : (
-                <MyLink href="/min-sida">
-                    <div className={styles.user}>
-                        <Image  
-                            src="/Icons/User.svg"
-                            alt="mín síða"
-                            width={32}
-                            height={32}/>
-                    </div>
-                </MyLink>
-            )}
-            
-        </nav>
+        <div>
+        {!user ? '' : (
+            <nav className={styles.nav}>
+                {!user ? '' : (
+                    <MyLink href="/">
+                        <div className={styles.logo}>
+                            <Image  
+                                src="/Icons/NavbarLogo.svg"
+                                alt="heim"
+                                width={32}
+                                height={32}/>
+                        </div>
+                    </MyLink>
+                )}
+                {!user ? '' : (
+                    <MyLink href="/ny-saga" className={styles.abc} >
+                        <div className={styles.write}>
+                            <Image  
+                                src="/Icons/write.svg"
+                                alt="Ný saga"
+                                width={32}
+                                height={32}/>
+                        </div>
+                    </MyLink>
+                )}
+                {!user ? '' : (
+                    <MyLink href="/min-sida">
+                        <div className={styles.user}>
+                            <Image  
+                                src="/Icons/User.svg"
+                                alt="mín síða"
+                                width={32}
+                                height={32}/>
+                        </div>
+                    </MyLink>
+                )}
+                
+            </nav>
+        )}
+        </div>
     );
 }

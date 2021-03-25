@@ -16,10 +16,10 @@ function MyApp({ Component, pageProps }) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Layout>
-            <main>
-              <Notification />
-              <Component {...pageProps} />
-            </main>
+              <main>
+                <Notification />
+                <Component {...pageProps} />
+              </main>
           </Layout>
       </div>
 

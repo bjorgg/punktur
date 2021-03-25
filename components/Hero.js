@@ -7,21 +7,30 @@ const Hero = () => {
     return ( 
         <div>
             {user ? '' : (
-                <div className={styles.heroContainer}>
-                    
-                    <div>
-                        <h1>Hvað dettur þér í hug?</h1>
-                        <h2>Deildu þinni smásögu með landinu!</h2>
+                <div>
+
+                    <div className={styles.div}>
                     </div>
-                    <Link href="/skra-inn">
-                        <a>Byrja að skrifa</a>
-                    </Link>
+
+                    <div className={styles.heroWrapper}>
+                    
+                        <div className={styles.heroContainer}>
+                            <h1>Hvað dettur þig í hug?</h1>
+                            <h4>Deildu þinni smásögu með landinu!</h4>
+                        </div>
+
+                        <Link href="/skra-inn">
+                            <button className={styles.callToAction}>Byrja að skrifa</button>
+                        </Link>
             
+                    </div>
+
                 </div>
             )}
         </div>
      );
 }
+
 
 
  
