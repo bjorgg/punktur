@@ -10,9 +10,9 @@
 
 .aboutDiv {
     display: flex;
-    margin-top: 2rem;
     margin-bottom: 2rem;
     flex-direction: column;
+    margin-top: 1rem;
 }
 
 .avatarDiv {
@@ -20,7 +20,7 @@
     justify-content: center;
     flex-direction: column;
     align-content: center;
-    align-items: center;
+    align-items: baseline;
 }
 
 .bio {
@@ -47,15 +47,15 @@
 .storyContainer {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .storyEditDiv {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 4rem;
-    height: 12rem;
+    gap: 2rem;
+    height: inherit;
     margin-top: 2rem;
 }
 
@@ -74,11 +74,11 @@
     text-align: center;
     cursor: pointer;
     background: none;
-    border-bottom: 1px solid #f3f1ee;
+    border-bottom: 2px solid #f3f1ee;
 }
 
 .iconButton:hover {
-    border-bottom: 1px solid #d98611;
+    border-bottom: 2px solid #d98611;
     border-radius: 2px;
 }
 

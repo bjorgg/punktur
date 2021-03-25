@@ -56,7 +56,10 @@ export default function EditStory({story}) {
             });
             const savedStory = await res.json();
             console.log(`savedStory`, savedStory)
-            router.push(`/stories/${savedStory.story._id}`)
+            router.push({
+                pathname: `/stories/${savedStory.story._id}`,
+                query: { showStoryEditMessage: true },
+            });
         } catch (err) {
             console.log(err); 
         }

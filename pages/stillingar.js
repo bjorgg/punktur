@@ -49,7 +49,7 @@ export default function Settings() {
             body: getFormData(),
         });
         if (res.status === 200) {
-            setMsg({ message: "Prófíll uppfærður" });
+            router.push("/min-sida/?showUserUpdatedMessage=true");
         } else if (res.status === 500) {
             setMsg({ message: "Eitthvað fór úrskeiðis, reyndu aftur", isError: true });
         } else {

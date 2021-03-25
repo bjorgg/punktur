@@ -18,7 +18,6 @@ export default function Footer() {
                 <Modal 
                     show={isOpen} 
                     title="Notendaskilmálar" 
-                    onSubmit={() => setModalOpen(false)}
                     onClose={() => setModalOpen(false)} 
                     submitText="frábært"
                     cancelText="Loka">

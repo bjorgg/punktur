@@ -16,7 +16,7 @@ body {
 }
 
 main {
-    width: 80%;
+    width: 90%;
     margin-top: 6rem;
     margin-bottom: 14rem;
 }
@@ -106,7 +106,7 @@ h6 {
 /* Form - global */
 
 form {
-    width: 400px;
+    min-width: 300px;
     margin: auto;
     height: auto;
     margin: auto;
@@ -114,6 +114,7 @@ form {
     padding: 1rem;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 form button {
@@ -146,7 +147,7 @@ form button:hover {
 
 textarea {
     height: 100px;
-    width: 374px;
+    min-width: 300px;
     border-radius: 6px;
     padding: 1rem;
 }
@@ -162,16 +163,10 @@ label {
     letter-spacing: 0em;
 }
 
-/* mobile */
-/* @media screen and (max-width: 400px) {
-  
-  p {
-    font-size: 11px;
-    line-height: 18px;
-  }
+@media only screen and (min-width: 1024px) {
+    main {
+        width: 80%;
+    }
+}
 
-  a {
-    
-  }
 
-} */

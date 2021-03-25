@@ -6,7 +6,8 @@
     border-radius: 6px;
     background: white;
     height: 40px;
-    width: 374px;
+    min-width: 300px;
+    max-width: 400px;
     border-radius: 6px;
     padding-left: 6px;
 }
@@ -20,7 +21,8 @@
 .customFileInput {
     border: none;
     padding: 0;
-    width: 374px;;
+    min-width: 300px;
+    max-width: 400px;
 }
 .customFileInput:hover {
     border: none;
@@ -50,7 +52,6 @@
 .customFileInput:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
-
 
 .buttonDiv {
     display: flex;
@@ -103,8 +104,9 @@
 
 .deleteDiv {
     display: flex;
-    width: 374px;
-    justify-content: flex-end;
+    min-width: 300px;
+    max-width: 400px;
+    justify-content: center;
     margin: auto;
 }
 
@@ -116,7 +118,8 @@
     border-radius: 6px;
     background: white;
     height: 40px;
-    width: 374px;
+    min-width: 300px;
+    max-width: 400px;
     border-radius: 6px;
     padding-left: 6px;
     margin-bottom: 2rem;
