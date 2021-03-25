@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <footer className={styles.footer}>
             <h5>&#169; 2021 Punktur ehf.</h5>
-            <div>
+            <div className={styles.notandi}>
                 <div className={styles.text}>
                             
                     <a onClick={() => setModalOpen(true)}>
