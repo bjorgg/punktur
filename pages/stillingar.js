@@ -2,7 +2,7 @@ import styles from "../styles/Form.module.css";
 import { useCurrentUser } from "../hooks/user";
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "../components/modal";
-import Image from 'next/image'
+import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -10,6 +10,7 @@ export default function Settings() {
     const router = useRouter();
     const [user] = useCurrentUser();
     const [isOpen, setModalOpen] = useState(false);
+    const [selectedImg, setImg] = useState(null);
     const [isUpdating, setIsUpdating] = useState(false);
     const formRef = useRef();
     const [msg, setMsg] = useState({ message: "", isError: false });
@@ -20,7 +21,7 @@ export default function Settings() {
             const form = formRef.current;
             form.email.value = user.email;
             form.username.value = user.username;
-            form.bio.value = bio.username ?? "";
+            form.bio.value = user.bio ?? "";
         }
     }, [user]);
     // read data from form to be saved
@@ -38,9 +39,21 @@ export default function Settings() {
         return formData;
     };
 
+    const handleImgChange = (e) => {
+        const img = e.target.files?.[0];
+        if (img) {
+            const fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                setImg(e.target.result);
+            };
+            fileReader.readAsDataURL(img);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // disable submitting while updating is in progress
+
         if (isUpdating) return;
         setIsUpdating(true);
 
@@ -75,27 +88,26 @@ export default function Settings() {
     return (
         <div>
             {!user ? (
-                "Þú hefur skráð þig út"
+                ""
             ) : (
                 <div>
                     <div>
                         <Link href="/min-sida">
                             {/* <a>Til baka</a> */}
-                            <Image  
-                            src="/Icons/ArrowLeft.svg"
-                            alt="til baka"
-                            width={24}
-                            height={24}/>
+                            <Image src="/Icons/ArrowLeft.svg" alt="til baka" width={24} height={24} />
                         </Link>
-                        
                     </div>
 
                     <form onSubmit={handleSubmit} ref={formRef}>
                         {msg.message ? <h5 style={{ color: msg.isError ? "#D94D11" : "#73B07D", textAlign: "center" }}>{msg.message}</h5> : null}
                         <h3>Stillingar</h3>
                         <div>
+                            <div className={styles.avatarDiv}>
+                              <img className={styles.avatarImg} src={selectedImg || user.avatar} />  
+                            </div>
+                            
                             <label htmlFor="avatar">
-                                <input className={styles.customFileInput} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                                <input className={styles.customFileInput} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={handleImgChange} />
                             </label>
                         </div>
 
@@ -118,27 +130,17 @@ export default function Settings() {
                             </label>
                         </div>
                         <button disabled={isUpdating} type="submit">
-                            <Image  
-                            src="/Icons/save.svg"
-                            alt="Ný saga"
-                            width={24}
-                            height={24}/>
+                            <Image src="/Icons/save.svg" alt="Ný saga" width={24} height={24} />
                             Uppfæra
                         </button>
                     </form>
                     <div className={styles.deleteDiv}>
-                       <button className={styles.deleteButton}
-                        onClick={() => setModalOpen(true)}>
-                        <Image  
-                            src="/Icons/Trash.svg"
-                            alt="Ný saga"
-                            width={24}
-                            height={24}/>
+                        <button className={styles.deleteButton} onClick={() => setModalOpen(true)}>
+                            <Image src="/Icons/Trash.svg" alt="Ný saga" width={24} height={24} />
                             Eyða aðgangi
-                        </button> 
+                        </button>
                     </div>
 
-                    
                     <Modal show={isOpen} title="Ertu viss um að þú viljir eyða aðgangi þínum?" onSubmit={handleDeleteUser} onClose={() => setModalOpen(false)} submitText="Já" cancelText="Nei">
                         <p>Allar upplýsingar verða eyddar út af punkti</p>
                     </Modal>

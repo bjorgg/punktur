@@ -173,6 +173,18 @@
     margin: auto;
 }
 
+.avatarDiv {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.avatarImg {
+    background: green;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
 
 /* New story Form styles */
 
@@ -234,6 +246,7 @@
     display: flex;
     justify-content: flex-end;
 }
+
 
 
 /* animation */
