@@ -9,12 +9,12 @@ const Hero = () => {
             {user ? '' : (
                 <div className={styles.heroContainer}>
                     
-                    <div>
+                    <div >
                         <h1>Hvað dettur þér í hug?</h1>
                         <h2>Deildu þinni smásögu með landinu!</h2>
                     </div>
                     <Link href="/skra-inn">
-                        <a>Byrja að skrifa</a>
+                        <button>Byrja að skrifa</button>
                     </Link>
             
                 </div>
