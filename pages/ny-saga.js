@@ -50,20 +50,24 @@ export default function NewStory() {
         <div>
             <h5>Titill</h5>
             <input className={styles.storyTitleInput} id='storyTitle' type='text' />
-            <Editor
-                id='storyContent'
-                apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-                init={{
-                    selector: 'textarea',
-                    skin_url: '/skins/ui/CUSTOM',
-                    plugins: 'wordcount table', 
-                    placeholder: 'Einu sinni var...',
-                    skin: 'content',
-                    // content_css: 'content',  
-                    height: 500,
-                    menubar: false,
-                    toolbar: 'undo redo bold italic underline indent outdent styleselect',
+            <div className={styles.editor}> 
+                <Editor
+                    id='storyContent'
+                    apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                    init={{
+                        selector: 'textarea',
+                        skin_url: '/skins/ui/CUSTOM',
+                        plugins: 'wordcount table', 
+                        placeholder: 'Einu sinni var...',
+                        skin: 'content',
+                        // content_css: 'content',  
+                        height: 500,
+                        max_width : 200,
+                        menubar: false,
+                        toolbar: 'undo redo bold italic underline indent outdent styleselect',
                 }} />
+            </div>
+           
             <Genres />
             <div className={styles.storyButtonDiv}>
                 <button 
