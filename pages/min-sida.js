@@ -95,7 +95,7 @@ export default function Profile() {
                     </div>
                     <div className={styles.myStories}>
                         <div className={styles.myStoriesHeader}>
-                            <h3 >Mínar sögur</h3>
+                            <h4 >Mínar sögur</h4>
                         </div>
                         {Array.isArray(stories) &&
                             stories.map((story) => (
