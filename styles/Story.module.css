@@ -4,7 +4,7 @@
     border-radius: 6px;
     margin: 2rem auto;
     min-width: 250px;
-    max-width: 800px;
+    max-width: 900px;
 }
 
 .storyHeader {
@@ -95,4 +95,24 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+}
+
+@media only screen and (min-width: 1024px) {
+     
+    .storyHeader  {
+        padding: 0.8rem;
+    }
+
+    .storyMain {
+        padding: 2rem
+    }
+
+    .storyMain h3 {
+        font-size: 40px;
+        line-height: 47px;
+    }
+
+    .storyMain h5 {
+        font-size: 16px;
+    }
 }

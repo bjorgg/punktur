@@ -167,6 +167,11 @@ label {
     main {
         width: 80%;
     }
+
+    p {
+        font-size: 16px;
+        line-height: 24px;
+    }
 }
 
 

@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import { useCurrentUser } from "../hooks/user";
 import { Editor } from '@tinymce/tinymce-react'
 import Genres from '../components/Genres'
 import { useRouter } from 'next/router'
-import { route } from 'next/dist/next-server/server/router';
 import Image from 'next/image'
 import styles from "../styles/Form.module.css";
 
@@ -70,6 +68,7 @@ export default function NewStory() {
            
             <Genres />
             <div className={styles.storyButtonDiv}>
+                <button onClick={() => router.back()} className={styles.storyButton}>Hætta við</button>
                 <button 
                     className={styles.storyButton}
                     onClick={handleCreateStory}>

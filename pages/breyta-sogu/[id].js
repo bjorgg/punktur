@@ -55,7 +55,6 @@ export default function EditStory({story}) {
                 }),
             });
             const savedStory = await res.json();
-            console.log(`savedStory`, savedStory)
             router.push({
                 pathname: `/stories/${savedStory.story._id}`,
                 query: { showStoryEditMessage: true },
@@ -126,10 +125,8 @@ export default function EditStory({story}) {
                         ))}
                     </div>        
                        
-                    <Link href={`/stories/${story._id}`}>
-                        <a>Hætta við</a>
-                    </Link>
                     <div className={styles.storyButtonDiv}>
+                        <button className={styles.storyButton} onClick={() => router.back()} className={styles.storyButton}>Hætta við</button>
                         <button className={styles.storyButton} onClick={updateEntryInDb}>Vista breytingar</button>
                     </div>
                     
@@ -145,7 +142,6 @@ export default function EditStory({story}) {
 export async function getServerSideProps({params}) {
     const {db} = await connectToDatabase();
     const story = await getStoryById(db, params.id);
-    console.log(story)
     
     if (!story) {
         return {
