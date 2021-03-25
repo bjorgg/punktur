@@ -61,7 +61,7 @@ export default function Profile() {
                     <div className={styles.aboutDiv}>
                         <div className={styles.avatarDiv}>
                             {!avatar ? 
-                                <Image
+                                <img
                                     src={defaultAvatar}
                                     className={styles.avatar}
                                     alt="Avatar"
