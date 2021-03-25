@@ -94,7 +94,7 @@ export default function EditStory({story}) {
                         <h5>Titill</h5>                       
                         <input className={styles.storyTitleInput} value={updatedStory.title} onChange={handleChange} name="title" type="text"></input>                            
                     </div>
-                    <div>
+                    <div className={styles.editor}>
                         <Editor
                             id='editStoryContent'
                             apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
@@ -113,12 +113,12 @@ export default function EditStory({story}) {
                             }}
                         />
                     </div>
-                    <div>
+                    <div className={`tags ${styles.tags}`}>
                         {Genres &&
                             Genres.map((genre, i) => (
-                                <div id='editStoryGenres' key={ genre }>
-                                    <input id={`genre${i}`} type="checkbox" name="genres" checked={updatedStory.genres.includes(genre)} onChange={handleGenreChange} value={ genre } />
-                                    <label htmlFor={`genre${i}`}>{ genre }</label>
+                                <div className={styles.container} id='editStoryGenres' key={ genre }>
+                                    <input id={`genre${i}`} className={styles.checkbox}  type="checkbox" name="genres" checked={updatedStory.genres.includes(genre)} onChange={handleGenreChange} value={ genre } />
+                                    <label className={styles.label}  htmlFor={`genre${i}`}>{ genre }</label>
                                 </div>
                         ))}
                     </div>        

@@ -57,11 +57,74 @@
     justify-content: center;
 }
 
-.checkbox {
-    width: 20px;
-    height: 20px;
+
+/* checkbox in sign up*/
+
+.TermsContainer {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding-left: 2rem;
+  }
+  
+/* Hide default checkbox */
+.TermsContainer input {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    height: 0;
+    width: 0;
 }
 
+/* custom checkbox */
+.TermCheckmark {
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 4px;
+    background-color: #f9f8f6;;
+    border:  2px solid #788788; /* oldCopper_lighter */
+    box-shadow: 0 1px 3px #788788;
+}
+
+.TermsContainer:hover input ~ .TermCheckmark {
+    background-color: #DCDAD6;
+}
+
+/* When the checked */
+.TermsContainer input:checked ~ .TermCheckmark {
+    background-color: #788788; /* oldCopper_lighter */
+}
+
+/* indicator (hidden when not checked) */
+.TermCheckmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* indicator when checked */
+.TermsContainer input:checked ~ .TermCheckmark:after {
+    display: block;
+}
+
+/* indicator */
+.TermsContainer .TermCheckmark:after {
+    left: 7px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #f9f8f6;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/*------------------------------*/
 .formTerms {
     display: flex;
     padding-top: 1rem;
@@ -201,3 +264,47 @@
 .editor {
     max-width: 860px;
 }
+
+/* tags edit story */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0 4rem;
+    max-width: 40rem;
+  }
+  
+  .container {
+    margin: 1.5rem 1rem 0 0;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(121, 120, 117, 0.2);
+  }
+  
+  /* Hide default checkbox */
+  .container input {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+  
+  /* custom checkbox */
+  .label {
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    height: 1.3rem;
+    width: auto;
+    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+    background-color: #E8E7E3;
+  }
+  
+  .container:hover input ~ .label {
+    background-color: #ccc;
+  }
+  
+  .container input:checked ~ .label {
+    background-color: #788788; /* oldCopper_lighter */
+    color: #F9F8F6;
+  }
+  
