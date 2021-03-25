@@ -27,8 +27,10 @@ export default function Notification() {
     useEffect(() => {
         handleNotification(router.query.showUserDeleteMessage, "Notandareikning hefur verið eytt!");
         handleNotification(router.query.showLogOutMessage, "Útskráning tókst");
-        handleNotification(router.query.showStoryCreatedMessage, "Saga þín er birt!");
+        handleNotification(router.query.showStoryCreatedMessage, "Sagan þín er birt!");
         handleNotification(router.query.showStoryDeleteMessage, "Sögunni hefur verið eytt");
+        handleNotification(router.query.showUserUpdatedMessage, "Prófíll uppfærður");
+        handleNotification(router.query.showStoryEditMessage, "Sagan þín er uppfærð");
     }, [router.query, handleNotification]);
 
     return (

@@ -86,18 +86,22 @@ const SignupPage = () => {
                         <input className={styles.formInput} id="password" name="password" type="password" />
                     </div>
                     <div className={styles.formTerms}>
-                        <input 
-                            className={styles.checkbox}
-                            type="checkbox" 
-                            id="terms" 
-                            name="terms" 
-                            checked={hasAcceptedterms} 
-                            onChange={() => setHasAcceptedTerms(!hasAcceptedterms)}
-                            >
-                        </input>
-                        <a onClick={() => setModalOpen(true)}>
-                            <p>Ég hef lesið og samþykki Notendaskilmála</p>
-                        </a>
+                        <label className={styles.TermsContainer}>
+                            <a onClick={() => setModalOpen(true)}>
+                                <p>Ég hef lesið og samþykki Notendaskilmála</p>
+                            </a>                            
+                            <input 
+                                type="checkbox" 
+                                id="terms" 
+                                name="terms" 
+                                checked={hasAcceptedterms} 
+                                // checked="checked" 
+                                onChange={() => setHasAcceptedTerms(!hasAcceptedterms)}
+                                >
+                            </input>
+                            <span className={styles.TermCheckmark}></span>
+                        </label>
+
                     </div>
                     <div className={styles.buttonDiv}>
                        <button type="submit">Nýskrá</button> 
