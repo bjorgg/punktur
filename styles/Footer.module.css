@@ -1,15 +1,14 @@
-
 .footer {
   margin-top: 7rem;
   padding-left: 2rem;
 }
 
 .footer h5 {
-  color: #F9F8F6; /* overcast lighter */ 
+  color: #F9F8F6; /* overcast lighter */
 }
 
-.notandi {
-  /* align-items: flex-end; */
+.footer a {
+  color: #F9F8F6; /* overcast lighter */
 }
 
 @media only screen and (min-width: 1024px) {
