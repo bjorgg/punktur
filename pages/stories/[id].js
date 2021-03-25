@@ -6,6 +6,7 @@ import AudioPlayer from '../../components/AudioPlayer'
 import { useRouter } from 'next/router'
 import styles from '../../styles/Story.module.css'
 import Like from "../../components/Like";
+import Image from 'next/image'
 
 import {
     FacebookShareButton,
@@ -28,6 +29,9 @@ export default function Stories({ story, speechUrl }) {
 
     return (
         <div>
+            <div>
+                <Image className={styles.backArrow} onClick={() => router.back()} src="/Icons/ArrowLeft.svg" alt="til baka" width={24} height={24} />
+            </div>
             {story &&
               <div className={styles.storyWrapper}>
                 <div className={styles.storyHeader}>

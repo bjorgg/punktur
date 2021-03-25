@@ -7,6 +7,10 @@
     max-width: 900px;
 }
 
+.backArrow {
+    cursor: pointer;
+}
+
 .storyHeader {
     background: #F3F1EE;
     border-radius: 6px 6px 0px 0px;

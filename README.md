@@ -59,5 +59,5 @@ This project was an awesome collaboration by these upcoming developers and desig
 
 - [Iris Elva](https://github.com/iriselva)
 - [Kolbrun](https://github.com/kollaaj)
-- [Hulda Sól](https://github.com/Huldas96)
+- [Hulda Sol](https://github.com/Huldas96)
 - [Bjorg](https://github.com/bjorgg)

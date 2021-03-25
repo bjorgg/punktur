@@ -94,7 +94,9 @@ export default function Settings() {
                     <div>
                         <Link href="/min-sida">
                             {/* <a>Til baka</a> */}
-                            <Image src="/Icons/ArrowLeft.svg" alt="til baka" width={24} height={24} />
+                            <a>
+                                <Image src="/Icons/ArrowLeft.svg" alt="til baka" width={24} height={24} />
+                            </a>
                         </Link>
                     </div>
 
