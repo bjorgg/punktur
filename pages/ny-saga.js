@@ -11,6 +11,7 @@ export default function NewStory() {
     const router = useRouter()
 
     const handleCreateStory = async () => {
+        // get story data
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
         const decodedStory = tinymce.html.Entities.decode(story)
@@ -19,7 +20,9 @@ export default function NewStory() {
         const genres = checkboxes
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
+
         try {
+            // post (create) the story
             const result = await fetch("/api/createStory", {
                 method: "POST",
                 headers: {'Content-Type': 'application/json',},
@@ -33,6 +36,8 @@ export default function NewStory() {
                     publishDate: new Date()
                 }),
             });
+
+            // redirect to newly created story
             const savedStory = await result.json();
             router.push({
                 pathname: `/stories/${savedStory._id}`,

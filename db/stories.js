@@ -3,6 +3,7 @@ import { ObjectID } from "mongodb";
 const convertMongoData = (data) => JSON.parse(JSON.stringify(data));
 
 export async function getStories(db, limit, genres) {
+    // if genres are specified then filter by those genres
     const searchCriteria = genres !== undefined
         ? { genres: { $all: genres } }
         : {};

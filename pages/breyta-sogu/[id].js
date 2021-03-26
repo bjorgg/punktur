@@ -113,7 +113,7 @@ export default function EditStory({story}) {
                                 max_width : 200,
                                 menubar: false,
                                 style_formats: [
-                                    { title: 'H1', format: 'h2' },
+                                    { title: 'H1', format: 'h3' },
                                     { title: 'Texti', format: 'p' },
                                 ],      
                                 toolbar: 'styleselect undo redo bold italic underline outdent indent preview ',
