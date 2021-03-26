@@ -54,7 +54,7 @@ const Like = ({story}) => {
         formData.append("username", user.username);
         formData.append("likedStories", JSON.stringify(likedStoriesCopy));
          // Update User
-         const userRes = await fetch("api/user", {
+         const userRes = await fetch("/api/user", {
             method: "PATCH",
             body: formData
         });
@@ -80,7 +80,7 @@ const Like = ({story}) => {
             storyLikesCopy.splice(i, 1);
         }
         
-        const storyRes = await fetch("api/story", {
+        const storyRes = await fetch("/api/story", {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

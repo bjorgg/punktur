@@ -52,6 +52,11 @@ Here is a link to the live version:
 - Most read - record how many times the story has been read and filter by reading count.
 - Public profile page - enable users to see each others profile pages.
 - Monthly challanges - push writers to go out of their comfort zone, be creative and have some fun.
+- Another TTS voice - enable users to choose between the two Icelandic TTS voices Karl and Dóra.
+- Darkmode - because we love darkmode.
+- Email verification at Sign Up.
+- Forgetting password and password change.
+- Story Sorting system by new / popular.
 
 ## Creators of Punktur
 
