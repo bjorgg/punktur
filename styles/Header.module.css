@@ -1,6 +1,5 @@
 /* --------------- mobile -------------- */
 
-
   .header {
     background-color: #f3f1ee;
     position: absolute;
@@ -30,6 +29,10 @@
     padding-right: 1rem;
   }
 
+  .skra div:hover {
+    color: #d98611;
+  }
+
   .skra div {
     display: flex;
   }
@@ -56,7 +59,7 @@
   }
 
 
-/* --------------- tablet -------------- */
+/* --------------- Desktop -------------- */
 
 @media only screen and (min-width: 1024px) {
 
@@ -84,9 +87,4 @@
     margin-right: 2rem;
   }
 
-
 }
-
-/* --------------- small Desktop -------------- */
-/* --------------- Desktop -------------- */
-/* --------------- large Desktop -------------- */

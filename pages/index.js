@@ -15,12 +15,16 @@ export default function Home({ initialStories }) {
     return (
         <div>
             <Hero />
-            <div className={styles.rex}>
-                <div className={styles.rex1}>
+            <div className={styles.homeContainer}>
+                <div className={styles.genres}>
                     <h5>{user && `Hæ ${user.username}!`}</h5>
                     <SortByGenres setStories={setStories} />
                 </div>
-                <div className={styles.rex2}>
+                <div className={styles.stories}>
+                    {stories.length === 0 && 
+                        <div className={styles.searchTearms}>
+                            <h3>Engar sögur uppfylla leitarskilirðin</h3>
+                        </div>}
                     {Array.isArray(stories) && stories.map((story) => <StoryCard story={story} key={story._id} />)}
                 </div>
             </div>
