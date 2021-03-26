@@ -8,7 +8,7 @@ const StoryCard = ({story}) => {
             <div className={styles.cardWrapper}> 
                 <div className={styles.cardTop}>
                     <div className={`tags ${styles.genres}`}>
-                        {story.genres.map((genre) => 
+                        {Array.isArray(story.genres) && story.genres.map((genre) => 
                             <div key={genre} className={styles.genre}>
                                 {genre}
                             </div>
