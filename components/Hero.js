@@ -15,7 +15,7 @@ const Hero = () => {
                     <div className={styles.heroWrapper}>
                     
                         <div className={styles.heroContainer}>
-                            <h1>Hvað dettur þig í hug?</h1>
+                            <h1>Hvað dettur þér í hug?</h1>
                             <h4>Deildu þinni smásögu með landinu!</h4>
                         </div>
 

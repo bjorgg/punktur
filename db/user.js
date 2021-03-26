@@ -43,20 +43,15 @@ export async function insertUser(db, {
     .then(({ ops }) => ops[0]);
 }
 
-// export async function updateUserById(db, id, update) {
-//   return db.collection('users').findOneAndUpdate(
-//     { _id: ObjectID(id) },
-//     { $set: update },
-//     { returnOriginal: false },
-//   ).then(({ value }) => value);
-// }
-
 export async function updateUserById(db, id, update) {
+  // update the user in the MongoDB users collection
   const result = await db.collection('users').findOneAndUpdate(
     { _id: ObjectID(id) },
     { $set: update },
     { returnOriginal: false },
   );
+
+  // update the author name of every story that user owns
   await db.collection('stories').updateMany(
     { user_id: id.toString() },
     { $set: { author: update.username }},

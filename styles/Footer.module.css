@@ -11,6 +11,14 @@
   color: #F9F8F6; /* overcast lighter */
 }
 
+.footer h5:hover  {
+  color: #d98611; /* beer */
+}
+
+.footer a:hover  {
+  color: #d98611; /* beer */
+}
+
 @media only screen and (min-width: 1024px) {
   .footer {
     

@@ -11,6 +11,7 @@ export default function NewStory() {
     const router = useRouter()
 
     const handleCreateStory = async () => {
+        // get story data
         const title = document.querySelector('#storyTitle').value;
         const story = tinymce.get('storyContent').getContent();
         const decodedStory = tinymce.html.Entities.decode(story)
@@ -19,7 +20,9 @@ export default function NewStory() {
         const genres = checkboxes
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
+
         try {
+            // post (create) the story
             const result = await fetch("/api/createStory", {
                 method: "POST",
                 headers: {'Content-Type': 'application/json',},
@@ -33,6 +36,8 @@ export default function NewStory() {
                     publishDate: new Date()
                 }),
             });
+
+            // redirect to newly created story
             const savedStory = await result.json();
             router.push({
                 pathname: `/stories/${savedStory._id}`,
@@ -55,14 +60,18 @@ export default function NewStory() {
                     init={{
                         selector: 'textarea',
                         skin_url: '/skins/ui/CUSTOM',
-                        plugins: 'wordcount table', 
+                        plugins: 'wordcount table preview paste', 
                         placeholder: 'Einu sinni var...',
                         skin: 'content',
                         // content_css: 'content',  
                         height: 500,
                         max_width : 200,
                         menubar: false,
-                        toolbar: 'undo redo bold italic underline indent outdent styleselect',
+                        style_formats: [
+                            { title: 'H1', format: 'h2' },
+                            { title: 'Texti', format: 'p' },
+                        ],      
+                        toolbar: 'styleselect undo redo bold italic underline outdent indent preview ',
                 }} />
             </div>
            

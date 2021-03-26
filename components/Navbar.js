@@ -1,6 +1,6 @@
-import MyLink from "./MyLink";
 import { useCurrentUser } from "../hooks/user";
 import Image from 'next/image'
+import MyLink from "./MyLink";
 import styles from '../styles/Navbar.module.css'
 
 export default function Navbar() {

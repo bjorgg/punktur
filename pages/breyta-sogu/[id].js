@@ -105,13 +105,19 @@ export default function EditStory({story}) {
                             init={{
                                 selector: 'textarea',
                                 skin_url: '/skins/ui/CUSTOM',
-                                plugins: 'wordcount table', 
+                                plugins: 'wordcount table preview paste', 
+                                placeholder: 'Einu sinni var...',
                                 skin: 'content',
                                 // content_css: 'content',  
                                 height: 500,
+                                max_width : 200,
                                 menubar: false,
-                                toolbar: 'undo redo bold italic underline indent outdent styleselect',
-                            }}
+                                style_formats: [
+                                    { title: 'H1', format: 'h3' },
+                                    { title: 'Texti', format: 'p' },
+                                ],      
+                                toolbar: 'styleselect undo redo bold italic underline outdent indent preview ',
+                        }}
                         />
                     </div>
                     <h4>Síur</h4>
