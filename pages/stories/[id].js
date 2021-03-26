@@ -98,7 +98,7 @@ export default function Stories({ story, speechUrl }) {
 
 export async function getStaticPaths(){
     const { db } = await connectToDatabase();
-    const stories = await getStories(db, 100);
+    const stories = await getStories(db, 90);
 
     const paths = stories.map(story => ({
         params: {
