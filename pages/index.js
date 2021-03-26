@@ -35,7 +35,7 @@ export default function Home({ initialStories }) {
 // Getting sever side props from MongoDB
 export async function getServerSideProps(context) {
     const { db } = await connectToDatabase();
-    const stories = await getStories(db, 20);
+    const stories = await getStories(db, 100);
 
     // Passing the data receved to the props object
     return {
